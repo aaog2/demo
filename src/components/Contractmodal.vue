@@ -60,16 +60,6 @@
                                 <p class="ps-5">Contract Date</p>
                                 <p class="ps-5">{{ employees.data.contrat_upload_data.contract_date }}</p>
                             </div>
-
-                            <div class="col-6 mt-4">
-                                <p class="ps-5">Training Date</p>
-                                <p class="ps-5">{{ employees.data.contrat_upload_data.training_start_date }}</p>
-                            </div>
-
-                            <div class="col-6 mt-4">
-                                <p class="ps-5">Departure Date</p>
-                                <p class="ps-5">{{ employees.data.contrat_upload_data.departure_date }}</p>
-                            </div>
                         </div>
                     </div>
                 </div>

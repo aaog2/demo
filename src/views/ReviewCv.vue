@@ -97,14 +97,14 @@ export default {
             return store.state.registerModule.employees
         })
 
-        let getEmployees = ()=> store.dispatch('registerModule/getEmployees');
+        let getEmployees = ()=> store.dispatch('registerModule/getEmployees',2);
         getEmployees();
 
 
         console.log(employees.value);
 
         let getdoeId =(id)=>{
-            // console.log(id);
+            console.log(id);
             console.log(employees.value.data);
             fillterEmployees.value = employees.value.data.filter((employee)=>{
                 if(employee.doe !== null){

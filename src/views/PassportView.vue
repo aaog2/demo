@@ -34,12 +34,12 @@
                           <tr>
                           <th scope="row">{{ index + 1 }}</th>
                           <td>{{ employees.employee_id }}</td>
-                          <td>{{ employees.employee_info.name_en }}</td>
-                          <td>{{employees.employee_info.nrc }}</td>
-                          <td>{{ employees.employee_info.father_name_en }}</td>
+                          <td>{{ employees.name_en }}</td>
+                          <td>{{employees.nrc }}</td>
+                          <td>{{ employees.father_name_en }}</td>
                           <td>
                               <div>
-                                  <button class="btn btn-primary btn-sm mx-1 my-1"  @click="showmodal(employees.employee_info.user_id)">Passport Upload</button>
+                                  <button class="btn btn-primary btn-sm mx-1 my-1"  @click="showmodal(employees.user_id)">Passport Upload</button>
                                   <!-- <button class="btn btn-warning btn-sm mx-1"  @click="showowicmodal(employees.employee_info.user_id)">Owic</button> -->
                               </div>
                           </td>
@@ -98,9 +98,8 @@
                   if(employee.doe !== null){
                       return employee.doe.doe_id == id
                   }
-                  
-                  // console.log(employee.doe);
               })
+              console.log(fillterEmployees.value[0]);
           }
   
   

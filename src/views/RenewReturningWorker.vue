@@ -21,7 +21,7 @@
              <h6>Search by NRC Number</h6>
               <!-- nrc -->
               <div class="nrcContainer col-7 col-md-5 col-lg-4">
-                            <div class="nrcForm d-flex">
+                            <div class="nrcForm wid d-flex">
                                 <select v-model="stateId" @change="getStateid(stateId.id)">
                                     <option v-for="state in getAllStates" :key="state.id" :value="{id:state.id,no:state.number.mm}">{{ state.number.mm }}</option>
                                 </select>
@@ -265,6 +265,10 @@ export default {
 </script>
 
 <style>
+.wid{
+    width:350px;
+}
+
 .bold{
     font-weight: bold;
 }

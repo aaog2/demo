@@ -63,19 +63,19 @@
                               <tbody v-for="(employees,index) in fillterEmployees" :key="employees.id" >
                                   <tr class="">
                                       <th scope="row">{{ index + 1 }}</th>
-                                      <td>{{ employees.employee_id }}</td>
-                                      <td>{{ employees.employee_info.name_en }}</td>
-                                      <td>{{ employees.employee_info.nrc }}</td>
-                                      <td v-if="employees.cv_data">{{ employees.employee_info.father_name_en}}</td>
+                                      <td>{{ employees.user.employee_id }}</td>
+                                      <td>{{ employees.name_en }}</td>
+                                      <td>{{ employees.nrc }}</td>
+                                      <td v-if="employees.cv_data">{{ employees.father_name_en}}</td>
                                       <td v-if="employees.cv_data == null" class="text-danger">No Data</td>
-                                      <td>{{ employees.employee_info.dob }}</td>
+                                      <td>{{ employees.dob }}</td>
                                       <td v-if="employees.cv_data">{{ employees.cv_data.address }}</td>
                                       <td v-if="employees.cv_data == null" class="text-danger">No Data</td>
-                                      <td v-if="employees.cv_data">{{ employees.employee_info.gender }}</td>
+                                      <td v-if="employees.cv_data">{{ employees.gender }}</td>
                                       <td v-if="employees.cv_data == null" class="text-danger">No Data</td>
-                                      <td v-if="employees.contrat_upload_data"><span class="btn btn-sm" :class="contractArray[index] > 548 ? 'btn-danger' : 'btn-success'">{{contractArray[index] }} days ago</span></td>
-                                      <td v-if="employees.contrat_upload_data == null" class="text-danger">No Data</td>
-                                      <td><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal({id:employees.employee_info.user_id,index})" /></td>
+                                      <td v-if="employees.contrat_upload"><span class="btn btn-sm" :class="contractArray[index] > 548 ? 'btn-danger' : 'btn-success'">{{contractArray[index] }} days ago</span></td>
+                                      <td v-if="employees.contrat_upload == null" class="text-danger">No Data</td>
+                                      <td><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal({id:employees.user_id,index})" /></td>
                                       
                                   </tr>   
                               </tbody>
@@ -156,7 +156,7 @@ export default {
             console.log(employees);
             if(employees.value){
                 fillterEmployees.value = employees.value.data.filter((employee)=>{
-                if (employee.contrat_upload_data !== null & employee.doe!== null ) {  
+                if (employee.contrat_upload !== null & employee.doe!== null ) {  
                 return employee.doe.doe_id == id
                 }
                 
@@ -167,10 +167,10 @@ export default {
             contractDate.value = fillterEmployees.value.forEach((fillterEmp)=>{
                 
                 if(fillterEmp.contrat_upload_data){
-                    console.log(fillterEmp.contrat_upload_data.contract_date);
+                    console.log(fillterEmp.contrat_upload.contract_date);
                     let daysSinceLastDate = computed(()=>{
                         const currentDate = new Date()
-                        const previousDate = new Date(fillterEmp.contrat_upload_data.contract_date)
+                        const previousDate = new Date(fillterEmp.contrat_upload.contract_date)
                         const timeDifference = currentDate.getTime() - previousDate.getTime()
                         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
                         return daysDifference
