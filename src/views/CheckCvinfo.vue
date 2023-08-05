@@ -460,6 +460,9 @@ setup(){
       router.push('/cvform');
     }
   const submitAllData = async () =>{
+    console.log("Submitted To Db value ===> ", submitToDb.value);
+    console.log("Submitted To Db value Type ===> ", typeof(submitToDb.value));
+    console.log("User Id =======>", userid);
     try {
       let res = await axios.patch(`cv/${userid}`,submitToDb.value)
       if(res){

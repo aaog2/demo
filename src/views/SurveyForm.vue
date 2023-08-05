@@ -1,7 +1,7 @@
 <template>
     <div class="suveryformContainers">
         <WorkerNavbar/>
-            <div v-if="nosuvery" class="surveryNoti text-center px-5">
+            <div v-if="nosuvery" class="surveryNoti text-center px-5 ">
                 <h5 class="text-dark p-3 rounded">Survey Form ဖြေဆိုရန် မရှိသေးပါ</h5>
             </div>
             <!-- <h6 class="text-center">Survey Page</h6> -->
@@ -157,5 +157,13 @@ export default {
 
 .zindex{    
  margin: 50px auto;
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
 }
 </style>
