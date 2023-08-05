@@ -401,6 +401,7 @@ export default {
         const uploadedImage = ref('');
         const file = ref();
         const imageInput = ref(null);
+        const scrollToTop = () => { window. scrollTo({ top: 0, behavior: "smooth" }); };
 
         const handleImageUpload = () => {
        file.value = imageInput.value.files[0];
@@ -410,7 +411,7 @@ export default {
       console.log('6 Image to show in form data type =>', typeof(uploadedImage.value));
     };
         const formData = ref({
-            userid:'',
+            // userid:'',
             userImage: '',
             address: '',
             selectedRegionValue: '',
@@ -423,10 +424,10 @@ export default {
             howdidyouknow: '',
             getContact: '',
             phoneNumber: '',
-            havePassport: '',
+            havePassport: '0',
             dopassport: '',
             passportCost: '',
-            vaccinated: '',
+            vaccinated: '0',
             firstVaccineName: '',
             firstVaccineDate: '',
             secondVaccineName: '',
@@ -434,19 +435,19 @@ export default {
             thirdVaccineName: '',
             thirdVaccineDate: '',
             vaccineNote: '',
-            colorBlind: '',
+            colorBlind: '0',
             colorBlindNote: '',
-            englishSkill: '',
+            englishSkill: '0',
             englishSkillNote: '',
-            mathSkill: '',
+            mathSkill: '0',
             mathSkillNote: '',
-            canWait: '',
+            canWait: '0',
             canWaitNote: '',
-            haveRelatives: '',
+            haveRelatives: '0',
             haveRelativesNote: '',
-            foreignExp: '',
+            foreignExp: '0',
             haveForeignExperienceNote: '',
-            bribe: '',
+            bribe: '0',
             haveToBribeNote: '',
 
         });
@@ -457,14 +458,20 @@ export default {
         let submitForm = async function() {
             formData.value.userImage = file.value;
             let userid = localStorage.getItem('userid');
-            
+            console.log("User Id ==>", userid, typeof(userid));
             let data = formData.value;
             // let userImage = file.value;
+
             // Convert Boolean and String Value into Number 
-            let weightNumber = Number(data.weight);
-            let heightFeetNumber = Number(data.heightFeet);
-            let heightInchesNumber = Number(data.heightInches);
-            let passportCostNumber = Number(data.passportCost);
+            
+            // let weightNumber = Number(data.weight);
+            let weightNumber = data.weight;
+            // let heightFeetNumber = Number(data.heightFeet);
+            let heightFeetNumber = data.heightFeet;
+            // let heightInchesNumber = Number(data.heightInches);
+            let heightInchesNumber = data.heightInches;
+            // let passportCostNumber = Number(data.passportCost);
+            let passportCostNumber = data.passportCost;
             let familyTreeNumber = Number(data.familyTree);
             let havePassportNumber = Number(data.havePassport);
             let vaccinatedNumber = Number(data.vaccinated);
@@ -475,11 +482,12 @@ export default {
             let haveRelativesNumber = Number(data.haveRelatives);
             let foreignExpNumber = Number(data.foreignExp);
             let bribeNumber = Number(data.bribe);
-          // console.log("1 User Image File  =>", userImage.data);
-          // console.log("1 User Image File Type =>", typeof(userImage));
-          // console.log("2 User Image File  =>", userImage.value);
-          // console.log("2 User Image File Type =>", typeof(userImage.value));
-          console.log('$ the image value ==>', data);
+        
+          // console.log('$ the image value ==>', data);
+          console.log("Weight data type and value =>", weightNumber, typeof(weightNumber));
+          console.log("Height Feet data type and value =>", heightFeetNumber, typeof(heightFeetNumber));
+          console.log("Height Inches data type and value =>", heightInchesNumber, typeof(heightInchesNumber));
+          console.log("Passport Cost data type and value =>", passportCostNumber, typeof(passportCostNumber));
             submitToDb.value = {
               address: data.address,
               state:data.selectedRegionValue,
@@ -548,13 +556,15 @@ export default {
             
         }
 
+        // onMounted()
+
       
     return{
         submitToDb,
         isChecked,
         formData,
         submitForm,
-        
+        scrollToTop,
 
         uploadedImage,
         handleImageUpload,

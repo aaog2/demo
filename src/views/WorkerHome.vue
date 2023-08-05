@@ -1,6 +1,6 @@
 <template>
     <div class="container form_control">
-        <WorkerNavbar class="text-center"></WorkerNavbar>
+        <WorkerNavbar class="text-center workerNavbar"></WorkerNavbar>
         <ChatWindow class="chatWindow"></ChatWindow>
         <NewChatForm class="newChatForm"></NewChatForm>
         
@@ -41,13 +41,17 @@ import WorkerNavbar from '@/components/WorkerNavbar.vue';
 }
 .newChatForm{
         width: 250px;
-        /* margin: auto; */
+        
         bottom: 1rem;
         position: fixed;
         left: 50%;
         transform: translate(-50%);
         line-height: 0.1rem;
 }
+.workerNavbar{
+    z-index: 1000;
+}
+
 @media (max-width: 768px) {
     .name {
       font-size: 10px; /* Adjust the font size for mobile screens as needed */

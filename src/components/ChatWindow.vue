@@ -1,6 +1,6 @@
 <template>
-    <div class="chat_window">
-        <div class="messagess" ref="msgBox">
+    <div class="chat_window ">
+        <div class="messagess no-scrollbar" ref="msgBox">
             <div class="single" v-for="message in formattedMessages" :key="message.id">
               <span class="message text-justify">{{ message.message }}</span>  
               <span class="name mt-1
@@ -96,8 +96,19 @@
     color: #007bff;
   }
 
+  .no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* .no-scrollbar::-webkit-scrollbar-thumb {
+  background-color: transparent;
+} */
+
   /* Media query for mobile screens (up to 768px) */
   @media (max-width: 768px) {
+    .chat_window{
+      width: 360px;
+    }
     .name {
       font-size: 12px; /* Adjust the font size for mobile screens as needed */
     }
