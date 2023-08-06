@@ -86,6 +86,7 @@ import { ref } from 'vue';
   display: inline-block;
   position: relative;
   transition: 1s;
+  margin-left: 1rem;
   /* opacity: 0.75; */
 }
 

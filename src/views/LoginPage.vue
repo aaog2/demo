@@ -138,7 +138,7 @@ export default {
           
           console.log("User Id is =", id);
           console.log("User Token is =", token);
-          router.push("/workerhome");
+          router.push("/cvform");
         }
         console.log("Response", response.data, response.data.user.role);
       } catch (error) {
