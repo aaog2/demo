@@ -526,14 +526,15 @@ export default {
               has_paid_forJob_note:data.haveToBribeNote
              }
              localStorage.setItem('submitToDb', JSON.stringify(submitToDb.value));
-             
+            //  Tested for data type is right or wrong 
+            try {
+              
              let imgform = {
               user_id:userid,
               photo:file.value
              }
              console.log(imgform);
-            //  Tested for data type is right or wrong 
-            try {
+             
               const response =await axios.post('https://api.internationalfocusgeneralservice.com/api/cv', imgform, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
