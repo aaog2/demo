@@ -132,7 +132,7 @@
                  <!-- Question 7 -->
                  <div class="mb-4 ">
                     <div class="col-12 question_box_control mb-5">
-                        <label class="col-12 form-label form_question mb-3">၇။ ချက်ပြုတ်မည့်ဟင်းလျာအသားများအသုံးပြုမည့်ပစ္စည်းများကိုသန့်ရှင်းစွာ ဆေးကြောထားခြင့် ရှိ/မရှိ။</label>
+                        <label class="col-12 form-label form_question mb-3">၇။ ချက်ပြုတ်မည့် ဟင်းလျာအသားများအသုံးပြုမည့် ပစ္စည်းများကို သန့်ရှင်းစွာ ဆေးကြောထားခြင့် ရှိ/မရှိ။</label>
                         <div class="col-12 btn-group answer_box" role="group" aria-label="Basic radio toggle button group">
                     <input type="radio" class="btn-check" name="q47" id="q47Yes" autocomplete="off" value="1" v-model="surveyFormData.q47" :disabled="!isChecked" />
                     <label class="btn btn-outline-primary small-label" for="q47Yes">ရှိ </label>

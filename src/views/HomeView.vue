@@ -66,15 +66,15 @@
                                       <td>{{ employees.user.employee_id }}</td>
                                       <td>{{ employees.name_en }}</td>
                                       <td>{{ employees.nrc }}</td>
-                                      <td v-if="employees.cv_data">{{ employees.father_name_en}}</td>
-                                      <td v-if="employees.cv_data == null" class="text-danger">No Data</td>
+                                      <td v-if="employees">{{ employees.father_name_en}}</td>
+                                      <!-- <td v-if="employees.cv_data == null" class="text-danger">No Data</td> -->
                                       <td>{{ employees.dob }}</td>
-                                      <td v-if="employees.cv_data">{{ employees.cv_data.address }}</td>
-                                      <td v-if="employees.cv_data == null" class="text-danger">No Data</td>
-                                      <td v-if="employees.cv_data">{{ employees.gender }}</td>
-                                      <td v-if="employees.cv_data == null" class="text-danger">No Data</td>
-                                      <td v-if="employees.contrat_upload"><span class="btn btn-sm" :class="contractArray[index] > 548 ? 'btn-danger' : 'btn-success'">{{contractArray[index] }} days ago</span></td>
-                                      <td v-if="employees.contrat_upload == null" class="text-danger">No Data</td>
+                                      <td v-if="employees.cv">{{ employees.cv.address }}</td>
+                                      <td v-if="employees.cv == null" class="text-danger">No Data</td>
+                                      <td v-if="employees.cv">{{ employees.gender }}</td>
+                                      <td v-if="employees.cv == null" class="text-danger">No Data</td>
+                                      <td v-if="employees.contract_upload"><span class="btn btn-sm" :class="contractArray[index] > 548 ? 'btn-danger' : 'btn-success'">{{contractArray[index] }} days ago</span></td>
+                                      <td v-if="employees.contract_upload == null" class="text-danger">No Data</td>
                                       <td><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal({id:employees.user_id,index})" /></td>
                                       
                                   </tr>   
@@ -153,7 +153,7 @@ export default {
 
 
           let getdoeId=(id)=>{
-            console.log(employees);
+           
             if(employees.value){
                 fillterEmployees.value = employees.value.data.filter((employee)=>{
                 if (employee.contrat_upload !== null & employee.doe!== null ) {  
@@ -163,14 +163,14 @@ export default {
             })
             }
 
-            // console.log(fillterEmployees.value);
+            console.log(fillterEmployees.value);
             contractDate.value = fillterEmployees.value.forEach((fillterEmp)=>{
                 
-                if(fillterEmp.contrat_upload_data){
-                    console.log(fillterEmp.contrat_upload.contract_date);
+                if(fillterEmp.contract_upload){
+                    console.log(fillterEmp.contract_upload);
                     let daysSinceLastDate = computed(()=>{
                         const currentDate = new Date()
-                        const previousDate = new Date(fillterEmp.contrat_upload.contract_date)
+                        const previousDate = new Date(fillterEmp.contract_upload.contract_date)
                         const timeDifference = currentDate.getTime() - previousDate.getTime()
                         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
                         return daysDifference

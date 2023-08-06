@@ -33,7 +33,7 @@
                       <tbody v-for="(employees,index) in fillterEmployees" :key="employees.id">
                           <tr>
                           <th scope="row">{{ index + 1 }}</th>
-                          <td>{{ employees.employee_id }}</td>
+                          <td>{{ employees.user.employee_id }}</td>
                           <td>{{ employees.name_en }}</td>
                           <td>{{employees.nrc }}</td>
                           <td>{{ employees.father_name_en }}</td>

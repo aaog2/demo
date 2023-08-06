@@ -198,9 +198,12 @@
 
 <script>
 import axios from 'axios';
+
 import { onMounted, ref } from 'vue';
+import { useRouter } from 'vue-router';
     export default{
         setup(){
+            let router = useRouter();
             let isChecked = ref(false);
             let submitSurvey = ref({});
             let workername = ref();

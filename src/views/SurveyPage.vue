@@ -1,5 +1,5 @@
 <template>
-   <SuveryModal  v-if="showModal && surveyNumber=='first'" :data="data" @closeModal="hidemodal"></SuveryModal>
+   <SuveryModal class="border"  v-if="showModal && surveyNumber=='first'" :data="data" @closeModal="hidemodal"></SuveryModal>
    <SuveryModal2  v-if="showModal && surveyNumber=='second'" :data="data" @closeModal="hidemodal"></SuveryModal2>
    <SuveryModal3  v-if="showModal && surveyNumber=='third'" :data="data" @closeModal="hidemodal"></SuveryModal3>
    <SuveryModal4  v-if="showModal && surveyNumber=='fourth'" :data="data" @closeModal="hidemodal"></SuveryModal4>
@@ -118,23 +118,23 @@
                               <tbody  v-for="(employees,index) in fillterEmployees" :key="employees.id" >
                                   <tr class="">
                                       <td>
-                                          <input type="checkbox" v-model="selectedEmployees" :value="employees.employee_id" @change="selectNum">
+                                          <input type="checkbox" v-model="selectedEmployees" :value="employees.user.employee_id" @change="selectNum">
                                       </td>
                                       <th scope="row">{{ index + 1 }}</th>
-                                      <td>{{ employees.employee_id }}</td>
-                                      <td>{{ employees.employee_info.name_en }}</td>
-                                      <td>{{ employees.employee_info.gender }}</td>
-                                      <td>{{ employees.employee_info.dob }}</td>
+                                      <td>{{ employees.user.employee_id }}</td>
+                                      <td>{{ employees.name_en }}</td>
+                                      <td>{{ employees.gender }}</td>
+                                      <td>{{ employees.dob }}</td>
                                       <td v-if="employees.cv_data">{{ employees.cv_data.state }}</td>
                                       <td v-if="employees.cv_data == null" class="text-danger">No Data</td>
-                                      <td v-if="employees.surveyIds.first_survey_id && surveyNumber == 'first'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.first_survey_id)" /></td>
-                                      <td v-if="employees.surveyIds.second_survey_id && surveyNumber == 'second'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.second_survey_id)" /></td>
-                                      <td v-if="employees.surveyIds.third_survey_id && surveyNumber == 'third'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.third_survey_id)" /></td>
-                                      <td v-if="employees.surveyIds.fourth_survey_id && surveyNumber == 'fourth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.fourth_survey_id)" /></td>
-                                      <td v-if="employees.surveyIds.fifth_survey_id && surveyNumber == 'fifth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.fifth_survey_id)" /></td>
-                                      <td v-if="employees.surveyIds.sixth_survey_id && surveyNumber == 'sixth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.sixth_survey_id)" /></td>
-                                      <td v-if="employees.surveyIds.seventh_survey_id && surveyNumber == 'seventh'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.seventh_survey_id)" /></td>
-                                      <td v-if="employees.surveyIds.eighth_survey_id && surveyNumber == 'eighth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.surveyIds.eighth_survey_id)" /></td>
+                                      <td v-if="employees.first_survey_id && surveyNumber == 'first'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.first_survey_id)" /></td>
+                                      <td v-if="employees.second_survey_id && surveyNumber == 'second'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.second_survey_id)" /></td>
+                                      <td v-if="employees.third_survey_id && surveyNumber == 'third'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.third_survey_id)" /></td>
+                                      <td v-if="employees.fourth_survey_id && surveyNumber == 'fourth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.fourth_survey_id)" /></td>
+                                      <td v-if="employees.fifth_survey_id && surveyNumber == 'fifth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.fifth_survey_id)" /></td>
+                                      <td v-if="employees.sixth_survey_id && surveyNumber == 'sixth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.sixth_survey_id)" /></td>
+                                      <td v-if="employees.seventh_survey_id && surveyNumber == 'seventh'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.seventh_survey_id)" /></td>
+                                      <td v-if="employees.eighth_survey_id && surveyNumber == 'eighth'" class="text-center"><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square"  @click="showmodal(employees.eighth_survey_id)" /></td>
                                       
                                   </tr>   
                               </tbody>

@@ -461,7 +461,7 @@ export default {
             console.log("User Id ==>", userid, typeof(userid));
             let data = formData.value;
             // let userImage = file.value;
-
+            
             // Convert Boolean and String Value into Number 
             
             // let weightNumber = Number(data.weight);

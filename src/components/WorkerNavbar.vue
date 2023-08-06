@@ -74,6 +74,7 @@ import { ref } from 'vue';
   /* padding: 10px; */
   /* margin: 10px; */
   /* background-color: aqua; */
+  z-index: 1000;
 }
     .nav-link {
   font-weight: bold;
