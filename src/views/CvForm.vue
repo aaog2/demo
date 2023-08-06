@@ -1,5 +1,6 @@
 <template>
     <div class="container form_control">
+      <WorkerNavbar/>
        <!-- alert message -->
        <div v-if="errorMessage" class="errorMessage">
             <div class="error-message">
@@ -388,8 +389,10 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import WorkerNavbar from '@/components/WorkerNavbar.vue';
 
 export default {
+  components:{WorkerNavbar},
     setup(){
         const router = useRouter();
         const store = useStore();

@@ -61,11 +61,11 @@
               <router-link class="nav-link sides py-3" to="/reviewmedical">
                 <font-awesome-icon icon="fa-solid fa-house-medical-circle-check" size="lg" />
               </router-link>
-              <router-link class="nav-link sides py-3" to="/contract">
-                <font-awesome-icon icon="fa-solid fa-file-contract" size="lg"/>
-              </router-link>
               <router-link class="nav-link sides py-3" to="/passport">
                 <font-awesome-icon icon="fa-solid fa-passport"  size="lg"/>
+              </router-link>
+              <router-link class="nav-link sides py-3" to="/contract">
+                <font-awesome-icon icon="fa-solid fa-file-contract" size="lg"/>
               </router-link>
               <router-link class="nav-link sides py-3" to="/owic">
                 <font-awesome-icon icon="fa-solid fa-address-card" size="lg" />

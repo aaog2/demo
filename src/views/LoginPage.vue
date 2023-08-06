@@ -117,27 +117,28 @@ export default {
           console.log("Admin Token is =", token);
         } else if (role === "employee") {
           
-          let checkcv = async()=>{
-            try {
-              let res = await axios.get(`employee_infos/${id}`)
-                console.log(res.data.data.cv_data);
-                if(res.data.data.cv_data){
-                  router.push("/workerhome");
-                }else{
-                  router.push("/checkprimaryinfo");
-                }
-            } catch (error) {
-              if (error.response) {
-                console.log(error.response.data.message);
-                errorMessage.value = "Login Failed"
-              }
-            }
-          }
+          // let checkcv = async()=>{
+          //   try {
+          //     let res = await axios.get(`employee_infos/${id}`)
+          //       console.log(res.data.data.cv_data);
+          //       if(res.data.data.cv_data){
+          //         router.push("/workerhome");
+          //       }else{
+          //         router.push("/checkprimaryinfo");
+          //       }
+          //   } catch (error) {
+          //     if (error.response) {
+          //       console.log(error.response.data.message);
+          //       errorMessage.value = "Login Failed"
+          //     }
+          //   }
+          // }
 
-          checkcv();
+          // checkcv();
           
           console.log("User Id is =", id);
           console.log("User Token is =", token);
+          router.push("/workerhome");
         }
         console.log("Response", response.data, response.data.user.role);
       } catch (error) {

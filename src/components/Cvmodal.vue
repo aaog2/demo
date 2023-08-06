@@ -251,15 +251,15 @@
                                     <p>{{ employees.data.cv_data.has_covid_vaccine ? 'ထိုးထားတယ်':'မထိုးထားပါ' }}</p>
                                 </div>
                         </div>
-                        <div>
-                            <div v-if=" employees.data.cv_data.has_covid_vaccine" class="d-flex align-items-center bolds">
+                        <div v-if=" employees.data.cv_data.has_covid_vaccine">
+                            <div class="d-flex align-items-center bolds">
                                 <div class="me-5">
                                         <p>ပထမအကြိမ် ကာကွယ်ဆေးအမည်</p>
                                         <p>{{ employees.data.cv_data.first_covid_vaccine_name }}</p>
                                 </div>
 
                                 <div class="px-2">
-                                        <p>ရက်ဆွဲ</p>
+                                        <p>ရက်စွဲ</p>
                                         <p>{{ employees.data.cv_data.first_vaccinated_date }}</p>
                                 </div>
                             </div>
@@ -271,7 +271,7 @@
                                 </div>
 
                                 <div class="px-1">
-                                        <p>ရက်ဆွဲ</p>
+                                        <p>ရက်စွဲ</p>
                                         <p>{{ employees.data.cv_data.second_vaccinated_date }}</p>
                                 </div>
                             </div>
@@ -283,7 +283,7 @@
                                 </div>
 
                                 <div class="">
-                                        <p>ရက်ဆွဲ</p>
+                                        <p>ရက်စွဲ</p>
                                         <p>{{ employees.data.cv_data.third_vaccinated_date }}</p>
                                 </div>
                             </div>
