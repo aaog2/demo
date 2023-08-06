@@ -5,10 +5,11 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
 
       <!-- Centered navigation links -->
-      <div class="d-flex justify-content-center ms-5">
+      <div class="d-flex justify-content-between">
         <div class="nav nav-centered">
           <router-link class="nav-link nav-link-ltr" to="/surveyform">Survey</router-link>
           <router-link class="nav-link nav-link-ltr " to="/workerhome">Chat</router-link>
+          <router-link class="nav-link nav-link-ltr " to="/cvform">Cv</router-link>
         </div>
       </div>
 
@@ -74,12 +75,13 @@ import { ref } from 'vue';
   /* padding: 10px; */
   /* margin: 10px; */
   /* background-color: aqua; */
+  z-index: 1000;
 }
     .nav-link {
   font-weight: bold;
   text-decoration: none;
   color: #031D44;
-  padding: 20px; 
+  padding: 20px 10px; 
   /* margin: 0px 20px; */
   display: inline-block;
   position: relative;

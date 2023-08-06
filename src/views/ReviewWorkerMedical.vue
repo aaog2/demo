@@ -54,7 +54,7 @@
                     <tbody  v-for="(employees,index) in fillterEmployees" :key="employees.id" >
                         <tr>
                             <td>
-                                <input type="checkbox" v-model="selectedEmployees" :value="{id:employees.employee_id,index}" @change="selectNum">
+                                <input type="checkbox" v-model="selectedEmployees" :value="{id:employees.employee_id,index,note:employees.medical_result_note}" @change="selectNum">
                             </td>
                             <th scope="row">{{ index + 1 }}</th>
                             <td>{{ employees.employee_id }}</td>
@@ -159,8 +159,8 @@ export default {
                 fillterEmployees.value.forEach((allemployee,index)=>{
                     selectedEmployees.value.push({
                         id:allemployee.employee_id,
-                        index
-
+                        index,
+                        note:allemployee.medical_result_note
                     })
                 })
 
@@ -177,9 +177,9 @@ export default {
             selectedEmployees.value.forEach((select,index)=>{
                 fillterEmployees.value[selectedEmployees.value[index].index].medical_result = status;
                 datas.value.result.push({
-                employee_id:select,
+                employee_id:select.id,
                 status:status,
-                note:""
+                note:select.note
              })
             })   
             await axios.post("medical_result", datas.value);

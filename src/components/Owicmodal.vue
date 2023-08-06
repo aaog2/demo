@@ -243,7 +243,7 @@
                   departure_date:depatureDate.value
               }
               try {    
-                  let res = await axios.patch(`owics/${employees.value.data.passport_data.id}`,data)
+                  let res = await axios.patch(`owics/${employees.value.data.owic_data.id}`,data)
                   console.log(res.data);  
                   if(res){
                   setTimeout(()=>{

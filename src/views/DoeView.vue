@@ -33,16 +33,23 @@
                             <div class="form-group col-8 col-lg-5 col-xl-3">
                                 <label for="factory">Factory</label>
                                     <select class="form-select" id="factory" v-model="factoryName">
-                                        <option value="Thai Union Co.Ltd" selected>Thai Union Co.Ltd</option>
-                                        <option value="Super Steel Co.Ltd">Super Steel Co.Ltd</option>
+                                        <option value="SYARIKAT SIN KWANG PLASTIC INDUSTRIES SDN BHD" selected>SYARIKAT SIN KWANG PLASTIC INDUSTRIES SDN BHD</option>
+                                        <option value="Thai Union Group Public Co.,Ltd">Thai Union Group Public Co.,Ltd</option>
+                                        <option value="Thai Union Manufacturing Co.,Ltd">Thai Union Manufacturing Co.,Ltd</option>
+                                        <option value="I Tail Corporation Public Co.,Ltd">I Tail Corporation Public Co.,Ltd</option>
+                                        <option value="Lucky Union Food Co.,Ltd ">Lucky Union Food Co.,Ltd </option>
+                                        <option value="Okeanos Food Co.,Ltd">Okeanos Food Co.,Ltd</option>
+                                        <option value="Thai Union Feedmill Co.,Ltd">Thai Union Feedmill Co.,Ltd</option>
+                                        <option value="Pakfood Public Co.,Ltd">Pakfood Public Co.,Ltd</option>
+                                        <option value="South East Asia Packaging and Canning Co.,Ltd">South East Asia Packaging and Canning Co.,Ltd</option>
                                     </select>
                             </div>
 
                             <div class="form-group col-4 col-xl-3 mt-4 mt-xl-0">
                                 <label for="category">Category</label>
                                     <select class="form-select" id="category" v-model="factoryCategory">
-                                        <option value="Food Packing" >Food Packing</option>
-                                        <option value="Steel Manufacturing">Steel Manufacturing</option>
+                                        <option value="Food Packing" >ပလတ်စတစ်ဖြင့်ပြုလုပ်သော အီလက်ထရောနစ်ပစ္စည်းများ ထုတ်လုပ်သည့် လုပ်ငန်း</option>
+                                        <option value="Steel Manufacturing">ပင်လယ်အစားအစာထုတ်လုပ်ခြင်း လုပ်ငန်း</option>
                                     </select>
                             </div>
 
@@ -54,7 +61,7 @@
                             <div class="form-group col-4 col-xl-3 mt-4" >
                                 <label for="country">Country</label>
                                     <select class="form-select" id="country" v-model="factoryCountry">
-                                        <option value="Thai" >Thai</option>
+                                        <option value="Thailand" >Thailand</option>
                                         <option value="Malaysia">Malaysia</option>
                                     </select>
                             </div>

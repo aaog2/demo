@@ -1,5 +1,6 @@
 <template>
     <div class="container form_control">
+      <WorkerNavbar/>
        <!-- alert message -->
        <div v-if="errorMessage" class="errorMessage">
             <div class="error-message">
@@ -388,8 +389,10 @@ import axios from 'axios';
 import { ref } from 'vue';
 import { useStore } from 'vuex';
 import { useRouter } from 'vue-router';
+import WorkerNavbar from '@/components/WorkerNavbar.vue';
 
 export default {
+  components:{WorkerNavbar},
     setup(){
         const router = useRouter();
         const store = useStore();
@@ -461,7 +464,7 @@ export default {
             console.log("User Id ==>", userid, typeof(userid));
             let data = formData.value;
             // let userImage = file.value;
-
+            
             // Convert Boolean and String Value into Number 
             
             // let weightNumber = Number(data.weight);
@@ -526,27 +529,31 @@ export default {
               has_paid_forJob_note:data.haveToBribeNote
              }
              localStorage.setItem('submitToDb', JSON.stringify(submitToDb.value));
-             
+            //  Tested for data type is right or wrong 
+            try {
+              
              let imgform = {
               user_id:userid,
               photo:file.value
              }
              console.log(imgform);
-            //  Tested for data type is right or wrong 
-            try {
-              const response =await axios.post('https://api.internationalfocusgeneralservice.com/api/cv', imgform, {
+
+              let response =await axios.post('cv', imgform, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                   'Accept': 'application/vnd.api+json'
                 }
               });
                   console.log("Response", response.data);
+                  console.log("try work")
                   localStorage.setItem('cvid', response.data.data.id);
                   router.push('/checkcvinfo');
-                  console.log("SubmitToDb value =>", submitToDb.value);           
+                  console.log("SubmitToDb value =>", submitToDb.value);  
+
             
                 } catch (error) {
                   if(error.response){
+                        console.log("catch work")
                         window.scrollTo(0,0);
                         errorMessage.value = error.response.data.message
                         console.log(error.response.data.message);

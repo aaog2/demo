@@ -33,14 +33,14 @@
                     <tbody v-for="(employees,index) in fillterEmployees" :key="employees.id">
                         <tr>
                         <th scope="row">{{ index + 1 }}</th>
-                        <td>{{ employees.employee_id }}</td>
-                        <td>{{ employees.employee_info.name_en }}</td>
-                        <td>{{employees.employee_info.nrc }}</td>
-                        <td>{{ employees.employee_info.father_name_en }}</td>
+                        <td>{{ employees.user.employee_id }}</td>
+                        <td>{{ employees.name_en }}</td>
+                        <td>{{employees.nrc }}</td>
+                        <td>{{ employees.father_name_en }}</td>
                         <td>
                             <div>
                                 <!-- <button class="btn btn-warning btn-sm mx-1 my-1"  @click="showmodal(employees.employee_info.user_id)">Passport</button> -->
-                                <button class="btn btn-primary btn-sm mx-1"  @click="showowicmodal(employees.employee_info.user_id)">Owic Upload</button>
+                                <button class="btn btn-primary btn-sm mx-1"  @click="showowicmodal(employees.user_id)">Owic Upload</button>
                             </div>
                         </td>
                        

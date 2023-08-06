@@ -107,7 +107,7 @@
 
       <div v-if="suveryDatas" class="">
             <p><span class="bold">Name</span>:<span class="bold text-dark mx-2">{{ suveryDatas.data.worker_name }}</span></p>
-            <p><span class="bold">Passport No.</span><span class="bold text-dark mx-2">{{ suveryDatas.data.passport_no }}</span></p>
+            <p v-if="suveryDatas.data.passport_no"><span class="bold">Passport No.</span><span class="bold text-dark mx-2">{{ suveryDatas.data.passport_no }}</span></p>
       </div>
     </div>
   </div>

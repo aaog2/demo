@@ -32,7 +32,7 @@ const infoModule = {
         let res = await axios.get("employee_infos");
         if (res) {
           //   console.log(res.data);
-          content.commit("getEmployeesinfo", res.data);
+          content.commit("getEmployeesinfo", res);
         }
       } catch (error) {
         if (error.response) {

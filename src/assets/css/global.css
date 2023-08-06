@@ -263,6 +263,7 @@ input:focus {
 .userPhoto img {
   width: inherit;
   height: inherit;
+  margin-left: -12px;
 }
 
 .margins {

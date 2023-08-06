@@ -15,7 +15,7 @@
                   <p v-if="suveryDatas.data.answer_1 == '1'" class="text-success mx-2">ပေးသွင်းရသည်။</p>
                   <p v-else class="text-danger mx-2">မပေးသွင်းရသည်။</p>
               </div>
-              <p v-if="suveryDatas.data.answer_1_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_1_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_1_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_1_note }}</p> -->
   
           </div>
   
@@ -26,7 +26,7 @@
                   <p v-if="suveryDatas.data.answer_2 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_2_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_2_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_2_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_2_note }}</p> -->
           </div>
   
           <div>
@@ -35,7 +35,7 @@
                   <p v-if="suveryDatas.data.answer_3 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_3_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_3_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_3_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_3_note }}</p> -->
           </div>
   
           <div>
@@ -44,7 +44,7 @@
                   <p v-if="suveryDatas.data.answer_4 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_4_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_4_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_4_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_4_note }}</p> -->
           </div>
   
           <div>
@@ -53,7 +53,7 @@
                   <p v-if="suveryDatas.data.answer_5 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_5_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_5_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_5_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_5_note }}</p> -->
           </div>
   
           <div class="mt-5">
@@ -62,7 +62,7 @@
                   <p v-if="suveryDatas.data.answer_6 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_6_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_6_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_6_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_6_note }}</p> -->
           </div>
   
           <div>
@@ -71,7 +71,7 @@
                   <p v-if="suveryDatas.data.answer_7 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_7_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_7_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_7_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_7_note }}</p> -->
           </div>
   
           <div>
@@ -79,7 +79,7 @@
                   <p class="bold">၂။(ဂ) အောက်ပါတိုမှ မည်သည့် လာဒ်ထိုးခြင်းကို အများစုက စဉ်းစားသနည်း။</p>
                   <p class="text-primary mx-2">{{ suveryDatas.data.answer_8 }}</p>
               </div>
-              <p v-if="suveryDatas.data.answer_8_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_8_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_8_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_8_note }}</p> -->
           </div>
   
           <div>
@@ -87,7 +87,7 @@
                   <p class="bold">၂။(ဃ)အချိန်ပို အလုပ်ကို မည်သည့်နှုန်းဖြင့် ပေးရမည်။</p>
                   <p class="text-primary mx-2">{{ suveryDatas.data.answer_9 }} ဆနှုန်း</p>
               </div>
-              <p v-if="suveryDatas.data.answer_9_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_9_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_9_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_9_note }}</p> -->
           </div>
   
           <div>
@@ -96,7 +96,7 @@
                   <p v-if="suveryDatas.data.answer_10 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_10_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_10_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_10_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_10_note }}</p> -->
           </div>
   
           <div>
@@ -105,7 +105,7 @@
                   <p v-if="suveryDatas.data.answer_11 == '1'" class="check"><font-awesome-icon icon="fa-solid fa-check" /></p>
                   <p v-else class="cross"><font-awesome-icon icon="fa-solid fa-xmark" /></p>
               </div>
-              <p v-if="suveryDatas.data.answer_11_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_11_note }}</p>
+              <!-- <p v-if="suveryDatas.data.answer_11_note"><span class="text-primary">Note :</span> {{ suveryDatas.data.answer_11_note }}</p> -->
           </div>
   
         </div>

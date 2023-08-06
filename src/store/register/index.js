@@ -37,10 +37,10 @@ const registerModule = {
     },
   },
   actions: {
-    async getEmployees(content) {
+    async getEmployees(content, limit) {
       try {
         content.commit("clearErrorMessage"); // Clear any previous error messages
-        let res = await axios.get("employees");
+        let res = await axios.get(`employees?page=${limit}`);
         if (res) {
           content.commit("getEmployees", res.data);
         }

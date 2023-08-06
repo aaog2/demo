@@ -63,7 +63,7 @@
                             <th scope="col">Worker ID</th>
                             <th scope="col">Name(En)</th>
                             <th scope="col">NRC Number</th>
-                            <th scope="col">Passport</th>
+                            <!-- <th scope="col">Passport</th> -->
                             <th scope="col">PDF Files</th>
                             <th scope="col">Detail</th>
                             </tr>
@@ -71,22 +71,21 @@
                         <tbody v-for="(employees,index) in fillterEmployees" :key="employees.id">
                             <tr>
                             <td>
-                                <input type="checkbox" v-model="selectedEmployees" :value="employees.employee_info.user_id" @change="selectNum">
+                                <input type="checkbox" v-model="selectedEmployees" :value="employees.user_id" @change="selectNum">
                             </td>
                             <th scope="row">{{ index + 1 }}</th>
-                                <td>{{ employees.employee_id }}</td>
-                                <td>{{ employees.employee_info.name_en }}</td>
-                                <td>{{employees.employee_info.nrc }}</td>
-                                <td>{{ employees.employee_id }}</td>
-                                <td v-if="employees.contrat_upload_data && !edit ">
-                                    <button v-if="!employees.contrat_upload_data.pdf" class="btn btn-primary" @click="showFile(employees.contrat_upload_data.id)">Upload File</button>  
-                                    <button v-else-if="employees.contrat_upload_data.pdf"  class="btn btn-success" @click.left="getfile(employees.contrat_upload_data.pdf)" @click.right="edit = !edit">Get File</button> 
+                                <td>{{ employees.user.employee_id }}</td>
+                                <td>{{ employees.name_en }}</td>
+                                <td>{{employees.nrc }}</td>
+                                <td v-if="employees.contract_upload && !edit ">
+                                    <button v-if="!employees.contract_upload.pdf" class="btn btn-primary" @click="showFile(employees.contract_upload.id)">Upload File</button>  
+                                    <button v-else-if="employees.contract_upload.pdf"  class="btn btn-success" @click.left="getfile(employees.contract_upload.pdf)" @click.right="edit = !edit">Get File</button> 
                                 </td>
-                                <td v-else-if="employees.contrat_upload_data && edit ">
-                                    <button v-if="employees.contrat_upload_data.pdf" class="btn btn-warning" @click.leftt="showFile(employees.contrat_upload_data.id)"  @click.right="edit = !edit">Update File</button>   
+                                <td v-else-if="employees.contract_upload && edit ">
+                                    <button v-if="employees.contract_upload.pdf" class="btn btn-warning" @click.leftt="showFile(employees.contract_upload.id)"  @click.right="edit = !edit">Update File</button>   
                                 </td>
                                 <td v-else class="text-danger">No Data</td>
-                                <td><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal(employees.employee_info.user_id)" /></td>
+                                <td><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal(employees.user_id)" /></td>
                             </tr>
                         </tbody>
                     </table>
@@ -145,7 +144,7 @@ import { useRouter } from 'vue-router';export default {
             try {
                 let res = await axios.get("employee_infos")
                 console.log(res.data);
-                employees.value = res.data
+                employees.value = res
            } catch (error) {
             if(error.response){
                 errorMessage.value = error.response.data.message
@@ -177,7 +176,7 @@ import { useRouter } from 'vue-router';export default {
                 selectedEmployees.value=[];
                 console.log(fillterEmployees.value);
                 fillterEmployees.value.forEach((allemployee,index)=>{
-                    selectedEmployees.value.push(allemployee.employee_info.user_id)
+                    selectedEmployees.value.push(allemployee.user_id)
                 })
 
                 console.log(selectedEmployees.value);

@@ -55,7 +55,7 @@
                     <tbody v-for="(employees,index) in fillterEmployees" :key="employees.id">
                         <tr>
                             <td>
-                                <input type="checkbox" v-model="selectedEmployees" :value="{id:employees.employee_id,index}" @change="selectNum">
+                                <input type="checkbox" v-model="selectedEmployees" :value="{id:employees.employee_id,index,note:employees.worker_result_note}" @change="selectNum">
                             </td>
                             <th scope="row">{{ index + 1 }}</th>
                             <td>{{ employees.employee_id }}</td>
@@ -70,8 +70,8 @@
                                <div class="col-6">
                                     <h6>Note</h6>
                                     <textarea class="d-block bg-light my-2" cols="75" rows="4" v-model="notetext"></textarea>
-                                    <button v-if="!employees.worker_result_note" class="btn btn-outline-primary notebtn"  @click="saveNote({id:employees.employee_id,status:employees.medical_result})">Save Note</button> 
-                                    <button v-if="employees.worker_result_note" class="btn btn-outline-primary notebtn"  @click="saveNote({id:employees.employee_id,status:employees.medical_result})">Edit Note</button>  
+                                    <button v-if="!employees.worker_result_note" class="btn btn-outline-primary notebtn"  @click="saveNote({id:employees.employee_id,status:employees.worker_result})">Save Note</button> 
+                                    <button v-if="employees.worker_result_note" class="btn btn-outline-primary notebtn"  @click="saveNote({id:employees.employee_id,status:employees.worker_result})">Edit Note</button>  
                                </div>
                             </td>
                         </tr>
@@ -161,7 +161,8 @@ export default {
                 fillterEmployees.value.forEach((allemployee,index)=>{
                     selectedEmployees.value.push({
                         id:allemployee.employee_id,
-                        index
+                        index,
+                        note:allemployee.worker_result_note
 
                     })
                 })
@@ -179,11 +180,13 @@ export default {
                 console.log(select);
                 fillterEmployees.value[selectedEmployees.value[index].index].worker_result = status
                 datas.value.result.push({
-                employee_id:select,
+                employee_id:select.id,
                 status:status,
-                note:""
+                note:select.note
              })
             })   
+
+            console.log(datas.value);
 
             await axios.post("worker_result", datas.value);
             
@@ -196,6 +199,7 @@ export default {
         
         // Save Note Function
         let saveNote =async (data)=>{
+            console.log(data);
             let savedata = {result:[
                 {
                     status:data.status,
@@ -203,18 +207,33 @@ export default {
                     note:notetext.value
                 }  
             ]}
-            console.log(data.index);
-            let res = await axios.post("worker_result", savedata);
-            console.log(res.data);
-            console.log(res.data);
-            if(res.data.status == 'success'){
-                showmodal();
-                setTimeout(()=>{
-                    router.go(0);
-                },2000)
-            }else if(res.data.error){
-                console.log(res.data.error.message)
+            console.log(savedata);
+            try {
+                let res = await axios.post("worker_result", savedata);
+                console.log(res.data);
+                if(res.data.status == 'success'){
+                    showmodal();
+                    setTimeout(()=>{
+                        router.go(0);
+                    },2000)
+                }    
+            } catch (error) {
+                if(error.response){
+                    console.log(error.response);
+                }
             }
+            // console.log(data.index);
+            // let res = await axios.post("worker_result", savedata);
+            // console.log(res.data);
+            // console.log(res.data);
+            // if(res.data.status == 'success'){
+            //     showmodal();
+            //     setTimeout(()=>{
+            //         router.go(0);
+            //     },2000)
+            // }else if(res.data.error){
+            //     console.log(res.data.error.message)
+            // }
         }
 
         let getnote=(note)=>{

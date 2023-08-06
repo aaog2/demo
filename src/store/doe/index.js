@@ -51,7 +51,7 @@ const doeModule = {
       try {
         let token = localStorage.getItem("token");
         content.commit("clearErrorMessage"); // Clear any previous error messages
-        let res = await axios.get("does?order=desc&limit=50");
+        let res = await axios.get("does");
         if (res) {
           content.commit("getDoes", res.data.data);
           console.log("It called!");
