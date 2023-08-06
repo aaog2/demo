@@ -534,20 +534,23 @@ export default {
               photo:file.value
              }
              console.log(imgform);
-             
-              const response =await axios.post('https://api.internationalfocusgeneralservice.com/api/cv', imgform, {
+
+              let response =await axios.post('api/cv', imgform, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                   'Accept': 'application/vnd.api+json'
                 }
               });
                   console.log("Response", response.data);
+                  console.log("try work")
                   localStorage.setItem('cvid', response.data.data.id);
                   router.push('/checkcvinfo');
-                  console.log("SubmitToDb value =>", submitToDb.value);           
+                  console.log("SubmitToDb value =>", submitToDb.value);  
+
             
                 } catch (error) {
                   if(error.response){
+                        console.log("catch work")
                         window.scrollTo(0,0);
                         errorMessage.value = error.response.data.message
                         console.log(error.response.data.message);
