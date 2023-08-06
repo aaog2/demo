@@ -535,7 +535,7 @@ export default {
              }
              console.log(imgform);
 
-              let response =await axios.post('api/cv', imgform, {
+              let response =await axios.post('cv', imgform, {
                 headers: {
                   'Content-Type': 'multipart/form-data',
                   'Accept': 'application/vnd.api+json'
