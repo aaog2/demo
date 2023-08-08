@@ -332,7 +332,7 @@ import { useRouter } from 'vue-router';
 }
 
 .form_control {
-  margin-top: 3%;
+  margin-top: 3rem;
     width: 370px;
     /* height: 400vh; */
     /* border: 1px solid blue; */

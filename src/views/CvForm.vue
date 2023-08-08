@@ -117,7 +117,7 @@
                 <option value="Grade - 10">Grade - 10</option>
                 <option value="Passed Matriculation Exam">Passed Matriculation Exam</option>
                 <option value="Undergraduate">Undergraduate</option>
-                <option value="Graduated">Grduated</option>
+                <option value="Graduated">Graduated</option>
                 
               </select>
           </div>
@@ -595,7 +595,7 @@ body {
   }
 
 .form_control {
-  margin-top: 3%;
+  margin-top: 3rem;
     width: 370px;
     /* height: 400vh; */
     /* border: 1px solid blue; */

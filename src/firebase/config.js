@@ -10,18 +10,20 @@ import "firebase/firestore";
 // Your web app's Firebase configuration
 const firebaseConfig = {
 
-    apiKey: "AIzaSyAljRkn9KR9DqyGVzdJCexxAWAo_kwhHSY",
-  
-    authDomain: "chat-for-international-focus.firebaseapp.com",
-  
-    projectId: "chat-for-international-focus",
-  
-    storageBucket: "chat-for-international-focus.appspot.com",
-  
-    messagingSenderId: "380899558642",
-  
-    appId: "1:380899558642:web:bcd65eaa6d8a4d472bbc6b"
-  
+  apiKey: "AIzaSyCrj-t2jjGNm2F-eFlH5rHlbiVyyewBG80",
+
+  authDomain: "vue-advanced-chat-565b3.firebaseapp.com",
+
+  databaseURL: "https://vue-advanced-chat-565b3-default-rtdb.asia-southeast1.firebasedatabase.app",
+
+  projectId: "vue-advanced-chat-565b3",
+
+  storageBucket: "vue-advanced-chat-565b3.appspot.com",
+
+  messagingSenderId: "119266723804",
+
+  appId: "1:119266723804:web:11ad6f4a1c3c3aec8bf119"
+
   };
   
 
