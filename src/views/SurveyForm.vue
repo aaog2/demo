@@ -1,11 +1,16 @@
 <template>
     <div class="suveryformContainers">
         <WorkerNavbar/>
+        <div v-if="success" class="success">
+            <div class="bg-white p-5 border rounded">
+                <h5>ဖြေဆိုမှုအောင်မြင်ပါသည်</h5>
+            </div>
+        </div>
             <div v-if="nosuvery" class="surveryNoti text-center px-5 ">
                 <h5 class="text-dark p-3 rounded">Survey Form ဖြေဆိုရန် မရှိသေးပါ</h5>
             </div>
             <!-- <h6 class="text-center">Survey Page</h6> -->
-            <SurveyFormone v-if="firstSurveyState" class="zindex"></SurveyFormone>
+            <SurveyFormone v-if="firstSurveyState" class="zindex" @success = "showsuccess"></SurveyFormone>
             <SurveyFormtwo v-if="secondSurveyState"></SurveyFormtwo>
             <SurveyFormthree v-if="thirdSurveyState"></SurveyFormthree>
             <SurveyFormfour v-if="fourthSurveyState"></SurveyFormfour>
@@ -20,6 +25,7 @@
 <script>
 import axios from 'axios';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 import WorkerNavbar from '@/components/WorkerNavbar.vue';
 import SurveyFormone from '@/components/SurveyFormone.vue';
 import SurveyFormtwo from '@/components/SurveyFormtwo.vue';
@@ -42,6 +48,7 @@ export default {
         SurveyFormeight,
     },
     setup(){
+        let router =useRouter();
         let firstSurveyPermission = ref(''); 
         let secondSurveyPermission = ref(''); 
         let thirdSurveyPermission = ref(''); 
@@ -58,7 +65,8 @@ export default {
         let sixthSurveyState = ref(false);
         let seventhSurveyState = ref(false);
         let eighthSurveyState = ref(false);
-        let nosuvery = ref(true)
+        let nosuvery = ref(true);
+        let success = ref(false);
         console.log(eighthSurveyState.value);
         let userid = localStorage.getItem("userid");
         // let surveyData = axios.get(`employee_infos/${userid}`);
@@ -110,10 +118,17 @@ export default {
                 }
                 // console.log("Response Data =>", res.data.data.employee_info.first_survey_permission);
             }catch(error){
-
+                console.log(error.response);
             }
         }
         surveyData();
+
+        let showsuccess =()=>{
+            success.value = true;
+            setTimeout(() => {
+                router.go(0);
+            }, 1000);
+        }
         // console.log("Survey Infos =>", surveyData);
 
         return{
@@ -127,7 +142,9 @@ export default {
             sixthSurveyState,
             seventhSurveyState,
             eighthSurveyState,
-            nosuvery
+            nosuvery,
+            success,
+            showsuccess
         }
     }
 }
@@ -165,5 +182,21 @@ export default {
 
 .no-scrollbar::-webkit-scrollbar-thumb {
   background-color: transparent;
+}
+
+.success{
+    width: 100vw;
+    height: 100vh;
+    background: #fff6f6da;
+
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    z-index: 200;
 }
 </style>

@@ -15,9 +15,9 @@
 
       <div v-if="successMessage" class="successMessage">
             <div class="success-message">
-                    <div class="modalss">
-                            <p class="my-2">အောင်မြင်ပါသည်</p>
-                            <button class="btn btn-danger" @click="successMessage = null">Close</button>
+                    <div class="modalss border border-primary">
+                            <h5 class="my-5">အောင်မြင်ပါသည်</h5>
+                            <!-- <button class="btn btn-danger" @click="successMessage = null">Close</button> -->
                     </div>
             </div>
       </div>
@@ -354,36 +354,26 @@
 <script>
 import axios from 'axios';
 import { ref,computed, onMounted } from 'vue'
-// import { computed,ref } from 'vue';
-// import { useStore } from 'vuex';
+
 import { useRouter } from 'vue-router';
-// import axios from 'axios';
 
 
 export default {
 setup(){
   const router = useRouter();
   let errorMessage = ref();
-  let cvid = ref();
+  // let cvid = ref();
   let submitToDb = ref({});
-  let successMessage = ref();
+  let successMessage = ref(false);
   let uploadedImage = computed(()=>{
     return localStorage.getItem('uploadedImage');
   });
-
-  // let getcvid = async()=>{
-  //   let res = await axios.get()
-  // }
-
- 
 
   const storedData = localStorage.getItem('submitToDb');
   let notification = ref('');
   let responseStatus = ref('');
   if (storedData) {
-    submitToDb.value = JSON.parse(storedData);  
-    // console.log("From Local Storage =>", JSON.parse(storedData));
-    // console.log("Image value from Check CV Info =>", submitToDb.value);
+    submitToDb.value = JSON.parse(storedData); 
   }
   let userid = localStorage.getItem('userid');
   let address = submitToDb.value.address;
@@ -421,37 +411,8 @@ setup(){
   let foreignExpNote = submitToDb.value.has_workexp_in_foreign_note;
   let bribe = Number(submitToDb.value.has_paid_forJob);
   let bribeNote = submitToDb.value.has_paid_forJob_note;
-
-  let getcvid =async ()=>{
-    try {
-      let res = await axios.get(`employee_infos/${userid}`)
-      console.log(res.data.data.cv_data.id);
-      cvid.value = res.data.data.cv_data.id;
-    } catch (error) {
-      if(error.response){
-                        window.scrollTo(0,0);
-                        errorMessage.value = error.response.data.message
-                        console.log(error.response.data.message);
-                    }
-    }
-    
-    // window.scrollTo(0,0)
-  }
-
-  getcvid();
-
-  // onMounted=(()=>{
-  //   window.scrollTo(0,0);
-  // })
-
   
-
-  
-
-
- 
   const hidePopup = () =>{
-      // warning.value = null;
       let popup = document.querySelector('.popup');
       popup.style.display = 'none';
     };
@@ -460,13 +421,11 @@ setup(){
       router.push('/cvform');
     }
   const submitAllData = async () =>{
-    console.log("Submitted To Db value ===> ", submitToDb.value);
-    console.log("Submitted To Db value Type ===> ", typeof(submitToDb.value));
-    console.log("User Id =======>", userid);
     try {
-      let res = await axios.patch(`cv/${userid}`,submitToDb.value)
+      let res = await axios.post(`cv`,submitToDb.value)
       if(res){
-        successMessage.value = "success"
+        window.scrollTo(0,0);
+        successMessage.value = true;
         setTimeout(()=>{
           router.push("/workerhome");
         },2000)
@@ -479,18 +438,11 @@ setup(){
             console.log(error.response.data.message);
           }
     }
-   
-    // console.log("Final CV data to DB =>", submitToDb.value);
-    // console.log(userid)
   }
 
- 
-
-  // console.log("Weight", weight, "Type of weight =>", typeof(weight));
-  // console.log("Weight Number", weightNumber, "Type of weight =>", typeof(weightNumber));
 
   return{
-    uploadedImage,
+    // uploadedImage,
     errorMessage,
     hidePopup,
     submitAllData,
@@ -755,14 +707,14 @@ form > div{
 
 }
 
-.errorMessage{
+.successMessage{
     width: 100vw;
     height: 100vh;
     font-weight: bold;
     font-size: 18px;
     padding: 30px 20px;
     transition: 1s;
-    background: gray;
+    background: rgba(133, 181, 240,0.5);
 
     position: absolute;
     top: 0;
@@ -772,7 +724,7 @@ form > div{
     z-index: 100;
 }
 
-.error-message {
+.success-message {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -783,7 +735,7 @@ form > div{
   margin-left: -200px;
   border-radius: 2px;
   overflow: hidden;
-  color: #415868;
+  color: #098cea;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   z-index:100;

@@ -42,7 +42,8 @@ import {
   faPassport,
   faArrowRight,
   faFileExport,
-  faAddressCard
+  faAddressCard,
+  faArrowsRotate,
 } from "@fortawesome/free-solid-svg-icons";
 /* add icons to the library */
 library.add(
@@ -72,7 +73,8 @@ library.add(
   faPassport,
   faArrowRight,
   faFileExport,
-  faAddressCard
+  faAddressCard,
+  faArrowsRotate
 );
 
 createApp(App)

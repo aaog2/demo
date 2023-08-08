@@ -185,6 +185,94 @@ input:focus {
 
 /* end */
 
+/* review cv */
+.circle {
+  width: 20px;
+  height: 20px;
+  line-height: 200px;
+  border-radius: 50%; /* the magic */
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+  margin-left: 10px;
+  margin-top: 5px;
+}
+
+.reload {
+  height: 250px;
+  width: 90vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.reload div {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-block;
+  margin: 0.5rem;
+  animation: loading 2.5s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0%,
+  100% {
+    transform: scale(0.2);
+    background-color: #0ddcf8;
+  }
+  42% {
+    background-color: #5d4da6;
+  }
+  50% {
+    transform: scale(1);
+    background-color: #42b58fb8;
+  }
+}
+
+.reload div:nth-child(0) {
+  animation-delay: 0s;
+}
+.reload div:nth-child(1) {
+  animation-delay: 0.2s;
+}
+.reload div:nth-child(2) {
+  animation-delay: 0.4s;
+}
+.reload div:nth-child(3) {
+  animation-delay: 0.6s;
+}
+.reload div:nth-child(4) {
+  animation-delay: 0.8s;
+}
+.reload div:nth-child(5) {
+  animation-delay: 1s;
+}
+
+.refleshbtn {
+  width: 50px;
+  height: 50px;
+  background: #0dddf84b;
+  border-radius: 50%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: fixed;
+  right: 5%;
+  bottom: 5%;
+
+  cursor: pointer;
+}
+
+.refleshbtn:hover {
+  background: #0dddf8;
+}
+
+.refleshbtn:active {
+  transform: scale(0.98);
+}
+
 /* CV modal css */
 /* start */
 .cvModal {

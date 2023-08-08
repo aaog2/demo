@@ -202,7 +202,7 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
     export default{
-        setup(){
+        setup(props,{emit}){
             let router = useRouter();
             let isChecked = ref(false);
             let submitSurvey = ref({});
@@ -271,8 +271,7 @@ import { useRouter } from 'vue-router';
                     const response = await axios.post('survey/first', submitSurvey.value);
                     // console.log("Survey One Result =>", )
                     if(response){
-                        console.log('Response =>', response.data);
-                        router.go(0);
+                        emit("success");
                     }
                 }catch (error){
                     if(error.response){
