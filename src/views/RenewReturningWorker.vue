@@ -1,6 +1,7 @@
 <template>
   <div class="bg-light mains" :class="showModal === true ? 'red' : 'blue'">
     <Navbar/>
+    <SideNavbar></SideNavbar>
       <!-- alert -->
       <div v-if="errorMessage" class="errorMessage">
         <div class="error-message">
@@ -120,7 +121,8 @@
 
 <script>
 import nrcdata from '../composable/nrcdata'
-import Navbar from '../components/Navbar.vue'
+import Navbar from '../components/Navbar.vue';
+import SideNavbar from '../components/SideNavbar.vue'
 import ReturnModal from '../components/ReturnModal.vue';
 import { useRouter } from 'vue-router';
 import { computed, ref } from 'vue';
@@ -128,7 +130,7 @@ import { useStore } from 'vuex';
 import {convertNumbers } from "mm-nrc-converter"
 import axios from 'axios';
 export default {    
-    components:{Navbar,ReturnModal},
+    components:{Navbar,SideNavbar,ReturnModal},
     setup(){
         let store = useStore();
         const showModal = ref(false);

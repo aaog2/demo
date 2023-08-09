@@ -1,6 +1,7 @@
 <template>
     <div class="bg-light mains"  :class="showModal === true ? 'red' : 'blue'">
         <Navbar/>
+        <SideNavbar></SideNavbar>
         <LoadingPage v-if="!employees"/>
         <CvModal v-if="showModal" :id="userid" @closeModal="hidemodal" @passed="passed" @failed="failed" @pending="pending"/>
         <div class="page"> 
@@ -85,13 +86,14 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
+import SideNavbar from '../components/SideNavbar.vue'
 import CvModal from '../components/Cvmodal.vue';
 import { computed, ref,onMounted } from 'vue';
 import LoadingPage from '../components/LoadingPage.vue'
 import { useStore } from 'vuex';
 import axios from "axios";
 export default {
-    components:{Navbar,CvModal,LoadingPage},
+    components:{Navbar,SideNavbar,CvModal,LoadingPage},
     setup(){
         let store = useStore();
         let doeId=ref();

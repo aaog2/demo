@@ -7,14 +7,15 @@
       <!-- Centered navigation links -->
       <div class="d-flex justify-content-between">
         <div class="nav nav-centered">
-          <router-link class="nav-link nav-link-ltr" to="/surveyform">Survey</router-link>
-          <router-link class="nav-link nav-link-ltr " to="/workerhome">Chat</router-link>
           <router-link class="nav-link nav-link-ltr " to="/cvform">Cv</router-link>
+          <router-link class="nav-link nav-link-ltr" to="/surveyform">Survey</router-link>
+          <router-link class="nav-link nav-link-ltr " to="/workerhome">တိုင်ကြားရန်</router-link>
+         
         </div>
       </div>
 
       <!-- Account dropdown -->
-      <div class="my-2 my-lg-0 py-2 px-2">
+      <div class="my-2 my-lg-0 py-2 px-1">
         <div class="account">
           <div class="btn-group dropstart">
             <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
@@ -79,6 +80,7 @@ import { ref } from 'vue';
 }
     .nav-link {
   font-weight: bold;
+  font-size: 14px;
   text-decoration: none;
   color: #031D44;
   padding: 20px 10px; 
@@ -86,7 +88,7 @@ import { ref } from 'vue';
   display: inline-block;
   position: relative;
   transition: 1s;
-  margin-left: 1rem;
+  margin-left: 0.5rem;
   /* opacity: 0.75; */
 }
 

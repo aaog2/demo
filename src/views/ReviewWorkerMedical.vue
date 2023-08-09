@@ -1,6 +1,7 @@
 <template>
     <div class="bg-light mains" :class="showModal === true ? 'red' : 'blue'">
         <Navbar/>
+        <SideNavbar></SideNavbar>
         <SuccessModal  v-if="showModal"/>
         <div class="page"> 
     <div class="containers py-4">
@@ -87,6 +88,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
+import SideNavbar from '../components/SideNavbar.vue'
 import { computed, ref } from 'vue';
 import { useStore } from 'vuex';
 import axios from "axios";
@@ -95,7 +97,7 @@ import LoadingPage from '../components/LoadingPage.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 
 export default {
-    components:{Navbar,LoadingPage,SuccessModal},
+    components:{Navbar,SideNavbar,LoadingPage,SuccessModal},
     setup(){
         let router = useRouter();
         let store = useStore();

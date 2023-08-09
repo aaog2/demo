@@ -1,6 +1,7 @@
 <template>
   <div class="bg-light mains" :class="bgactive === true ? 'red' : 'blue'">
     <Navbar/>
+    <SideNavbar></SideNavbar>
     <Passportmodal v-if="showModal" :id="userid" @closeModal="hidemodal"></Passportmodal>
     <Owicmodal v-if="owicModal" :id="userid" @closeModal="hidemodal"></Owicmodal>
     <div class="page">
@@ -58,6 +59,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import SideNavbar from '@/components/SideNavbar.vue';
 import Owicmodal from '../components/Owicmodal.vue';
 import Passportmodal from '../components/Passportmodal.vue';
 import { computed, ref, onMounted } from 'vue';
@@ -65,7 +67,7 @@ import { useStore } from 'vuex';
 import axios from "axios";
 
 export default {
-components:{Navbar,Passportmodal,Owicmodal},
+components:{Navbar,SideNavbar,Passportmodal,Owicmodal},
 setup(){
     let showModal = ref(false);
     let owicModal = ref(false);

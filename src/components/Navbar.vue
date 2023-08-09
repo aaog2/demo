@@ -4,13 +4,13 @@
         <div>
             <nav class="nav navbar-light bg-white mx-auto">
               <router-link  to="/home" class="my-auto">
-                <a class="navbar-brand"><img src="../assets/image/internationalfocuslogo.jpg" alt="logo"></a>
+                <a class="navbar-brand logo_container"><img src="../assets/image/internationalfocuslogo.jpg" width="30px" height="30px"  alt="logo"></a>
               </router-link>
               
                   <div class="mx-auto">
                     <router-link class="nav-link nav-link-ltr ms-5"  to="/home" >Manage</router-link>
                     <router-link class="nav-link nav-link-ltr"  to="/surveypage">Suvery</router-link>
-                    <router-link class="nav-link nav-link-ltr" to="/chatadminview">Chat</router-link>
+                    <router-link class="nav-link nav-link-ltr" to="/chatadminview">Grievance Form</router-link>
                   </div>
                   <div class="my-2 my-lg-0 px-2">
                       <!-- <p>logo</p> -->
@@ -35,14 +35,11 @@
             </nav>
         </div>
         <!-- side navbar -->
-        <div class="sidebars bg-white">
+        <!-- <div class="sidebars bg-white">
           <nav class="nav flex-column pt-3">
               <router-link class="nav-link sides py-3" to="/home">
               <font-awesome-icon icon="fa-solid fa-users" size="lg" />
               </router-link>
-              <!-- <router-link class="nav-link sides py-3" to="/searchpage">
-              <font-awesome-icon icon="fa-solid fa-magnifying-glass" size="lg" />
-              </router-link> -->
               <router-link class="nav-link sides py-3" to="/doe">
                 <font-awesome-icon icon="fa-solid fa-file" size="lg" />
               </router-link>
@@ -73,7 +70,7 @@
               
               
           </nav>  
-        </div>
+        </div> -->
   </div>
 </template>
 
@@ -103,4 +100,19 @@ export default {
 
 <style>
 
+.navbar-brand img{
+  margin-left: 0.5rem;
+  width: 40px !important;
+  height: 40px !important;
+}
+ 
+
+  .logo_container img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: #007bff;
+    border: 2px solid #007bff;
+
+  }
 </style>
