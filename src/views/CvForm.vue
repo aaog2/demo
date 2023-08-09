@@ -210,7 +210,7 @@
    <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.firstVaccineDate" autocomplete="off" /> 
+              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" v-model="formData.firstVaccineDate" autocomplete="off" /> 
     </div>
 
      <!-- Select Region / State Section  -->
@@ -834,4 +834,8 @@ body {
 
 
 }
+
+.THIS .slds-datepicker{ display: none !important; }
+
+input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
 </style>

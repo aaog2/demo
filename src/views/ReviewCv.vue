@@ -215,8 +215,9 @@ export default {
 
         let reloadTable =()=>{
             reload.value = true;
-            getdoeId(doeId.value);
+            getemployees()
             setTimeout(() => {
+                getdoeId(doeId.value);
                 reload.value = false;
             }, 2000);
         }

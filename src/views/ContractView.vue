@@ -37,7 +37,7 @@
                     <!-- Contract Date -->
                     <div class="form-group col-4">
                             <label for="contractDate" class="d-block">Contract Date</label>
-                            <input autocomplete="off" class="form-control bg-light dates" name="MoveInDate" placeholder="MM-DD-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="contractDate" v-model="contractDate">
+                            <input class="form-control bg-light dates" placeholder="dd-mm-yyyy" type="date" min="1900-12-01" max="2050-01-01" id="contractDate" v-model="contractDate">
                     </div>
                 </div>   
                 <!-- Button Container -->
