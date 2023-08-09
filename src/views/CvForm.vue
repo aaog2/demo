@@ -29,10 +29,10 @@
         </div>
       </div>
     </div>
-      <div class="form" >
+      <form class="form" >
         
        
-            <div class="photo_upload_control ms-2">
+            <!-- <div class="photo_upload_control ms-2">
             <label for="photo" class="form-label mt-5">ဓာတ်ပုံ</label>
             <div v-if="uploadedImage" class="image_container ">
               <img :src="uploadedImage" alt="Uploaded Image" class="image">
@@ -41,7 +41,7 @@
           <label v-if="!uploadedImage" for="imageInput" class="plus-button plus_button">
             <font-awesome-icon icon="fa-solid fa-plus"  /> 
           </label>
-          <input type="file" accept="image/jpeg, image/png, image/webp" class="btn btn-info image_input" id="imageInput" ref="imageInput" @change="handleImageUpload" required />
+          <input type="file" accept="image/jpeg, image/png, image/webp" class="btn btn-info image_input" id="imageInput" ref="imageInput" @change="handleImageUpload" required /> -->
 
           <!-- Address Section  -->
           <div class="address_control">
@@ -378,7 +378,7 @@
     </div>
   </div>
   
-  </div>
+      </form>
     </div>
   </template>
 
@@ -401,18 +401,18 @@ export default {
         let errorMessage = ref()
 
 
-        const uploadedImage = ref('');
-        const file = ref();
-        const imageInput = ref(null);
+        // const uploadedImage = ref('');
+        // const file = ref();
+        // const imageInput = ref(null);
         const scrollToTop = () => { window. scrollTo({ top: 0, behavior: "smooth" }); };
 
-        const handleImageUpload = () => {
-       file.value = imageInput.value.files[0];
-       uploadedImage.value = URL.createObjectURL(file.value);
-      localStorage.setItem('uploadedImage',uploadedImage.value);
-      console.log('5 Image to show in form =>', uploadedImage.value);
-      console.log('6 Image to show in form data type =>', typeof(uploadedImage.value));
-    };
+    //     const handleImageUpload = () => {
+    //    file.value = imageInput.value.files[0];
+    //    uploadedImage.value = URL.createObjectURL(file.value);
+    //   localStorage.setItem('uploadedImage',uploadedImage.value);
+    //   console.log('5 Image to show in form =>', uploadedImage.value);
+    //   console.log('6 Image to show in form data type =>', typeof(uploadedImage.value));
+    // };
         const formData = ref({
             // userid:'',
             userImage: '',
@@ -459,21 +459,13 @@ export default {
 
         
         let submitForm = async function() {
-            formData.value.userImage = file.value;
+            // formData.value.userImage = file.value;
             let userid = localStorage.getItem('userid');
-            console.log("User Id ==>", userid, typeof(userid));
+            // console.log("User Id ==>", userid, typeof(userid));
             let data = formData.value;
-            // let userImage = file.value;
-            
-            // Convert Boolean and String Value into Number 
-            
-            // let weightNumber = Number(data.weight);
             let weightNumber = data.weight;
-            // let heightFeetNumber = Number(data.heightFeet);
             let heightFeetNumber = data.heightFeet;
-            // let heightInchesNumber = Number(data.heightInches);
             let heightInchesNumber = data.heightInches;
-            // let passportCostNumber = Number(data.passportCost);
             let passportCostNumber = data.passportCost;
             let familyTreeNumber = Number(data.familyTree);
             let havePassportNumber = Number(data.havePassport);
@@ -486,12 +478,13 @@ export default {
             let foreignExpNumber = Number(data.foreignExp);
             let bribeNumber = Number(data.bribe);
         
-          // console.log('$ the image value ==>', data);
-          console.log("Weight data type and value =>", weightNumber, typeof(weightNumber));
-          console.log("Height Feet data type and value =>", heightFeetNumber, typeof(heightFeetNumber));
-          console.log("Height Inches data type and value =>", heightInchesNumber, typeof(heightInchesNumber));
-          console.log("Passport Cost data type and value =>", passportCostNumber, typeof(passportCostNumber));
+          // // console.log('$ the image value ==>', data);
+          // console.log("Weight data type and value =>", weightNumber, typeof(weightNumber));
+          // console.log("Height Feet data type and value =>", heightFeetNumber, typeof(heightFeetNumber));
+          // console.log("Height Inches data type and value =>", heightInchesNumber, typeof(heightInchesNumber));
+          // console.log("Passport Cost data type and value =>", passportCostNumber, typeof(passportCostNumber));
             submitToDb.value = {
+              user_id:userid,
               address: data.address,
               state:data.selectedRegionValue,
               weight:weightNumber,
@@ -529,36 +522,37 @@ export default {
               has_paid_forJob_note:data.haveToBribeNote
              }
              localStorage.setItem('submitToDb', JSON.stringify(submitToDb.value));
+             router.push('/checkcvinfo');
             //  Tested for data type is right or wrong 
-            try {
+            // try {
               
-             let imgform = {
-              user_id:userid,
-              photo:file.value
-             }
-             console.log(imgform);
+            //  let imgform = {
+            //   user_id:userid,
+            //   photo:file.value
+            //  }
+            //  console.log(imgform);
 
-              let response =await axios.post('cv', imgform, {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                  'Accept': 'application/vnd.api+json'
-                }
-              });
-                  console.log("Response", response.data);
-                  console.log("try work")
-                  localStorage.setItem('cvid', response.data.data.id);
-                  router.push('/checkcvinfo');
-                  console.log("SubmitToDb value =>", submitToDb.value);  
+            //   let response =await axios.post('cv', imgform, {
+            //     headers: {
+            //       'Content-Type': 'multipart/form-data',
+            //       'Accept': 'application/vnd.api+json'
+            //     }
+            //   });
+            //       console.log("Response", response.data);
+            //       console.log("try work")
+            //       localStorage.setItem('cvid', response.data.data.id);
+            //       router.push('/checkcvinfo');
+            //       console.log("SubmitToDb value =>", submitToDb.value);  
 
             
-                } catch (error) {
-                  if(error.response){
-                        console.log("catch work")
-                        window.scrollTo(0,0);
-                        errorMessage.value = error.response.data.message
-                        console.log(error.response.data.message);
-                    }
-                }
+            //     } catch (error) {
+            //       if(error.response){
+            //             console.log("catch work")
+            //             window.scrollTo(0,0);
+            //             errorMessage.value = error.response.data.message
+            //             console.log(error.response.data.message);
+            //         }
+            //     }
             //  console.log("CV Data=>", localStorage.getItem('submitToDb'));
             
         }
@@ -572,11 +566,10 @@ export default {
         formData,
         submitForm,
         scrollToTop,
-
-        uploadedImage,
-        handleImageUpload,
-        imageInput,
-        file,
+        // uploadedImage,
+        // handleImageUpload,
+        // imageInput,
+        // file,
         errorMessage
     }
 

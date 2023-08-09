@@ -3,6 +3,17 @@
       <Navbar/>
       <Passportmodal v-if="showModal" :id="userid" @closeModal="hidemodal"></Passportmodal>
       <Owicmodal v-if="owicModal" :id="userid" @closeModal="hidemodal"></Owicmodal>
+       <!-- alert -->
+       <div v-if="errorMessage" class="errorMessage">
+            <div class="error-message">
+                <div class="modalss">
+                    <img src="http://100dayscss.com/codepen/alert.png" width="44" height="38" />
+                        <span class="title">ops !</span>
+                        <p class="my-2">{{ errorMessage }}</p>
+                        <button class="btn btn-danger" @click="errorMessage= null">Close</button>
+                </div>
+            </div>
+        </div>
       <div class="page">
           <div class="containers pt-4">
               <h4 class="py-2">Passport</h4>
@@ -39,8 +50,8 @@
                           <td>{{ employees.father_name_en }}</td>
                           <td>
                               <div>
-                                  <button class="btn btn-primary btn-sm mx-1 my-1"  @click="showmodal(employees.user_id)">Passport Upload</button>
-                                  <!-- <button class="btn btn-warning btn-sm mx-1"  @click="showowicmodal(employees.employee_info.user_id)">Owic</button> -->
+                                <button v-if="employees.passport" class="btn btn-success btn-sm mx-1 my-1"  @click="showmodal(employees.user_id)">View Passport</button>
+                                <button v-else  class="btn btn-primary btn-sm mx-1 my-1"  @click="showmodal(employees.user_id)">Passport Upload</button>
                               </div>
                           </td>
                          
@@ -60,8 +71,9 @@
   import Navbar from '../components/Navbar.vue';
   import Owicmodal from '../components/Owicmodal.vue';
   import Passportmodal from '../components/Passportmodal.vue';
-  import { computed, ref } from 'vue';
+  import { computed, ref,onMounted  } from 'vue';
   import { useStore } from 'vuex';
+  import axios from "axios";
   export default {
   components:{Navbar,Passportmodal,Owicmodal},
   setup(){
@@ -69,9 +81,11 @@
       let owicModal = ref(false);
       let store = useStore();
       let doeId=ref();
+      let employees = ref();
       let fillterEmployees = ref();
       let userid = ref();
       let bgactive = ref(false);
+      let errorMessage = ref();
   
   
   
@@ -84,13 +98,25 @@
           getData();  
          
        // get All Employees Data
-       let getEmployees = ()=> store.dispatch('infoModule/getEmployees');
-          getEmployees();
-  
-          let employees = computed(()=> {
-              return store.state.infoModule.employeesinfo
-          })    
-      
+       let getemployees = async()=>{
+            try {
+                let res = await axios.get("employee_infos")
+                // console.log(res.data);
+                employees.value = res
+           } catch (error) {
+            if(error.response){
+                errorMessage.value = error.response.data.message
+                console.log(error.response.data.message);
+            }
+           }
+         }
+
+          // console.log(employees.value.data);
+        onMounted(()=>{
+          getemployees()
+        })
+
+
           let getdoeId =(id)=>{
               // console.log(id);
               console.log(employees.value);
@@ -99,7 +125,7 @@
                       return employee.doe.doe_id == id
                   }
               })
-              console.log(fillterEmployees.value[0]);
+            //   console.log(fillterEmployees.value[0]);
           }
   
   
@@ -117,15 +143,19 @@
   
       let hidemodal = () => {
           // console.log("hide modal")
-              showModal.value = false;
-              owicModal.value = false;
+              getemployees();
               bgactive.value = false;
+              setTimeout(()=>{
+                showModal.value = false;
+                    getdoeId(doeId.value)
+            },500)
           };
   
   
       return{
           doeId,does,getdoeId,fillterEmployees,employees,
-          showModal,showmodal,hidemodal,userid,owicModal,showowicmodal,bgactive
+          showModal,showmodal,hidemodal,userid,owicModal,showowicmodal,bgactive,
+          errorMessage
       }
   
   }

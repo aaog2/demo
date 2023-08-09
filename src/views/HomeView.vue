@@ -60,7 +60,16 @@
                                   <th scope="col">Details</th>
                                   </tr>
                               </thead>
-                              <tbody v-for="(employees,index) in fillterEmployees" :key="employees.id" >
+                              <tbody v-if="reload">
+                                <div class="reload">
+                                <div class="one"></div>
+                                <div class="two"></div>
+                                <div class="three"></div>
+                                <div class="four"></div>
+                                <div class="five"></div>
+                                </div>
+                            </tbody>
+                            <tbody v-if="!reload" v-for="(employees,index) in fillterEmployees" :key="employees.id" >
                                   <tr class="">
                                       <th scope="row">{{ index + 1 }}</th>
                                       <td>{{ employees.user.employee_id }}</td>
@@ -78,10 +87,16 @@
                                       <td><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal({id:employees.user_id,index})" /></td>
                                       
                                   </tr>   
-                              </tbody>
+                            </tbody>
                           </table>
                       </div>
                </div>
+
+               <!-- reflesh btn -->
+               <div class="refleshbtn" @click="reloadTable">
+                    <font-awesome-icon icon="fa-solid fa-arrows-rotate " size="lg" />
+                    <!-- <font-awesome-icon icon="fa-solid fa-arrows-rotate " size="lg" /> -->
+                </div>
           </div>
       </div>
   </div>
@@ -94,7 +109,6 @@ import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
 import LoadingPage from '../components/LoadingPage.vue'
 import { useRouter } from 'vue-router';
-import FileSaver from 'file-saver'
 import axios from "axios";
 
 export default {
@@ -108,8 +122,9 @@ export default {
       let message = ref(true);
       let contractDate = ref();
       let contractArray = ref([]);
-
-      const showModal = ref(false);
+      let employees = ref();
+      let reload = ref(false);   
+      let showModal = ref(false);
 
         // get Error Message
         let errorMessage = computed(()=>{
@@ -124,34 +139,26 @@ export default {
 
              
         //   get employee
-            let getEmployees = ()=> store.dispatch('infoModule/getEmployees');
-
-          let getData = ()=> store.dispatch('doeModule/getDoes');
-          onMounted(()=>{
-            if(errorMessage.value){
-                router.go(0);
-                console.log("hey");
+        let getemployees = async()=>{
+                try {
+                    let res = await axios.get("employee_infos")
+                    // console.log(res.data);
+                    employees.value = res
+            } catch (error) {
+                if(error.response){
+                    errorMessage.value = error.response.data.message
+                    console.log(error.response.data.message);
+                }
             }
-            // router.go(0);
-            getEmployees();
-            getData();
-            // if(does){
-            //     console.log(does.value.length);
-            //     console.log(does.value[does.value.length - 1]);
-            //     
-            // }
-            
-          })
-       
-          
+        }
 
-          let employees = computed(()=> {
-              return store.state.infoModule.employeesinfo
-          })
+            // console.log(employees.value.data);
+            onMounted(()=>{
+                getemployees()
+                // getcurrentDoe()
+            })
 
-         
-
-
+        
           let getdoeId=(id)=>{
            
             if(employees.value){
@@ -243,10 +250,18 @@ export default {
            
         }
 
+        let reloadTable =()=>{
+            reload.value = true;
+            getdoeId(doeId.value);
+            setTimeout(() => {
+                reload.value = false;
+            }, 2000);
+        }
+
           return{
               does,doeId,getdoeId,fillterEmployees,showModal,showmodal,hidemodal,userid,
               errorMessage,closemessage,message,contractDate,contractArray,
-              downloadData
+              downloadData,reload,reloadTable
           }
   }
 }

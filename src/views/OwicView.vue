@@ -39,8 +39,8 @@
                         <td>{{ employees.father_name_en }}</td>
                         <td>
                             <div>
-                                <!-- <button class="btn btn-warning btn-sm mx-1 my-1"  @click="showmodal(employees.employee_info.user_id)">Passport</button> -->
-                                <button class="btn btn-primary btn-sm mx-1"  @click="showowicmodal(employees.user_id)">Owic Upload</button>
+                                <button v-if="employees.owic" class="btn btn-success btn-sm mx-1"  @click="showowicmodal(employees.user_id)">View Owic</button>
+                                <button v-else class="btn btn-primary btn-sm mx-1"  @click="showowicmodal(employees.user_id)">Owic Upload</button>
                             </div>
                         </td>
                        
@@ -60,13 +60,16 @@
 import Navbar from '../components/Navbar.vue';
 import Owicmodal from '../components/Owicmodal.vue';
 import Passportmodal from '../components/Passportmodal.vue';
-import { computed, ref } from 'vue';
+import { computed, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
+import axios from "axios";
+
 export default {
 components:{Navbar,Passportmodal,Owicmodal},
 setup(){
     let showModal = ref(false);
     let owicModal = ref(false);
+    let employees = ref();
     let store = useStore();
     let doeId=ref();
     let fillterEmployees = ref();
@@ -84,13 +87,26 @@ setup(){
         getData();  
        
      // get All Employees Data
-     let getEmployees = ()=> store.dispatch('infoModule/getEmployees');
-        getEmployees();
+        let getemployees = async()=>{
+                try {
+                    let res = await axios.get("employee_infos")
+                    // console.log(res.data);
+                    employees.value = res
+            } catch (error) {
+                if(error.response){
+                    errorMessage.value = error.response.data.message
+                    console.log(error.response.data.message);
+                }
+            }
+        }
 
-        let employees = computed(()=> {
-            return store.state.infoModule.employeesinfo
-        })    
-    
+            // console.log(employees.value.data);
+            onMounted(()=>{
+                getemployees()
+            })
+
+
+
         let getdoeId =(id)=>{
             // console.log(id);
             console.log(employees.value);
@@ -118,9 +134,12 @@ setup(){
 
     let hidemodal = () => {
         // console.log("hide modal")
-            showModal.value = false;
-            owicModal.value = false;
+            getemployees();
             bgactive.value = false;
+            setTimeout(()=>{
+                owicModal.value = false;
+                    getdoeId(doeId.value)
+            },500)
         };
 
 
