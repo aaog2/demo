@@ -91,21 +91,6 @@ import { db, timestamp } from '../firebase/config';
         border-radius: 6px;
     }
 
-    /* .image_input {
-  display: none;
-}
-
-.plus_button{
-    width: 45px;
-  height: 45px;
-  background-color: #007bff;
-  color: #fff; 
-  border-radius: 50%; 
-  text-align: center;
-  line-height: 40px; 
-  cursor: pointer;
-  margin-left: -15px;
-} */
 
     textarea{
         color: #000;

@@ -1,7 +1,7 @@
 <template>
   <div class="bg-light mains" :class="bgactive === true ? 'red' : 'blue'" >
         <Navbar/>
-        <SideNavbar></SideNavbar>
+        <SideNavbar>s</SideNavbar>
         <Contractmodal v-if="showModal" :id="userid" @closeModal="hidemodal"></Contractmodal>
         <Filemodal  class="success" v-if="fileModal" :id="contractid" @closeModal="hidemodal"></Filemodal>
         <SuccessModal class="success"  v-if="successModal"/>
