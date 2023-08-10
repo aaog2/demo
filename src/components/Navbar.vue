@@ -9,7 +9,7 @@
               
                   <div class="mx-auto">
                     <router-link class="nav-link nav-link-ltr ms-5"  to="/home" >Manage</router-link>
-                    <router-link class="nav-link nav-link-ltr"  to="/surveypage">Suvery</router-link>
+                    <router-link class="nav-link nav-link-ltr"  to="/surveypage">Survey</router-link>
                     <router-link class="nav-link nav-link-ltr" to="/chatadminview">Grievance Form</router-link>
                   </div>
                   <div class="my-2 my-lg-0 px-2">

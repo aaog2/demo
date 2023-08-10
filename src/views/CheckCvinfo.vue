@@ -44,7 +44,7 @@
     <div class="form">
        
       <!-- Image Section  -->
-      <div class="image_control ">
+      <div class="image_control">
         <div v-if="uploadedImage" class="image_container">
           <img :src="uploadedImage" alt="Uploaded Image" class="image">
         </div>
@@ -375,6 +375,7 @@ setup(){
   if (storedData) {
     submitToDb.value = JSON.parse(storedData); 
   }
+  console.log(submitToDb.value);
   let userid = localStorage.getItem('userid');
   let address = submitToDb.value.address;
   let selectedRegionValue = submitToDb.value.state;
@@ -422,7 +423,12 @@ setup(){
     }
   const submitAllData = async () =>{
     try {
-      let res = await axios.post(`cv`,submitToDb.value)
+      let res = await axios.post('cv',submitToDb.value,{
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  'Accept': 'application/vnd.api+json'
+                }
+              })
       if(res){
         window.scrollTo(0,0);
         successMessage.value = true;

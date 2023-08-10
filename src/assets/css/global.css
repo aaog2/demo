@@ -422,7 +422,7 @@ input:focus {
 /* start */
 .dates {
   /* width: 300px; */
-  -webkit-appearance: none;
+  /* -webkit-appearance: none; */
   font-size: 18px;
   text-align: center;
   letter-spacing: 2px;

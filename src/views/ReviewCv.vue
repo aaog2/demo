@@ -63,8 +63,8 @@
                                     <td class=""><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal({id:employees.user.id,index})" />
                                     </td>    
                                     <td class="col-1">
-                                        <div v-if="employees.cv" class="circle bg-warning"></div>
-                                        <div v-else class="circle bg-info"></div>
+                                        <div v-if="employees.cv" class="circle bg-info"></div>
+                                        <div v-else class="circle bg-warning"></div>
                                     </td>
                                 </tr>
                                 
@@ -217,8 +217,9 @@ export default {
 
         let reloadTable =()=>{
             reload.value = true;
-            getdoeId(doeId.value);
+            getemployees()
             setTimeout(() => {
+                getdoeId(doeId.value);
                 reload.value = false;
             }, 2000);
         }

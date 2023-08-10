@@ -200,17 +200,26 @@
     <div class="firstVaccineName_control" >
               <label for="firstVaccineName" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးအမည်</label>
               <select class="form-select" aria-label="Default select example"  v-model="formData.firstVaccineName">
-                <!-- <option selected>Open this select menu</option> -->
+                <option selected>Open this select menu</option>
                 <option value="Covidshield">Covidshield</option>
                 <option value="Sinopharm">Sinopharm</option>
-                <option value="Sputnik">Sputnik</option>
+                <option value="Sinovoc">Sinovoc</option>
+                <option value="Pfizer">Pfizer</option>
+                <option value="SputnikV">SputnikV</option>
+                <option value="Sputnik Light">Sputnik Light</option>
+                <option value="Moderna">Moderna</option>
+                <option value="AstraZeneca">AstraZeneca</option>
+                <option value="Covaxin">Covaxin</option>
+                <option value="Janssen">Janssen</option>
+                <option value="Novavax">Novavax</option>
+                <option value="Cansino">Cansino</option>
               </select>
           </div>
 
    <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.firstVaccineDate" autocomplete="off" /> 
+              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" v-model="formData.firstVaccineDate" autocomplete="off" /> 
     </div>
 
      <!-- Select Region / State Section  -->
@@ -220,7 +229,16 @@
                 <!-- <option selected>Open this select menu</option> -->
                 <option value="Covidshield">Covidshield</option>
                 <option value="Sinopharm">Sinopharm</option>
-                <option value="Sputnik">Sputnik</option>
+                <option value="Sinovoc">Sinovoc</option>
+                <option value="Pfizer">Pfizer</option>
+                <option value="SputnikV">SputnikV</option>
+                <option value="Sputnik Light">Sputnik Light</option>
+                <option value="Moderna">Moderna</option>
+                <option value="AstraZeneca">AstraZeneca</option>
+                <option value="Covaxin">Covaxin</option>
+                <option value="Janssen">Janssen</option>
+                <option value="Novavax">Novavax</option>
+                <option value="Cansino">Cansino</option>
               </select>
           </div>
 
@@ -237,7 +255,16 @@
                 <!-- <option selected>Open this select menu</option> -->
                 <option value="Covidshield">Covidshield</option>
                 <option value="Sinopharm">Sinopharm</option>
-                <option value="Sputnik">Sputnik</option>
+                <option value="Sinovoc">Sinovoc</option>
+                <option value="Pfizer">Pfizer</option>
+                <option value="SputnikV">SputnikV</option>
+                <option value="Sputnik Light">Sputnik Light</option>
+                <option value="Moderna">Moderna</option>
+                <option value="AstraZeneca">AstraZeneca</option>
+                <option value="Covaxin">Covaxin</option>
+                <option value="Janssen">Janssen</option>
+                <option value="Novavax">Novavax</option>
+                <option value="Cansino">Cansino</option>
               </select>
           </div>
 
@@ -834,4 +861,8 @@ body {
 
 
 }
+
+.THIS .slds-datepicker{ display: none !important; }
+
+input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
 </style>

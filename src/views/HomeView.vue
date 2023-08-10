@@ -10,7 +10,7 @@
                     <img src="http://100dayscss.com/codepen/alert.png" width="44" height="38" />
                         <span class="title">ops !</span>
                         <p class="my-2">{{ errorMessage }}</p>
-                        <button class="btn btn-danger" @click="closemessage">Close</button>
+                        <button class="btn btn-danger" @click="errorMessage = null">Close</button>
                 </div>
             </div>
       </div>
@@ -127,11 +127,9 @@ export default {
       let employees = ref();
       let reload = ref(false);   
       let showModal = ref(false);
+      let errorMessage = ref();
 
         // get Error Message
-        let errorMessage = computed(()=>{
-            return store.state.infoModule.errorMessage
-        })
 
         // get DOE Data
             
@@ -139,12 +137,15 @@ export default {
               return store.state.doeModule.does
           })
 
+
+          let getData = ()=> store.dispatch('doeModule/getDoes');
+        getData();
+
              
         //   get employee
         let getemployees = async()=>{
                 try {
                     let res = await axios.get("employee_infos")
-                    // console.log(res.data);
                     employees.value = res
             } catch (error) {
                 if(error.response){
@@ -210,28 +211,6 @@ export default {
         }
 
         let downloadData = async(id)=>{
-            let fileName = 'test1';
-            // const encodeEndPoint = encodeURIComponent(id);
-            // console.log(id);
-            // let res = await axios.get(`export/does/${id}`)
-            // console.log(res.data);
-        //     await axios.get(`export/does/${id}`, {
-        //         file_name: fileName
-        //     }, {
-        //         responseType: 'blob'
-        //     }).then(response => {
-        //     // Create a download link for the received blob and trigger the download
-        //     const downloadLink = document.createElement('a');
-        //     const url = window.URL.createObjectURL(new Blob([response.data]));
-        //     downloadLink.href = url;
-        //     downloadLink.setAttribute('download', `doe_data_${id}.xlsx`);
-        //     document.body.appendChild(downloadLink);
-        //     downloadLink.click();
-        //     window.URL.revokeObjectURL(url);
-        //   })
-        //   .catch(error => {
-        //     console.error('Error exporting Excel:', error);
-        //   });
         await axios({
             method: 'get',
             url: `https://api.internationalfocusgeneralservice.com/api/export/does/${id}`,
@@ -247,6 +226,9 @@ export default {
             window.URL.revokeObjectURL(url);
           })
           .catch(error => {
+              if(error){
+                errorMessage.value = error.message
+              }
             console.error('Error exporting Excel:', error);
           });
            
@@ -254,8 +236,9 @@ export default {
 
         let reloadTable =()=>{
             reload.value = true;
-            getdoeId(doeId.value);
+            getemployees();
             setTimeout(() => {
+                getdoeId(doeId.value);
                 reload.value = false;
             }, 2000);
         }
@@ -263,7 +246,7 @@ export default {
           return{
               does,doeId,getdoeId,fillterEmployees,showModal,showmodal,hidemodal,userid,
               errorMessage,closemessage,message,contractDate,contractArray,
-              downloadData,reload,reloadTable
+              downloadData,reload,reloadTable,employees
           }
   }
 }

@@ -74,7 +74,8 @@ library.add(
   faArrowRight,
   faFileExport,
   faAddressCard,
-  faArrowsRotate
+  faArrowsRotate,
+  faTrash
 );
 
 createApp(App)
