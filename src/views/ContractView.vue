@@ -37,7 +37,8 @@
                     <!-- Contract Date -->
                     <div class="form-group col-4">
                             <label for="contractDate" class="d-block">Contract Date</label>
-                            <input class="form-control bg-light dates" placeholder="dd-mm-yyyy" type="date" min="1900-12-01" max="2050-01-01" id="contractDate" v-model="contractDate">
+                            <input type="text" class="dates form-control" v-model="contractDate"  @keyup.enter="updateDate" placeholder="DD-MM-YYYY">
+                            <!-- <input v-if="!contractDate" class="form-control bg-light dates" type="date" min="1900-12-01" max="2050-01-01" id="contractDate" v-model="contractDate" @input="updateDate"> -->
                     </div>
                 </div>   
                 <!-- Button Container -->
@@ -128,6 +129,13 @@ import { useRouter } from 'vue-router';export default {
         let file = ref();
         let bgactive = ref(false);
 
+        const updateDate = () => {
+        // Parse the reversed date format to update the actual date value
+        let format = contractDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
+        console.log(format);
+        contractDate.value = format;
+        };
+
         // get DOE Data
         let does = computed(()=>{
             return store.state.doeModule.does
@@ -203,6 +211,8 @@ import { useRouter } from 'vue-router';export default {
                 setTimeout(()=>{
                     getdoeId(doeId.value)
                     hideSuccess();
+                    contractPlace.value = "";
+                    contractDate.value = "";
                 },2000)
             }
         } catch (error) {
@@ -277,7 +287,8 @@ import { useRouter } from 'vue-router';export default {
             trainingDate,depatureDate,fillterEmployees,employees,getdoeId,
             showModal,showmodal,hidemodal,allEmployees,selectedEmployees,selectedallEmployee,
             handleSubmit,userid,uploadFile,file,fileModal,showFile,bgactive,contractid,getfile,
-            successModal,showSuccess,hideSuccess,errorMessage,message,closemessage,edit,chgbtn
+            successModal,showSuccess,hideSuccess,errorMessage,message,closemessage,edit,chgbtn,
+            updateDate
         }
 
     }

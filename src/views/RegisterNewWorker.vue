@@ -68,7 +68,8 @@
 
                             <div class="col-12 col-md-6 col-lg-3  mt-4 mt-lg-0">
                                 <label for="MoveInDate" class="d-block">Date Of Birth</label>
-                                <input  autocomplete="off" class="dates form-control" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" v-model="dob">
+                                <input type="text" class="dates form-control" v-model="dob" placeholder="dd-mm-yyyy" @keyup.enter="updateDate">
+                                <!-- <input v-if="!dob" class="dates form-control" type="date" placeholder="dd-mm-yyyy" v-model="dob" @input="updateDate"> -->
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-3 mt-4 mt-lg-0">
@@ -133,7 +134,7 @@
 </template>
 
 <script>
-import { computed, ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import nrcdata from '../composable/nrcdata'
 import Navbar from '../components/Navbar.vue'
@@ -143,7 +144,7 @@ import { useRouter } from 'vue-router';
 import { convertToMmNrc,convertToEnNrc } from 'mm-nrc';
 import { pattern } from 'mm-nrc';
 import { autoConvertNrc,convertNrc,convertNumbers } from "mm-nrc-converter"
-// import { getFormat } from "myanmar-nrc-tool"
+import useDateFormat from '../composable/useDateFormat'
 
 
 export default {
@@ -152,6 +153,7 @@ export default {
         // let MMNRC = require('myanmar-nrc-tool');
         // var nrc = MMNRC("12/OUKAMA (N) 123456");
         // console.log(nrc.getFormat("mm"));
+    
         let store = useStore();
         let router =useRouter();
         const engNrcPattern = pattern.en;
@@ -180,6 +182,27 @@ export default {
         let errorMessage = ref('');
 
         let formData = ref({})
+
+        
+        // date format function
+        // const { date, formattedDate } = useDateFormat(new Date());
+
+         // Watch for changes in the formattedDate and update the input when needed
+        // watch(formattedDate, (newFormattedDate) => {
+        // if (newFormattedDate) {
+        //     // Reverse the formatted date to YYYY-MM-DD format for input binding
+        //     const [day, month, year] = newFormattedDate.split('-');
+        //     const reversedFormattedDate = `${year}-${month}-${day}`;
+        //     dob.value = reversedFormattedDate;
+        // }
+        // });
+
+        const updateDate = () => {
+        // Parse the reversed date format to update the actual date value
+        let format = dob.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
+        console.log(format);
+        dob.value = format;
+        };
 
         // modal function
         let showmodal = () => {
@@ -302,7 +325,10 @@ export default {
             dob,selectedGender,formData,
             showForm,
             showModal,showmodal,hidemodal,employeeData,clearData,
-            showSuccess,errorMessage,closemessage,chgmmnrc
+            showSuccess,errorMessage,closemessage,chgmmnrc,
+            // date,
+            // formattedDate,
+            updateDate,
             
         }
     }

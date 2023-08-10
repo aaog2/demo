@@ -101,7 +101,8 @@
                           <!-- Contract Date -->
                           <div class="form-group col-6 pb-3">
                               <label for="passportcreateDate" class="d-block">Owic Created Date</label>
-                              <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="owiccreateDate" v-model="owiccreateDate">
+                              <input type="text" class="dates form-control" v-model="owiccreateDate" placeholder="DD-MM-YYYY"  @keyup.enter="updateDate">
+                              <!-- <input v-if="!owiccreateDate" autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="owiccreateDate" v-model="owiccreateDate" @input="updateDate"> -->
                           </div>
   
                           <!-- Contract Date -->
@@ -116,13 +117,15 @@
                           <!-- Contract Date -->
                           <div class="form-group col-6 py-3">
                               <label for="trainingStartDate" class="d-block">Training Start Date</label>
-                              <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="trainingStartDate" v-model="trainingstartDate">
+                              <input type="text" class="dates form-control" v-model="trainingstartDate" placeholder="DD-MM-YYYY"  @keyup.enter="updateDatetwo">
+                              <!-- <input v-if="!trainingstartDate" autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="trainingStartDate" v-model="trainingstartDate"  @input="updateDatetwo"> -->
                           </div>
 
                            <!-- Contract Date -->
                            <div class="form-group col-6 py-3">
                               <label for="DepatureDate" class="d-block">Depature Date</label>
-                              <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="dapatureDate" v-model="depatureDate">
+                              <input type="text" class="dates form-control" v-model="depatureDate" placeholder="DD-MM-YYYY"  @keyup.enter="updateDatethree">
+                              <!-- <input v-if="!depatureDate" autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="dapatureDate" v-model="depatureDate"  @input="updateDatethree"> -->
                           </div>
                       </div>
                   </div>
@@ -169,6 +172,28 @@
           let edit = ref(false);
           let errorMessage = ref(null);
           let successModal = ref(false);
+
+        //   date format
+        const updateDate = () => {
+        let format = owiccreateDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
+        console.log(format);
+        owiccreateDate.value = format;
+        console.log(owiccreateDate.value);
+        };
+
+        const updateDatetwo = () => {
+        let format = trainingstartDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
+        console.log(format);
+        trainingstartDate.value = format;
+        // console.log(owiccreateDate.value);
+        };
+
+        const updateDatethree = () => {
+        // Parse the reversed date format to update the actual date value
+        let format = depatureDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
+        console.log(format);
+        depatureDate.value = format;
+        };
   
           //   get employee
           let getsingleEmployees = (id)=> store.dispatch('infoModule/getsingleEmployees',id);
@@ -273,7 +298,7 @@
          return{
           employees,owicnum,owiccreateDate,owiccreatedPlace,trainingstartDate,depatureDate,
           handleSubmit,cancel,edit,editData,update,
-          successModal,showSuccess,errorMessage
+          successModal,showSuccess,errorMessage,updateDate,updateDatetwo,updateDatethree
          }   
       }
   }

@@ -210,7 +210,8 @@
    <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" v-model="formData.firstVaccineDate" autocomplete="off" /> 
+              <input type="text" class="firstVaccineDate_input  input_text_box dates" v-if="formData.firstVaccineDate" v-model="formData.firstVaccineDate">
+              <input v-if="!formData.firstVaccineDate" id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" v-model="formData.firstVaccineDate" autocomplete="off" @input="updateDate"/> 
     </div>
 
      <!-- Select Region / State Section  -->
@@ -227,7 +228,8 @@
      <!-- Second Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="secondVaccineDate" class="form-label">ဒုတိယအကြိမ် အကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.secondVaccineDate" autocomplete="off" /> 
+              <input type="text" class="firstVaccineDate_input  input_text_box dates" v-if="formData.secondVaccineDate" v-model="formData.secondVaccineDate">
+              <input  v-if="!formData.secondVaccineDate" id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.secondVaccineDate" autocomplete="off" @input="updateDatetwo" /> 
     </div>
 
      <!-- Select Region / State Section  -->
@@ -244,7 +246,8 @@
      <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">တတိယအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.thirdVaccineDate" autocomplete="off" /> 
+              <input type="text" class="firstVaccineDate_input  input_text_box dates" v-if="formData.thirdVaccineDate" v-model="formData.thirdVaccineDate">
+              <input v-if="!formData.thirdVaccineDate" id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.thirdVaccineDate" autocomplete="off" @input="updateDatethree"/> 
     </div>
 
     <!-- COvid Vaccine Note Section  -->
@@ -400,19 +403,7 @@ export default {
         let submitToDb = ref({});
         let errorMessage = ref()
 
-
-        // const uploadedImage = ref('');
-        // const file = ref();
-        // const imageInput = ref(null);
         const scrollToTop = () => { window. scrollTo({ top: 0, behavior: "smooth" }); };
-
-    //     const handleImageUpload = () => {
-    //    file.value = imageInput.value.files[0];
-    //    uploadedImage.value = URL.createObjectURL(file.value);
-    //   localStorage.setItem('uploadedImage',uploadedImage.value);
-    //   console.log('5 Image to show in form =>', uploadedImage.value);
-    //   console.log('6 Image to show in form data type =>', typeof(uploadedImage.value));
-    // };
         const formData = ref({
             // userid:'',
             userImage: '',
@@ -455,7 +446,34 @@ export default {
 
         });
         
-       
+               //   date format
+        const updateDate = () => {
+          console.log(formData.value.firstVaccineDate);
+        // Parse the reversed date format to update the actual date value
+        const [year, month, day] = formData.value.firstVaccineDate.split('-');
+        console.log(year,month,day);
+        const parsedDate = `${day}-${month}-${year}`;
+        formData.value.firstVaccineDate = parsedDate;
+        console.log(formData.value.firstVaccineDate);
+        };
+
+        const updateDatetwo = () => {
+        // Parse the reversed date format to update the actual date value
+        const [year, month, day] = formData.value.secondVaccineDate.split('-');
+        console.log(year,month,day);
+        const parsedDate = `${day}-${month}-${year}`;
+        formData.value.secondVaccineDate = parsedDate;
+        console.log(formData.value.secondVaccineDate);
+        };
+
+        const updateDatethree = () => {
+        // Parse the reversed date format to update the actual date value
+        const [year, month, day] = formData.value.thirdVaccineDate.split('-');
+        console.log(year,month,day);
+        const parsedDate = `${day}-${month}-${year}`;
+        formData.value.thirdVaccineDate = parsedDate;
+        console.log(formData.value.thirdVaccineDate);
+        };
 
         
         let submitForm = async function() {
@@ -478,11 +496,6 @@ export default {
             let foreignExpNumber = Number(data.foreignExp);
             let bribeNumber = Number(data.bribe);
         
-          // // console.log('$ the image value ==>', data);
-          // console.log("Weight data type and value =>", weightNumber, typeof(weightNumber));
-          // console.log("Height Feet data type and value =>", heightFeetNumber, typeof(heightFeetNumber));
-          // console.log("Height Inches data type and value =>", heightInchesNumber, typeof(heightInchesNumber));
-          // console.log("Passport Cost data type and value =>", passportCostNumber, typeof(passportCostNumber));
             submitToDb.value = {
               user_id:userid,
               address: data.address,
@@ -570,7 +583,8 @@ export default {
         // handleImageUpload,
         // imageInput,
         // file,
-        errorMessage
+        errorMessage,
+        updateDate,updateDatetwo,updateDatethree
     }
 
 
@@ -835,7 +849,7 @@ body {
 
 }
 
-.THIS .slds-datepicker{ display: none !important; }
+/* .THIS .slds-datepicker{ display: none !important; } */
 
-input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
+/* input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; } */
 </style>

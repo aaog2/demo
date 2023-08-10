@@ -104,7 +104,8 @@
                         <!-- Contract Date -->
                         <div class="form-group col-6 py-3">
                             <label for="passportcreateDate" class="d-block">Passport Created Date</label>
-                            <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportcreateDate" v-model="passportcreateDate">
+                            <input type="text" class="dates form-control" v-model="passportcreateDate" @keyup.enter="updateDate">
+                            <!-- <input v-if="!passportcreateDate" autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportcreateDate" v-model="passportcreateDate" @input="updateDate"> -->
                         </div>
 
                         <!-- Contract Date -->
@@ -116,7 +117,8 @@
                         <!-- Contract Date -->
                         <div class="form-group col-6 py-3">
                             <label for="passportexpiredDate" class="d-block">Passport Expired Date</label>
-                            <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportexpiredDate" v-model="passportexpiredDate">
+                            <input type="text" class="dates form-control" v-model="passportexpiredDate" @keyup.enter="updateDatetwo">
+                            <!-- <input v-if="!passportexpiredDate" autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportexpiredDate" v-model="passportexpiredDate" @input="updateDatetwo"> -->
                         </div>
                     </div>
                 </div>
@@ -164,6 +166,26 @@ export default {
         let edit = ref(false);
         let errorMessage = ref(null);
         let successModal = ref(false);
+
+        // date format
+        const updateDate = () => {
+            // console.log(passportcreateDate.value.replace(/(\d{2})(\d{2})(\d{4})/));
+        // var n = "1234567899"; console.log(n.replace(/(\d{3})(\d{3})(\d{4})
+        // Parse the reversed date format to update the actual date value
+        let format = passportcreateDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
+        console.log(format);
+        // const parsedDate = `${day}-${month}-${year}`;
+        passportcreateDate.value = format;
+        // console.log(passportcreateDate.value);
+        };
+
+        const updateDatetwo = () => {
+        // Parse the reversed date format to update the actual date value
+        let format = passportexpiredDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
+        console.log(format);
+        // const parsedDate = `${day}-${month}-${year}`;
+        passportexpiredDate.value = format;
+        };
 
         //   get employee
         let getsingleEmployees = (id)=> store.dispatch('infoModule/getsingleEmployees',id);
@@ -260,7 +282,7 @@ export default {
        return{
         employees,address,passport,passportcreateDate,passportexpiredDate,passportlocation,
         handleSubmit,owicdata,cancel,edit,editData,update,
-        successModal,showSuccess,errorMessage
+        successModal,showSuccess,errorMessage,updateDate,updateDatetwo
        }   
     }
 }
