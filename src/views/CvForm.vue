@@ -200,10 +200,19 @@
     <div class="firstVaccineName_control" >
               <label for="firstVaccineName" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးအမည်</label>
               <select class="form-select" aria-label="Default select example"  v-model="formData.firstVaccineName">
-                <!-- <option selected>Open this select menu</option> -->
+                <option selected>Open this select menu</option>
                 <option value="Covidshield">Covidshield</option>
                 <option value="Sinopharm">Sinopharm</option>
-                <option value="Sputnik">Sputnik</option>
+                <option value="Sinovoc">Sinovoc</option>
+                <option value="Pfizer">Pfizer</option>
+                <option value="SputnikV">SputnikV</option>
+                <option value="Sputnik Light">Sputnik Light</option>
+                <option value="Moderna">Moderna</option>
+                <option value="AstraZeneca">AstraZeneca</option>
+                <option value="Covaxin">Covaxin</option>
+                <option value="Janssen">Janssen</option>
+                <option value="Novavax">Novavax</option>
+                <option value="Cansino">Cansino</option>
               </select>
           </div>
 
@@ -221,7 +230,16 @@
                 <!-- <option selected>Open this select menu</option> -->
                 <option value="Covidshield">Covidshield</option>
                 <option value="Sinopharm">Sinopharm</option>
-                <option value="Sputnik">Sputnik</option>
+                <option value="Sinovoc">Sinovoc</option>
+                <option value="Pfizer">Pfizer</option>
+                <option value="SputnikV">SputnikV</option>
+                <option value="Sputnik Light">Sputnik Light</option>
+                <option value="Moderna">Moderna</option>
+                <option value="AstraZeneca">AstraZeneca</option>
+                <option value="Covaxin">Covaxin</option>
+                <option value="Janssen">Janssen</option>
+                <option value="Novavax">Novavax</option>
+                <option value="Cansino">Cansino</option>
               </select>
           </div>
 
@@ -239,7 +257,16 @@
                 <!-- <option selected>Open this select menu</option> -->
                 <option value="Covidshield">Covidshield</option>
                 <option value="Sinopharm">Sinopharm</option>
-                <option value="Sputnik">Sputnik</option>
+                <option value="Sinovoc">Sinovoc</option>
+                <option value="Pfizer">Pfizer</option>
+                <option value="SputnikV">SputnikV</option>
+                <option value="Sputnik Light">Sputnik Light</option>
+                <option value="Moderna">Moderna</option>
+                <option value="AstraZeneca">AstraZeneca</option>
+                <option value="Covaxin">Covaxin</option>
+                <option value="Janssen">Janssen</option>
+                <option value="Novavax">Novavax</option>
+                <option value="Cansino">Cansino</option>
               </select>
           </div>
 

@@ -1,6 +1,7 @@
 <template>
   <div class="bg-light mains" :class="bgactive === true ? 'red' : 'blue'" >
         <Navbar/>
+        <SideNavbar>s</SideNavbar>
         <Contractmodal v-if="showModal" :id="userid" @closeModal="hidemodal"></Contractmodal>
         <Filemodal  class="success" v-if="fileModal" :id="contractid" @closeModal="hidemodal"></Filemodal>
         <SuccessModal class="success"  v-if="successModal"/>
@@ -100,11 +101,12 @@ import { computed, ref,onMounted } from 'vue';
 import { useStore } from 'vuex';
 import axios from "axios";
 import Navbar from '../components/Navbar.vue'
+import SideNavbar from '../components/SideNavbar.vue'
 import Contractmodal from '../components/Contractmodal.vue';
 import SuccessModal from '../components/SuccessModal.vue';
 import Filemodal from '../components/FileUploadmodal.vue';
 import { useRouter } from 'vue-router';export default {
-    components:{Navbar,Contractmodal,Filemodal,SuccessModal},
+    components:{Navbar,SideNavbar,Contractmodal,Filemodal,SuccessModal},
     setup(){
         let store = useStore();
         let router =useRouter();

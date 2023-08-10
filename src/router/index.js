@@ -23,17 +23,18 @@ import store from "../store/auth";
 
 const routes = [
   {
-    path: "/home",
-    name: "home",
-    component: HomeView,
-    meta: { requiresAuth: true },
-  },
-  {
     path: "/",
     name: "login",
     component: LoginPage,
     meta: { requiresAuth: false },
   },
+  {
+    path: "/home",
+    name: "home",
+    component: HomeView,
+    meta: { requiresAuth: true },
+  },
+  
   {
     path: "/checkprimaryinfo",
     name: "checkprimaryinfo",
@@ -147,25 +148,27 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-
+// ORIGINAL ROUTE GUARD 
 router.beforeEach((to, from, next) => {
   const isAuthenticated = localStorage.getItem('token') !== null;
   const isUser = localStorage.getItem('role') === 'employee';
   const isAdmin = localStorage.getItem('role') === 'admin';
 
   if (to.meta.requiresAuth && !isAuthenticated) {
-    if (to.path !== '/') {
+    if (to.path !== '/login') {
       next('/');
     } else {
       next();
     }
-  } else if (!to.meta.requiresAuth && isAuthenticated && isAdmin) {
+  } 
+  else if (!to.meta.requiresAuth && isAuthenticated && isAdmin) {
     if (to.path !== '/home') {
       next('/home');
     } else {
       next();
     }
-  } else if(!to.meta.requiresAuth && isAuthenticated && isUser) {
+  } 
+  else if(!to.meta.requiresAuth && isAuthenticated && isUser) {
     if(to.path !== '/'){
       next('/workerhome');
     }else{
@@ -175,32 +178,7 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
-// router.beforeEach((to, from, next) => {
-//   const isAuthenticated = localStorage.getItem("token") !== null;
-//   const isUser = localStorage.getItem("role") === "employee";
-//   const isAdmin = localStorage.getItem("role") === "admin";
 
-//   if (to.meta.requiresAuth && !isAuthenticated) {
-//     if (to.path !== "/") {
-//       next("/");
-//     } else {
-//       next();
-//     }
-//   } else if (!to.meta.requiresAuth && isAuthenticated && isAdmin) {
-//     if (to.path !== "/home") {
-//       next("/home");
-//     } else {
-//       next();
-//     }
-//   } else if (!to.meta.requiresAuth && isAuthenticated && isUser) {
-//     if (to.path !== "/") {
-//       next("/workerhome");
-//     } else {
-//       next();
-//     }
-//   } else {
-//     next();
-//   }
-// });
+
 
 export default router;

@@ -154,7 +154,6 @@ export default {
 <style scoped>
 .surveryNoti{
     margin: 300px 0;
-
 }
 
 .surveryNoti h5{

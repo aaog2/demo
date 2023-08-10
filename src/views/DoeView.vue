@@ -2,6 +2,7 @@
     
     <div class="bg-light mains" :class="showModal === true ? 'red' : 'blue'">
         <Navbar/>
+        <SideNavbar></SideNavbar>
         <LoadingPage v-if="!does"/>
         <SuccessModal  v-if="showModal"/>
         <!-- alert -->
@@ -145,10 +146,11 @@ import { computed , ref, onMounted } from 'vue';
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router';
 import Navbar from '../components/Navbar.vue'
+import SideNavbar from '../components/SideNavbar.vue'
 import LoadingPage from '../components/LoadingPage.vue'
 import SuccessModal from '../components/SuccessModal.vue'
 export default {
-    components:{Navbar,LoadingPage,SuccessModal},
+    components:{Navbar,SideNavbar,LoadingPage,SuccessModal},
     setup(){
         let router = useRouter();
         let reverse = ref(false);

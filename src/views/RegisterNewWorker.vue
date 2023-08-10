@@ -1,6 +1,7 @@
 <template>
     <div class="bg-light mains" :class="showModal === true ? 'red' : 'blue'">
         <Navbar/>
+        <SideNavbar></SideNavbar>
         <!-- alert -->
         <div v-if="errorMessage" class="errorMessage">
 
@@ -138,6 +139,7 @@ import { computed, ref, watch } from 'vue';
 import { useStore } from 'vuex';
 import nrcdata from '../composable/nrcdata'
 import Navbar from '../components/Navbar.vue'
+import SideNavbar from '../components/SideNavbar.vue';
 import axios from "axios";
 import Modal from '../components/Modal.vue';
 import { useRouter } from 'vue-router';
@@ -148,7 +150,7 @@ import useDateFormat from '../composable/useDateFormat'
 
 
 export default {
-    components:{Navbar,Modal},
+    components:{Navbar,SideNavbar,Modal},
     setup(){
         // let MMNRC = require('myanmar-nrc-tool');
         // var nrc = MMNRC("12/OUKAMA (N) 123456");

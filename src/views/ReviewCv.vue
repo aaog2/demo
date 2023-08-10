@@ -1,6 +1,7 @@
 <template>
     <div class="bg-light mains"  :class="showModal === true ? 'red' : 'blue'">
         <Navbar/>
+        <SideNavbar></SideNavbar>
         <LoadingPage v-if="!employees"/>
         <CvModal v-if="showModal" :id="userid" @closeModal="hidemodal" @passed="passed" @failed="failed" @pending="pending"/>
         <div class="page"> 
@@ -62,8 +63,8 @@
                                     <td class=""><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal({id:employees.user.id,index})" />
                                     </td>    
                                     <td class="col-1">
-                                        <div v-if="employees.cv" class="circle bg-warning"></div>
-                                        <div v-else class="circle bg-info"></div>
+                                        <div v-if="employees.cv" class="circle bg-info"></div>
+                                        <div v-else class="circle bg-warning"></div>
                                     </td>
                                 </tr>
                                 
@@ -85,13 +86,14 @@
 
 <script>
 import Navbar from '../components/Navbar.vue'
+import SideNavbar from '../components/SideNavbar.vue'
 import CvModal from '../components/Cvmodal.vue';
 import { computed, ref,onMounted } from 'vue';
 import LoadingPage from '../components/LoadingPage.vue'
 import { useStore } from 'vuex';
 import axios from "axios";
 export default {
-    components:{Navbar,CvModal,LoadingPage},
+    components:{Navbar,SideNavbar,CvModal,LoadingPage},
     setup(){
         let store = useStore();
         let doeId=ref();

@@ -1,7 +1,8 @@
 <template>
   <div class="bg-light mains" :class="showModal && !errorMessage ? 'red' : 'blue'">
       <Navbar/>
-      <LoadingPage v-if="!employees"/>
+      <SideNavbar></SideNavbar>
+      <LoadingPage v-if="!does"/>
       <CvModalview v-if="showModal && !errorMessage" :id="userid" @closeModal="hidemodal"/>
       <div v-if="errorMessage && message" class="errorMessage">
         <div class="error-message">
@@ -104,6 +105,7 @@
 
 <script>
 import Navbar from '../components/Navbar.vue';
+import SideNavbar from '../components/SideNavbar.vue';
 import CvModalview from '../components/Cvmodalview.vue';
 import { computed, onMounted, ref } from 'vue';
 import { useStore } from 'vuex';
@@ -112,7 +114,7 @@ import { useRouter } from 'vue-router';
 import axios from "axios";
 
 export default {
-  components:{Navbar,CvModalview,LoadingPage},
+  components:{Navbar,SideNavbar,CvModalview,LoadingPage},
   setup(){
       let router = useRouter();
       let store = useStore();

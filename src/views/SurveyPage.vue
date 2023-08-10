@@ -21,41 +21,7 @@
         </div>
      </div>
     <!-- top navbar -->
-    <div>
-      <nav class="nav navbar-light bg-white ps-3">
-              <router-link  to="/home" class="my-auto">
-                <a class="navbar-brand"><img src="../assets/image/internationalfocuslogo.jpg" alt="logo"></a>
-              </router-link>     
-        
-                    <div class="mx-auto">
-                      <router-link class="nav-link nav-link-ltr ms-5"  to="/home" >Manage</router-link>
-                      <router-link class="nav-link nav-link-ltr"  to="/surveypage">Suvery</router-link>
-                      <router-link class="nav-link nav-link-ltr" to="/searchpage">Chat</router-link>
-                    </div>
-                    <!-- User Account -->
-                    <div class="my-2 my-lg-0 px-2">
-                        <!-- <p>logo</p> -->
-                        <div class="account">
-                              <div class="btn-group dropstart">
-                                  <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                                    <font-awesome-icon icon="fa-solid fa-circle-user" size="2xl" style="color:black" />
-
-                                  </button>
-                                  <form class="dropdown-menu p-4">
-                                    <div class="mb-3">
-                                      <label for="exampleDropdownFormEmail2" class="form-label">User Name</label>
-                                      <p class="form-control text-center">{{ useraccount }}</p>
-                                    </div>
-                                
-                                  
-                                    <button type="submit" class="col-12 btn btn-primary text-center" @click="logoutFunction">Logout</button>
-                                  </form>
-                              </div>
-                        </div>
-                    </div>
-      </nav>
-    </div>
-   
+     <Navbar></Navbar>
     <div class="">
       <div class="container border border-primary">
 
@@ -163,8 +129,9 @@ import SuveryModal6 from '../components/SuveryModal6.vue'
 import SuveryModal7 from '../components/SuveryModal7.vue'
 import SuveryModal8 from '../components/SuveryModal8.vue'
 import SuccessModal from '../components/SuccessModal.vue'
+import Navbar from '../components/Navbar.vue'
 export default {
-  components:{SuveryModal,SuveryModal2,SuveryModal3,SuveryModal4,SuveryModal5,SuveryModal6,SuveryModal7,SuveryModal8,SuccessModal},
+  components:{Navbar,SuveryModal,SuveryModal2,SuveryModal3,SuveryModal4,SuveryModal5,SuveryModal6,SuveryModal7,SuveryModal8,SuccessModal},
   setup(){
     let store = useStore();
     let router =useRouter();
