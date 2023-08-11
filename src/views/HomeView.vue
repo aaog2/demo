@@ -2,7 +2,7 @@
   <div class="bg-light mains" :class="showModal && !errorMessage ? 'red' : 'blue'">
       <Navbar/>
       <SideNavbar></SideNavbar>
-      <LoadingPage v-if="!does"/>
+      <LoadingPage v-if="!employees"/>
       <CvModalview v-if="showModal && !errorMessage" :id="userid" @closeModal="hidemodal"/>
       <div v-if="errorMessage && message" class="errorMessage">
         <div class="error-message">

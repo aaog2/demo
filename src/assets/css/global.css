@@ -155,13 +155,13 @@
   padding-bottom: 2px;
 }
 
-.cvs input {
+/* .cvs input {
   background-color: #f8f9fa;
   border: 1px solid #dedede;
   height: 38px;
   font-size: 15px;
   border-radius: 8px;
-}
+} */
 
 .cvs .dates {
   border: solid 1px #dedede;
@@ -482,4 +482,22 @@ input:focus {
 
 .download {
   margin-top: 34px;
+}
+
+/* date format css */
+
+.datecss {
+  width: 80px;
+  border: none;
+  text-align: center;
+  /* font-weight: bold; */
+  font-size: 16px;
+  /* background-color: red; */
+}
+
+.dateContainer {
+  display: flex;
+}
+
+.dateContainer:focus {
 }

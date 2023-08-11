@@ -3,6 +3,7 @@
         <Navbar/>
         <SideNavbar></SideNavbar>
         <SuccessModal  v-if="showModal"/>
+        <LoadingPage v-if="!employees"/>
         <div class="page"> 
     <div class="containers py-4">
         <h4 class="py-2">Review Worker Interview Results</h4>

@@ -219,7 +219,13 @@
    <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" v-model="formData.firstVaccineDate" autocomplete="off" /> 
+              <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+              </div>
     </div>
 
      <!-- Select Region / State Section  -->
@@ -245,7 +251,13 @@
      <!-- Second Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="secondVaccineDate" class="form-label">ဒုတိယအကြိမ် အကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.secondVaccineDate" autocomplete="off" /> 
+              <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="trainingday">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="trainingmonth">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="trainingyear" @input="insertDatetwo">
+               </div>
     </div>
 
      <!-- Select Region / State Section  -->
@@ -271,7 +283,13 @@
      <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">တတိယအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.thirdVaccineDate" autocomplete="off" /> 
+               <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="expireday">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="expiremonth">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="expireyear" @input="insertDatethree">
+                </div>
     </div>
 
     <!-- COvid Vaccine Note Section  -->
@@ -427,19 +445,17 @@ export default {
         let submitToDb = ref({});
         let errorMessage = ref()
 
+          let day = ref();
+          let month = ref();
+          let year = ref();
+          let trainingday = ref();
+          let trainingmonth = ref();
+          let trainingyear = ref();
+          let expireday = ref();
+          let expiremonth = ref();
+          let expireyear = ref();
 
-        // const uploadedImage = ref('');
-        // const file = ref();
-        // const imageInput = ref(null);
         const scrollToTop = () => { window. scrollTo({ top: 0, behavior: "smooth" }); };
-
-    //     const handleImageUpload = () => {
-    //    file.value = imageInput.value.files[0];
-    //    uploadedImage.value = URL.createObjectURL(file.value);
-    //   localStorage.setItem('uploadedImage',uploadedImage.value);
-    //   console.log('5 Image to show in form =>', uploadedImage.value);
-    //   console.log('6 Image to show in form data type =>', typeof(uploadedImage.value));
-    // };
         const formData = ref({
             // userid:'',
             userImage: '',
@@ -481,8 +497,23 @@ export default {
             haveToBribeNote: '',
 
         });
-        
-       
+      
+
+         //   date format
+         let insertDate = ()=>{
+          formData.value.firstVaccineDate = `${day.value}-${month.value}-${year.value}`
+            // console.log(passportcreateDate.value);
+        }
+
+        let insertDatetwo = ()=>{
+          formData.value.secondVaccineDate = `${trainingday.value}-${trainingmonth.value}-${trainingyear.value}`
+            // console.log(passportexpiredDate.value);
+        }
+
+        let insertDatethree = ()=>{
+          formData.value.thirdVaccineDate = `${expireday.value}-${expiremonth.value}-${expireyear.value}`
+            // console.log(passportexpiredDate.value);
+        }
 
         
         let submitForm = async function() {
@@ -505,11 +536,6 @@ export default {
             let foreignExpNumber = Number(data.foreignExp);
             let bribeNumber = Number(data.bribe);
         
-          // // console.log('$ the image value ==>', data);
-          // console.log("Weight data type and value =>", weightNumber, typeof(weightNumber));
-          // console.log("Height Feet data type and value =>", heightFeetNumber, typeof(heightFeetNumber));
-          // console.log("Height Inches data type and value =>", heightInchesNumber, typeof(heightInchesNumber));
-          // console.log("Passport Cost data type and value =>", passportCostNumber, typeof(passportCostNumber));
             submitToDb.value = {
               user_id:userid,
               address: data.address,
@@ -550,41 +576,10 @@ export default {
              }
              localStorage.setItem('submitToDb', JSON.stringify(submitToDb.value));
              router.push('/checkcvinfo');
-            //  Tested for data type is right or wrong 
-            // try {
-              
-            //  let imgform = {
-            //   user_id:userid,
-            //   photo:file.value
-            //  }
-            //  console.log(imgform);
 
-            //   let response =await axios.post('cv', imgform, {
-            //     headers: {
-            //       'Content-Type': 'multipart/form-data',
-            //       'Accept': 'application/vnd.api+json'
-            //     }
-            //   });
-            //       console.log("Response", response.data);
-            //       console.log("try work")
-            //       localStorage.setItem('cvid', response.data.data.id);
-            //       router.push('/checkcvinfo');
-            //       console.log("SubmitToDb value =>", submitToDb.value);  
-
-            
-            //     } catch (error) {
-            //       if(error.response){
-            //             console.log("catch work")
-            //             window.scrollTo(0,0);
-            //             errorMessage.value = error.response.data.message
-            //             console.log(error.response.data.message);
-            //         }
-            //     }
-            //  console.log("CV Data=>", localStorage.getItem('submitToDb'));
             
         }
 
-        // onMounted()
 
       
     return{
@@ -593,11 +588,10 @@ export default {
         formData,
         submitForm,
         scrollToTop,
-        // uploadedImage,
-        // handleImageUpload,
-        // imageInput,
-        // file,
-        errorMessage
+        errorMessage,
+        insertDate,
+        day,month,year,expireday,expiremonth,expireyear,insertDatetwo,
+        trainingday,trainingmonth,trainingyear,insertDatethree
     }
 
 
@@ -862,7 +856,7 @@ body {
 
 }
 
-.THIS .slds-datepicker{ display: none !important; }
+/* .THIS .slds-datepicker{ display: none !important; } */
 
-input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; }
+/* input[type="date"]::-webkit-inner-spin-button, input[type="date"]::-webkit-calendar-picker-indicator { display: none; -webkit-appearance: none; } */
 </style>

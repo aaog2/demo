@@ -339,9 +339,10 @@ import { defineEmits,defineComponent } from 'vue';
 import { useStore } from 'vuex';
 import axios from 'axios';
 import SuccessModal from './SuccessModal.vue';
+import LoadingPage from '../components/LoadingPage.vue'
 export default {
     props:["id"],
-    components:{SuccessModal},
+    components:{SuccessModal,LoadingPage},
     setup(props){
         let store = useStore();
         let family = ref();

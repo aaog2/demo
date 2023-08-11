@@ -1,5 +1,6 @@
 <template>
   <div class="cvModal bg-white">
+    <LoadingPage v-if="!employees"/>
     <div class="cv px-5">
         <SuccessModal class="modalfix"  v-if="successModal"/>
         <!-- alert -->
@@ -104,7 +105,13 @@
                         <!-- Contract Date -->
                         <div class="form-group col-6 py-3">
                             <label for="passportcreateDate" class="d-block">Passport Created Date</label>
-                            <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportcreateDate" v-model="passportcreateDate">
+                            <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+                            </div>
                         </div>
 
                         <!-- Contract Date -->
@@ -116,7 +123,13 @@
                         <!-- Contract Date -->
                         <div class="form-group col-6 py-3">
                             <label for="passportexpiredDate" class="d-block">Passport Expired Date</label>
-                            <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportexpiredDate" v-model="passportexpiredDate">
+                            <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="expireday">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="expiremonth">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="expireyear" @input="insertDatetwo">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -149,9 +162,10 @@ import { useStore } from 'vuex';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import SuccessModal from './SuccessModal.vue';
+import LoadingPage from '../components/LoadingPage.vue'
 export default {
     props:["id"],
-    components:{SuccessModal},
+    components:{SuccessModal,LoadingPage},
     setup(props,{emit}){
         let store = useStore();
         let router = useRouter();
@@ -164,7 +178,15 @@ export default {
         let edit = ref(false);
         let errorMessage = ref(null);
         let successModal = ref(false);
+        let day = ref();
+        let month = ref();
+        let year = ref();
+        let expireday = ref();
+        let expiremonth = ref();
+        let expireyear = ref();
 
+
+        
         //   get employee
         let getsingleEmployees = (id)=> store.dispatch('infoModule/getsingleEmployees',id);
         getsingleEmployees(props.id);
@@ -174,6 +196,16 @@ export default {
           })
           
         console.log(employees);  
+
+        let insertDate = ()=>{
+            passportcreateDate.value = `${day.value}-${month.value}-${year.value}`
+            console.log(passportcreateDate.value);
+        }
+
+        let insertDatetwo = ()=>{
+            passportexpiredDate.value = `${expireday.value}-${expiremonth.value}-${expireyear.value}`
+            console.log(passportexpiredDate.value);
+        }
 
         let handleSubmit=async()=>{
             let data = {
@@ -192,7 +224,6 @@ export default {
                 console.log(res.data);
                 if(res){
                 setTimeout(()=>{
-                    console.log("emit");
                     emit("closeModal");    
                 },2000)
                 showSuccess();
@@ -260,7 +291,8 @@ export default {
        return{
         employees,address,passport,passportcreateDate,passportexpiredDate,passportlocation,
         handleSubmit,owicdata,cancel,edit,editData,update,
-        successModal,showSuccess,errorMessage
+        successModal,showSuccess,errorMessage,insertDate,
+        day,month,year,expireday,expiremonth,expireyear,insertDatetwo
        }   
     }
 }

@@ -1,5 +1,6 @@
 <template>
     <div class="cvModal bg-light">
+        <LoadingPage v-if="!employees"/>
         <div v-if="!employees" class="errorMessage">
         <div class="error-message">
                 <div class="modalss">
@@ -318,9 +319,11 @@
 import { computed, onMounted, ref } from 'vue';
 import { defineEmits,defineComponent } from 'vue';
 import { useStore } from 'vuex';
+import LoadingPage from '../components/LoadingPage.vue'
 import axios from 'axios';
 export default {
     props:["id"],
+    components:{LoadingPage},
     setup(props){
         let store = useStore();
         let family = ref();

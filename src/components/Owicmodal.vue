@@ -1,5 +1,6 @@
 <template>
     <div class="cvModal bg-white">
+        <LoadingPage v-if="!employees"/>
       <div class="cv px-5">
           <SuccessModal class="modalfix"  v-if="successModal"/>
           <!-- alert -->
@@ -101,7 +102,13 @@
                           <!-- Contract Date -->
                           <div class="form-group col-6 pb-3">
                               <label for="passportcreateDate" class="d-block">Owic Created Date</label>
-                              <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="owiccreateDate" v-model="owiccreateDate">
+                              <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+                            </div>
                           </div>
   
                           <!-- Contract Date -->
@@ -113,16 +120,28 @@
                                     </select>
                             </div>
   
-                          <!-- Contract Date -->
+                          <!-- training Date -->
                           <div class="form-group col-6 py-3">
                               <label for="trainingStartDate" class="d-block">Training Start Date</label>
-                              <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="trainingStartDate" v-model="trainingstartDate">
+                              <div class="dateContainer form-control">
+                                    <input type="text" class="datecss" v-model="trainingday">
+                                    <span>/</span>
+                                    <input type="text" class="datecss" v-model="trainingmonth">
+                                    <span>/</span>
+                                    <input type="text" class="datecss" v-model="trainingyear" @input="insertDatetwo">
+                            </div>
                           </div>
 
-                           <!-- Contract Date -->
+                           <!-- depature Date -->
                            <div class="form-group col-6 py-3">
                               <label for="DepatureDate" class="d-block">Depature Date</label>
-                              <input autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="dapatureDate" v-model="depatureDate">
+                              <div class="dateContainer form-control">
+                                    <input type="text" class="datecss" v-model="expireday">
+                                    <span>/</span>
+                                    <input type="text" class="datecss" v-model="expiremonth">
+                                    <span>/</span>
+                                    <input type="text" class="datecss" v-model="expireyear" @input="insertDatethree">
+                            </div>
                           </div>
                       </div>
                   </div>
@@ -155,9 +174,10 @@
   import axios from 'axios';
   import { useRouter } from 'vue-router';
   import SuccessModal from './SuccessModal.vue';
+  import LoadingPage from '../components/LoadingPage.vue'
   export default {
       props:["id"],
-      components:{SuccessModal},
+      components:{SuccessModal,LoadingPage},
       setup(props,{emit}){
           let store = useStore();
           let router = useRouter();
@@ -169,6 +189,32 @@
           let edit = ref(false);
           let errorMessage = ref(null);
           let successModal = ref(false);
+
+          let day = ref();
+          let month = ref();
+          let year = ref();
+          let trainingday = ref();
+          let trainingmonth = ref();
+          let trainingyear = ref();
+          let expireday = ref();
+          let expiremonth = ref();
+          let expireyear = ref();
+
+        //   date format
+        let insertDate = ()=>{
+            owiccreateDate.value = `${day.value}-${month.value}-${year.value}`
+            // console.log(passportcreateDate.value);
+        }
+
+        let insertDatetwo = ()=>{
+            trainingstartDate.value = `${trainingday.value}-${trainingmonth.value}-${trainingyear.value}`
+            // console.log(passportexpiredDate.value);
+        }
+
+        let insertDatethree = ()=>{
+            depatureDate.value = `${expireday.value}-${expiremonth.value}-${expireyear.value}`
+            // console.log(passportexpiredDate.value);
+        }
   
           //   get employee
           let getsingleEmployees = (id)=> store.dispatch('infoModule/getsingleEmployees',id);
@@ -189,15 +235,6 @@
                   training_start_date:trainingstartDate.value,
                   departure_date:depatureDate.value
               }
-
-            //   let data = {
-            //     user_id:props.id,
-            //     owic_number:owicnum.value,
-            //     owic_created_date:owiccreateDate.value,
-            //     owic_created_place:"yangon",
-            //     training_start_date:"required",
-            //     departure_date:"required"
-            //   }
 
               console.log(data);
   
@@ -273,7 +310,9 @@
          return{
           employees,owicnum,owiccreateDate,owiccreatedPlace,trainingstartDate,depatureDate,
           handleSubmit,cancel,edit,editData,update,
-          successModal,showSuccess,errorMessage
+          successModal,showSuccess,errorMessage,insertDate,
+        day,month,year,expireday,expiremonth,expireyear,insertDatetwo,
+        trainingday,trainingmonth,trainingyear,insertDatethree
          }   
       }
   }
