@@ -1,6 +1,7 @@
 <template>
   <div class="bg-light mains" :class="bgactive === true ? 'red' : 'blue'">
     <Navbar/>
+    <LoadingPage v-if="!employees"/>
     <SideNavbar></SideNavbar>
     <Passportmodal v-if="showModal" :id="userid" @closeModal="hidemodal"></Passportmodal>
     <Owicmodal v-if="owicModal" :id="userid" @closeModal="hidemodal"></Owicmodal>
@@ -65,9 +66,10 @@ import Passportmodal from '../components/Passportmodal.vue';
 import { computed, ref, onMounted } from 'vue';
 import { useStore } from 'vuex';
 import axios from "axios";
+import LoadingPage from '../components/LoadingPage.vue'
 
 export default {
-components:{Navbar,SideNavbar,Passportmodal,Owicmodal},
+components:{Navbar,SideNavbar,Passportmodal,Owicmodal,LoadingPage},
 setup(){
     let showModal = ref(false);
     let owicModal = ref(false);
@@ -137,10 +139,10 @@ setup(){
     let hidemodal = () => {
         // console.log("hide modal")
             getemployees();
+            owicModal.value = false;
             bgactive.value = false;
             setTimeout(()=>{
-                owicModal.value = false;
-                    getdoeId(doeId.value)
+                getdoeId(doeId.value)
             },500)
         };
 

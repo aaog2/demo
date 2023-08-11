@@ -155,13 +155,13 @@
   padding-bottom: 2px;
 }
 
-.cvs input {
+/* .cvs input {
   background-color: #f8f9fa;
   border: 1px solid #dedede;
   height: 38px;
   font-size: 15px;
   border-radius: 8px;
-}
+} */
 
 .cvs .dates {
   border: solid 1px #dedede;
@@ -485,27 +485,19 @@ input:focus {
 }
 
 /* date format css */
-input[type="date"]::-webkit-datetime-edit,
-input[type="date"]::-webkit-inner-spin-button,
-input[type="date"]::-webkit-clear-button {
-  color: #fff;
-  position: relative;
+
+.datecss {
+  width: 80px;
+  border: none;
+  text-align: center;
+  /* font-weight: bold; */
+  font-size: 16px;
+  /* background-color: red; */
 }
 
-input[type="date"]::-webkit-datetime-edit-year-field {
-  position: absolute !important;
-  color: #000;
-  left: 104px;
+.dateContainer {
+  display: flex;
 }
 
-input[type="date"]::-webkit-datetime-edit-month-field {
-  position: absolute !important;
-  color: #000;
-  left: 60px;
-}
-
-input[type="date"]::-webkit-datetime-edit-day-field {
-  position: absolute !important;
-  color: #000;
-  left: 24px;
+.dateContainer:focus {
 }

@@ -36,7 +36,7 @@
                                 <select class="type" v-model="nrctype">
                                     <option v-for="types in getAlltypes" class="my-2" :key="types.id" :value="types.name.en">{{ types.name.en }}</option>
                                 </select>
-                                <input type="text" class="nrcNumber" @change="chgmmnrc" v-model="nrcnumber">
+                                <input type="text" class="nrcNumber" @change="chgmmnrc" v-model="nrcnumber" maxlength="6">
                             </div>
                         </div>
 
@@ -69,8 +69,15 @@
 
                             <div class="col-12 col-md-6 col-lg-3  mt-4 mt-lg-0">
                                 <label for="MoveInDate" class="d-block">Date Of Birth</label>
-                                <input type="text" class="dates form-control" v-model="dob" placeholder="dd-mm-yyyy" @keyup.enter="updateDate">
-                                <!-- <input v-if="!dob" class="dates form-control" type="date" placeholder="dd-mm-yyyy" v-model="dob" @input="updateDate"> -->
+                                <!-- <input type="text" class="dates form-control" v-model="dob" placeholder="dd-mm-yyyy" @keyup.enter="updateDate"> -->
+                                <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" max="31" class="datecss" v-model="day">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="year">
+                                </div>
+                              
                             </div>
 
                             <div class="col-12 col-md-6 col-lg-3 mt-4 mt-lg-0">
@@ -170,6 +177,10 @@ export default {
         let nrctype = ref();
         let nrcnumber = ref();
 
+        let day = ref();
+        let month = ref();
+        let year = ref();
+
         let nameEn = ref();
         let nameMm= ref();
         let fatherEn = ref();
@@ -232,6 +243,8 @@ export default {
 
  
         let showForm =async function(){
+
+            dob.value = `${day.value}-${month.value}-${year.value}`
            
             formData.value={
                 employee_id:nrcnumber.value + nameEn.value,
@@ -330,7 +343,7 @@ export default {
             showSuccess,errorMessage,closemessage,chgmmnrc,
             // date,
             // formattedDate,
-            updateDate,
+            updateDate,day,month,year
             
         }
     }

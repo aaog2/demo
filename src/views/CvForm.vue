@@ -219,8 +219,13 @@
    <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input type="text" class="firstVaccineDate_input  input_text_box dates" v-if="formData.firstVaccineDate" v-model="formData.firstVaccineDate">
-              <input v-if="!formData.firstVaccineDate" id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" v-model="formData.firstVaccineDate" autocomplete="off" @input="updateDate"/> 
+              <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+              </div>
     </div>
 
      <!-- Select Region / State Section  -->
@@ -246,8 +251,13 @@
      <!-- Second Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="secondVaccineDate" class="form-label">ဒုတိယအကြိမ် အကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input type="text" class="firstVaccineDate_input  input_text_box dates" v-if="formData.secondVaccineDate" v-model="formData.secondVaccineDate">
-              <input  v-if="!formData.secondVaccineDate" id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.secondVaccineDate" autocomplete="off" @input="updateDatetwo" /> 
+              <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="trainingday">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="trainingmonth">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="trainingyear" @input="insertDatetwo">
+               </div>
     </div>
 
      <!-- Select Region / State Section  -->
@@ -273,8 +283,13 @@
      <!-- First Covid Vaccine Date  -->
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">တတိယအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
-              <input type="text" class="firstVaccineDate_input  input_text_box dates" v-if="formData.thirdVaccineDate" v-model="formData.thirdVaccineDate">
-              <input v-if="!formData.thirdVaccineDate" id="firstVaccineDate" class="firstVaccineDate_input  input_text_box dates" placeholder="DD-MM-YYYY" type="date" min="1950-12-17" max="2030-01-01" v-model="formData.thirdVaccineDate" autocomplete="off" @input="updateDatethree"/> 
+               <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="expireday">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="expiremonth">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="expireyear" @input="insertDatethree">
+                </div>
     </div>
 
     <!-- COvid Vaccine Note Section  -->
@@ -430,6 +445,16 @@ export default {
         let submitToDb = ref({});
         let errorMessage = ref()
 
+          let day = ref();
+          let month = ref();
+          let year = ref();
+          let trainingday = ref();
+          let trainingmonth = ref();
+          let trainingyear = ref();
+          let expireday = ref();
+          let expiremonth = ref();
+          let expireyear = ref();
+
         const scrollToTop = () => { window. scrollTo({ top: 0, behavior: "smooth" }); };
         const formData = ref({
             // userid:'',
@@ -472,35 +497,23 @@ export default {
             haveToBribeNote: '',
 
         });
-        
-               //   date format
-        const updateDate = () => {
-          console.log(formData.value.firstVaccineDate);
-        // Parse the reversed date format to update the actual date value
-        const [year, month, day] = formData.value.firstVaccineDate.split('-');
-        console.log(year,month,day);
-        const parsedDate = `${day}-${month}-${year}`;
-        formData.value.firstVaccineDate = parsedDate;
-        console.log(formData.value.firstVaccineDate);
-        };
+      
 
-        const updateDatetwo = () => {
-        // Parse the reversed date format to update the actual date value
-        const [year, month, day] = formData.value.secondVaccineDate.split('-');
-        console.log(year,month,day);
-        const parsedDate = `${day}-${month}-${year}`;
-        formData.value.secondVaccineDate = parsedDate;
-        console.log(formData.value.secondVaccineDate);
-        };
+         //   date format
+         let insertDate = ()=>{
+          formData.value.firstVaccineDate = `${day.value}-${month.value}-${year.value}`
+            // console.log(passportcreateDate.value);
+        }
 
-        const updateDatethree = () => {
-        // Parse the reversed date format to update the actual date value
-        const [year, month, day] = formData.value.thirdVaccineDate.split('-');
-        console.log(year,month,day);
-        const parsedDate = `${day}-${month}-${year}`;
-        formData.value.thirdVaccineDate = parsedDate;
-        console.log(formData.value.thirdVaccineDate);
-        };
+        let insertDatetwo = ()=>{
+          formData.value.secondVaccineDate = `${trainingday.value}-${trainingmonth.value}-${trainingyear.value}`
+            // console.log(passportexpiredDate.value);
+        }
+
+        let insertDatethree = ()=>{
+          formData.value.thirdVaccineDate = `${expireday.value}-${expiremonth.value}-${expireyear.value}`
+            // console.log(passportexpiredDate.value);
+        }
 
         
         let submitForm = async function() {
@@ -563,41 +576,10 @@ export default {
              }
              localStorage.setItem('submitToDb', JSON.stringify(submitToDb.value));
              router.push('/checkcvinfo');
-            //  Tested for data type is right or wrong 
-            // try {
-              
-            //  let imgform = {
-            //   user_id:userid,
-            //   photo:file.value
-            //  }
-            //  console.log(imgform);
 
-            //   let response =await axios.post('cv', imgform, {
-            //     headers: {
-            //       'Content-Type': 'multipart/form-data',
-            //       'Accept': 'application/vnd.api+json'
-            //     }
-            //   });
-            //       console.log("Response", response.data);
-            //       console.log("try work")
-            //       localStorage.setItem('cvid', response.data.data.id);
-            //       router.push('/checkcvinfo');
-            //       console.log("SubmitToDb value =>", submitToDb.value);  
-
-            
-            //     } catch (error) {
-            //       if(error.response){
-            //             console.log("catch work")
-            //             window.scrollTo(0,0);
-            //             errorMessage.value = error.response.data.message
-            //             console.log(error.response.data.message);
-            //         }
-            //     }
-            //  console.log("CV Data=>", localStorage.getItem('submitToDb'));
             
         }
 
-        // onMounted()
 
       
     return{
@@ -606,12 +588,10 @@ export default {
         formData,
         submitForm,
         scrollToTop,
-        // uploadedImage,
-        // handleImageUpload,
-        // imageInput,
-        // file,
         errorMessage,
-        updateDate,updateDatetwo,updateDatethree
+        insertDate,
+        day,month,year,expireday,expiremonth,expireyear,insertDatetwo,
+        trainingday,trainingmonth,trainingyear,insertDatethree
     }
 
 

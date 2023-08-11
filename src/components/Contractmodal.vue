@@ -1,5 +1,6 @@
 <template>
   <div class="cvModal bg-light">
+    <LoadingPage v-if="!employees"/>
     <div class="cv">
         <div class="container">
             <!-- Modal Header -->
@@ -78,9 +79,10 @@
 <script>
 import { useStore } from 'vuex';
 import { computed, onMounted, ref } from 'vue';
-import axios from 'axios';
+import LoadingPage from '../components/LoadingPage.vue'
 export default {
     props:["id"],
+    components:{LoadingPage},
     setup(props){
         let store = useStore();
         console.log(props.id);

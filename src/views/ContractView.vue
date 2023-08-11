@@ -1,7 +1,8 @@
 <template>
   <div class="bg-light mains" :class="bgactive === true ? 'red' : 'blue'" >
         <Navbar/>
-        <SideNavbar>s</SideNavbar>
+        <LoadingPage v-if="!employees"/>
+        <SideNavbar></SideNavbar>
         <Contractmodal v-if="showModal" :id="userid" @closeModal="hidemodal"></Contractmodal>
         <Filemodal  class="success" v-if="fileModal" :id="contractid" @closeModal="hidemodal"></Filemodal>
         <SuccessModal class="success"  v-if="successModal"/>
@@ -38,8 +39,13 @@
                     <!-- Contract Date -->
                     <div class="form-group col-4">
                             <label for="contractDate" class="d-block">Contract Date</label>
-                            <input type="text" class="dates form-control" v-model="contractDate"  @keyup.enter="updateDate" placeholder="DD-MM-YYYY">
-                            <!-- <input v-if="!contractDate" class="form-control bg-light dates" type="date" min="1900-12-01" max="2050-01-01" id="contractDate" v-model="contractDate" @input="updateDate"> -->
+                            <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="year">
+                                </div>
                     </div>
                 </div>   
                 <!-- Button Container -->
@@ -88,6 +94,7 @@
                                 </td>
                                 <td v-else class="text-danger">No Data</td>
                                 <td><font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" @click="showmodal(employees.user_id)" /></td>
+                                <td v-if="employees.contract_upload"><button class="btn btn-outline-danger" @click="deleteContract(employees.contract_upload.id)"><font-awesome-icon icon="fa-solid fa-trash" /></button></td>
                             </tr>
                         </tbody>
                     </table>
@@ -99,14 +106,16 @@
 <script>
 import { computed, ref,onMounted } from 'vue';
 import { useStore } from 'vuex';
+import LoadingPage from '../components/LoadingPage.vue'
 import axios from "axios";
 import Navbar from '../components/Navbar.vue'
 import SideNavbar from '../components/SideNavbar.vue'
 import Contractmodal from '../components/Contractmodal.vue';
 import SuccessModal from '../components/SuccessModal.vue';
 import Filemodal from '../components/FileUploadmodal.vue';
-import { useRouter } from 'vue-router';export default {
-    components:{Navbar,SideNavbar,Contractmodal,Filemodal,SuccessModal},
+import { useRouter } from 'vue-router';import { faArrowRotateRight } from '@fortawesome/free-solid-svg-icons';
+export default {
+    components:{Navbar,SideNavbar,Contractmodal,Filemodal,SuccessModal,LoadingPage},
     setup(){
         let store = useStore();
         let router =useRouter();
@@ -114,11 +123,10 @@ import { useRouter } from 'vue-router';export default {
         let fileModal = ref(false)
         let successModal = ref(false);
         let errorMessage = ref(null);
-        let message = ref(true);
         let edit = ref(false);
 
         let doeId=ref();
-    let employees = ref();
+        let employees = ref();
         let contractPlace = ref();
         let contractDate = ref();
         let trainingDate = ref();
@@ -131,12 +139,9 @@ import { useRouter } from 'vue-router';export default {
         let file = ref();
         let bgactive = ref(false);
 
-        const updateDate = () => {
-        // Parse the reversed date format to update the actual date value
-        let format = contractDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
-        console.log(format);
-        contractDate.value = format;
-        };
+        let day = ref();
+        let month = ref();
+        let year = ref();
 
         // get DOE Data
         let does = computed(()=>{
@@ -197,6 +202,8 @@ import { useRouter } from 'vue-router';export default {
 
 
     let handleSubmit = async ()=>{
+        contractDate.value = `${day.value}-${month.value}-${year.value}`
+
         let data = {
             userIds:selectedEmployees.value,
             contract_place:contractPlace.value,
@@ -218,7 +225,6 @@ import { useRouter } from 'vue-router';export default {
                 },2000)
             }
         } catch (error) {
-            message.value = true;
             if(error.response){
                 errorMessage.value = error.response.data.message
                 console.log(error.response.data.message);
@@ -260,10 +266,10 @@ import { useRouter } from 'vue-router';export default {
             getemployees();
             fileModal.value = false;
             bgactive.value = false;
+            showModal.value = false;
             setTimeout(()=>{
-                showModal.value = false;
                 getdoeId(doeId.value)
-            },2000)
+            },500)
         };
 
         let closemessage = ()=>{
@@ -283,14 +289,37 @@ import { useRouter } from 'vue-router';export default {
             },3000)
         }
 
+        let deleteContract = async(id)=>{
+           if( window.confirm("Are you sure want to delete")){
+            try {
+                let res = await axios.delete(`contract_upload/${id}`)
+                if(res){
+                    console.log(res.data.message);
+                    getemployees();
+                    showSuccess();
+                    setTimeout(()=>{
+                        getdoeId(doeId.value)
+                        hideSuccess();
+                    },2000)
+                }
+            } catch (error) {
+                if(error.response){
+                    errorMessage.value = error.response.data.message
+                    console.log(error.response.data.message);
+                }
+            }
+           }
+           
+        }
+
 
         return{
             doeId,does,contractPlace,contractDate,
             trainingDate,depatureDate,fillterEmployees,employees,getdoeId,
             showModal,showmodal,hidemodal,allEmployees,selectedEmployees,selectedallEmployee,
             handleSubmit,userid,uploadFile,file,fileModal,showFile,bgactive,contractid,getfile,
-            successModal,showSuccess,hideSuccess,errorMessage,message,closemessage,edit,chgbtn,
-            updateDate
+            successModal,showSuccess,hideSuccess,errorMessage,closemessage,edit,chgbtn,
+            day,month,year,deleteContract
         }
 
     }

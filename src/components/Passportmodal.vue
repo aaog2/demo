@@ -1,5 +1,6 @@
 <template>
   <div class="cvModal bg-white">
+    <LoadingPage v-if="!employees"/>
     <div class="cv px-5">
         <SuccessModal class="modalfix"  v-if="successModal"/>
         <!-- alert -->
@@ -104,8 +105,13 @@
                         <!-- Contract Date -->
                         <div class="form-group col-6 py-3">
                             <label for="passportcreateDate" class="d-block">Passport Created Date</label>
-                            <input type="text" class="dates form-control" v-model="passportcreateDate" @keyup.enter="updateDate">
-                            <!-- <input v-if="!passportcreateDate" autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportcreateDate" v-model="passportcreateDate" @input="updateDate"> -->
+                            <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+                            </div>
                         </div>
 
                         <!-- Contract Date -->
@@ -117,8 +123,13 @@
                         <!-- Contract Date -->
                         <div class="form-group col-6 py-3">
                             <label for="passportexpiredDate" class="d-block">Passport Expired Date</label>
-                            <input type="text" class="dates form-control" v-model="passportexpiredDate" @keyup.enter="updateDatetwo">
-                            <!-- <input v-if="!passportexpiredDate" autocomplete="off" class="form-control bg-light date" name="MoveInDate" placeholder="DD-MM-YYYY" type="date" min="1900-12-01" max="2050-01-01" spellcheck="false" id="passportexpiredDate" v-model="passportexpiredDate" @input="updateDatetwo"> -->
+                            <div class="dateContainer form-control">
+                                    <input type="text" maxlength="2" class="datecss" v-model="expireday">
+                                    <span>/</span>
+                                    <input type="text" maxlength="2" class="datecss" v-model="expiremonth">
+                                    <span>/</span>
+                                    <input type="text" maxlength="4" class="datecss" v-model="expireyear" @input="insertDatetwo">
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -151,9 +162,10 @@ import { useStore } from 'vuex';
 import axios from 'axios';
 import { useRouter } from 'vue-router';
 import SuccessModal from './SuccessModal.vue';
+import LoadingPage from '../components/LoadingPage.vue'
 export default {
     props:["id"],
-    components:{SuccessModal},
+    components:{SuccessModal,LoadingPage},
     setup(props,{emit}){
         let store = useStore();
         let router = useRouter();
@@ -166,27 +178,15 @@ export default {
         let edit = ref(false);
         let errorMessage = ref(null);
         let successModal = ref(false);
+        let day = ref();
+        let month = ref();
+        let year = ref();
+        let expireday = ref();
+        let expiremonth = ref();
+        let expireyear = ref();
 
-        // date format
-        const updateDate = () => {
-            // console.log(passportcreateDate.value.replace(/(\d{2})(\d{2})(\d{4})/));
-        // var n = "1234567899"; console.log(n.replace(/(\d{3})(\d{3})(\d{4})
-        // Parse the reversed date format to update the actual date value
-        let format = passportcreateDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
-        console.log(format);
-        // const parsedDate = `${day}-${month}-${year}`;
-        passportcreateDate.value = format;
-        // console.log(passportcreateDate.value);
-        };
 
-        const updateDatetwo = () => {
-        // Parse the reversed date format to update the actual date value
-        let format = passportexpiredDate.value.replace(/(\d{2})(\d{2})(\d{4})/,"$1-$2-$3");
-        console.log(format);
-        // const parsedDate = `${day}-${month}-${year}`;
-        passportexpiredDate.value = format;
-        };
-
+        
         //   get employee
         let getsingleEmployees = (id)=> store.dispatch('infoModule/getsingleEmployees',id);
         getsingleEmployees(props.id);
@@ -196,6 +196,16 @@ export default {
           })
           
         console.log(employees);  
+
+        let insertDate = ()=>{
+            passportcreateDate.value = `${day.value}-${month.value}-${year.value}`
+            console.log(passportcreateDate.value);
+        }
+
+        let insertDatetwo = ()=>{
+            passportexpiredDate.value = `${expireday.value}-${expiremonth.value}-${expireyear.value}`
+            console.log(passportexpiredDate.value);
+        }
 
         let handleSubmit=async()=>{
             let data = {
@@ -214,7 +224,6 @@ export default {
                 console.log(res.data);
                 if(res){
                 setTimeout(()=>{
-                    console.log("emit");
                     emit("closeModal");    
                 },2000)
                 showSuccess();
@@ -282,7 +291,8 @@ export default {
        return{
         employees,address,passport,passportcreateDate,passportexpiredDate,passportlocation,
         handleSubmit,owicdata,cancel,edit,editData,update,
-        successModal,showSuccess,errorMessage,updateDate,updateDatetwo
+        successModal,showSuccess,errorMessage,insertDate,
+        day,month,year,expireday,expiremonth,expireyear,insertDatetwo
        }   
     }
 }
