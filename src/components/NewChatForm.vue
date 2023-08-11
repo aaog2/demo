@@ -1,31 +1,92 @@
 <template>
-    <form class="container col-lg-6 col-sm-4 d-flex">
-        <!-- <div class="col-2">
-            <label for="imageInput" class="plus-button plus_button">
-            <font-awesome-icon icon="fa-solid fa-plus"  /> 
-           
-          </label>
-          <input type="file" accept="image/jpeg, image/png, image/webp" class="btn btn-info image_input" id="imageInput" ref="imageInput" @change="handleImageUpload" />
-        </div> -->
-        <textarea class="col-9 chatBox" placeholder="Enter Message" v-model="message" @keypress.enter="handleSubmit"></textarea>
-        <div class="col-1 mt-3 ms-2" @click="handleSubmit">
-            <span class="sendIcon"><font-awesome-icon icon="fa-solid fa-paper-plane" /></span>
+    <form class="container col-lg-12 col-sm-6 d-flex">
+       <div class="col-12">
+        <div class="col-12 d-block imageSend">
+          <div class="d-flex">
+            <div class="col-8 sendImageSection">
+                <label for="imageInput" class="plus-button plus_button d-flex">
+                    <!-- <font-awesome-icon icon="fa-solid fa-plus" size="lg" />  -->
+                    <span class="photoChooseBtn" :style="{ backgroundColor: bgColor }">{{ guideText }}</span>
+                </label>
+                <input type="file" ref="imageInput" class="imageSelector" id="imageInput" @change="handleImageChange" />
+            </div>
+            <div class="col-4  imageSendBtn">
+                <button type="button" class="btn" @click="sendImage">ဓာတ်ပုံပိုရန်</button>
+            </div>
+          </div>
         </div>
+       <div class="col-12 d-block d-flex">
+        <textarea class="col-8 chatBox" placeholder="စာရိုက်ထည့်ရန်" v-model="message" @keypress.enter="handleSubmit"></textarea>
+            <div class="col-1 mt-3 ms-2" @click="handleSubmit">
+                <span class="sendIcon"><font-awesome-icon icon="fa-solid fa-paper-plane" /></span>
+            </div>
+       </div>
+       </div>
+        <!-- Warning popup -->
+        <!-- <div v-if="isPopupVisible">
+                  <div  class="popup row ">
+                    <div class="col-12">
+                      <p class="col-8 wrongInfosText ">မှားယွင်းနေသော ကိုယ်ရေးကိုယ်တာ အချက်အလက်များအား ပြန်လည်ပြင်ဆင်ရန် တာဝန်ရှိသူအား အကြောင်းကြားပါ။</p>
+                    </div>
+                    <div class="col-12 ">
+                       <button class="col-6 text-center wrongInfoBtn btn bg-info" @click="hidePopup">OK</button>
+                    </div>
+                  </div>
+        </div> -->
     </form>
 </template>
 
 <script>
 import { ref } from 'vue';
-import { db, timestamp } from '../firebase/config';
-// import useCollection from '@/composable/useCollection';
-// import { storage } from '../firebase/config';
+import { db, timestamp,storage } from '../firebase/config';
+
     export default{
         setup(){
             let nameDisplay = localStorage.getItem("useraccount");
+            let guideText = ref('ဓာတ်ပုံရွေးချယ်ရန်နှိပ်ပါ');
+            let bgColor = ref('#007bff');
             let message = ref('');
-            // let imageInput = ref(null);
-            // let {error, addDoc} = useCollection('messages');
-           
+            let imageFile = ref(null);
+            let handleImageChange = (event) =>{
+                imageFile.value = event.target.files[0];
+                console.log("Image value =>", imageFile.value);
+                console.log("Image value type=>", typeof(imageFile.value));
+                if(imageFile.value){
+                    guideText.value = "ဓာတ်ပုံရွေးချယ်ပြီးပါပြီ";
+                    bgColor.value = "#198754";
+                }
+            }
+            const sendImage = async()=>{
+                if(!imageFile.value){
+                    return;
+                }
+                const storageRef = storage.ref();
+                const imageRef = storageRef.child(imageFile.value.name);
+                await imageRef.put(imageFile.value);
+
+                const imageUrl = await imageRef.getDownloadURL();
+                console.log("Image File URL =>", imageUrl);
+                console.log("Image File URL Type=>", typeof(imageUrl));
+
+                let chat = {
+                    name:nameDisplay,
+                    message:imageUrl
+                }
+                console.log("Image Chat info =>",chat);
+                let imgChatRef = db.collection('chats').doc(nameDisplay);
+                imgChatRef.get()
+                .then((doc)=>{
+                    if(doc.exists){
+                        const existingMessages = doc.data().messages || [];
+                        existingMessages.push(chat);
+                        return imgChatRef.update({
+                            messages:existingMessages
+                        })
+                    }
+                    console.log("Document Successfully Written");
+                })
+
+            }
             let handleSubmit =async () =>{
                
                 let chat = {
@@ -65,8 +126,11 @@ import { db, timestamp } from '../firebase/config';
 
             return{
                 message,
-                // imageInput,
-                handleSubmit
+                handleImageChange,
+                handleSubmit,
+                sendImage,
+                guideText,
+                bgColor
             }
         }
     }
@@ -74,17 +138,67 @@ import { db, timestamp } from '../firebase/config';
 
 <style scoped>
     .container{
-        /* width: 300px; */
-        /* margin: auto; */
+        padding: 1rem 1.5rem;
+        /* background-color: #tomato; */
+        border: 3px solid #007bff;
+        border-radius: 15px;
         bottom: 1rem;
         position: fixed;
         left: 50%;
         transform: translate(-50%);
     }
 
+    .imageSend{
+        height: 3rem;
+    }
+
+    .imageSelector{
+        display: none;
+    }
+    .photoChooseBtn{
+        font-size: 12px;
+        cursor: pointer;
+        padding: 20px 20px;
+        margin-right: 20px;
+       
+        color: #fff;
+        border-radius: 12px;
+
+        position: relative;
+    }
+
+    .photoChooseBtn font-awesome-icon{
+        /* margin-right: 0; */
+        /* position: absolute;
+        left: 0;
+        right: 100%; */
+
+    }
+
+    .imageSendBtn{
+        width: 20px;
+        height: 30px;
+    }
+
+    .sendImageSection{
+        margin-left: 0;
+        /* margin: auto; */
+    }
+
+    .imageSendBtn button{
+       margin-right: 0;
+       margin-left: 1rem;
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 12px;
+        padding: 10px 14px;
+    }
+
     .sendIcon{
-        /* margin-top: 0.5rem; */
-        font-size: 18px;
+        font-size: 14px;
         padding: 10px 12px;
         background-color: #007bff;
         color: #fff;
@@ -94,17 +208,18 @@ import { db, timestamp } from '../firebase/config';
 
     textarea{
         color: #000;
-        /* background-color: #7DC3FF; */
         background-color: #a7adba;
         width: 100%;
-        height: 6rem;
+        height: 1rem;
         max-width: 100%;
         margin-bottom: 6px;
-        padding: 20px;
+        /* padding: 20px; */
+        padding: 20px 10px;
         box-sizing: border-box;
         border: 1px solid #999;
         border-radius: 12px;
         font-family: inherit;
+        font-size: 12px;
         flex: 1;
         resize: none;
         line-height: 1;
