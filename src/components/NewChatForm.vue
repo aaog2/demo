@@ -225,5 +225,20 @@ import { db, timestamp,storage } from '../firebase/config';
         line-height: 1;
     }
 
+    @media (max-width: 768px) {
+    .imageSendBtn button {
+      font-size: 10px; /* Adjust the font size for mobile screens as needed */
+      padding: 5px 10px;
+      margin-right: 0;
+    }
+
+    .photoChooseBtn{
+        font-size: 10px;
+         padding: 20px 20px;
+        margin-right: 0px;
+    }
+   
+  }
+
     
 </style>

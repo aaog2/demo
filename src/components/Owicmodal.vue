@@ -94,7 +94,7 @@
   
                   <div class="mx-auto col-7">
                       <div class="row">
-                          <div class="col-6 pb-2">
+                          <div class="col-6 pb-3 py-3">
                               <label for="owic" class="d-block">Owic Number</label>
                               <input type="text" class="form-control" name="owic" id="owic" v-model="owicnum">
                           </div>
@@ -113,7 +113,7 @@
   
                           <!-- Contract Date -->
                           <div class="form-group col-6 py-3" >
-                            <label for="owiclocation" class="d-block">Owic Created Place</label>
+                            <label for="owiclocation" class="d-block py-2">Owic Created Place</label>
                                     <select class="form-select" id="country" v-model="owiccreatedPlace">
                                         <option value="yangon" >Yangon</option>
                                         <option value="myawadyy">Myawadyy</option>

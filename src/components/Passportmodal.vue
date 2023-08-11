@@ -63,7 +63,7 @@
                 <div class="col-12 col-lg-7">
                     <div class="row">
 
-                        <div class="col-6 py-3">
+                        <div class="col-6 py-5">
                             <p>Passport Number</p>
                             <p>{{employees.data.passport_data.passport_number }}</p>
                         </div>
