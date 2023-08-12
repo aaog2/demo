@@ -35,12 +35,12 @@ import WorkerNavbar from '@/components/WorkerNavbar.vue';
     align-items: center;
 }
 .chatWindow{
-    height: 60vh;
-    margin-top: 3rem;
+    height: 50vh;
+    margin-top: 2rem;
     background-color: transparent;
 }
 .newChatForm{
-        width: 250px;
+        width: 300px;
         
         bottom: 1rem;
         position: fixed;

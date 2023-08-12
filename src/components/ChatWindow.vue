@@ -2,7 +2,13 @@
   <div class="chat_window">
       <div class="messagess" ref="msgBox">
           <div class="single" v-for="message in messages" :key="message.id">
-            <span class="message text-justify">{{ message.message }}</span>  
+            <!-- <span class="message text-justify">{{ message.message }}</span>   -->
+            <template v-if="isImage(message.message)">
+             <span> <a :href="message.message" target="_blank" class="file-link">ပုံကိုကြည့်ရှုရန် နှိပ်ပါ</a></span>
+            </template>
+            <template v-else>
+              <span class="message text-justify">{{ message.message }}</span>
+            </template>
             <span class="name mt-1
             ">{{ message.name }}</span>
             <span class="created_at">{{ message.created_at }}</span>
@@ -48,6 +54,9 @@
         //   messages.value = result;
         //   console.log("Result =>", result);
         // })
+        const isImage = (content) => {
+          return content.startsWith('http') || content.startsWith('https');
+        };
         let fetchMessages = async()=>{
           const chatRef = db.collection('chats').doc(nameDisplay);
           try{
@@ -68,13 +77,26 @@
         return{
           // formattedMessages,
           messages,
-          msgBox
+          msgBox,
+          isImage
         }
       }
   }
 </script>
 
 <style>
+.file-link {
+  text-align: center;
+  display: block;
+  width: 150px;
+  padding: 10px;
+  border-radius: 12px;
+  background-color: #007bff;
+  color: #fff;
+  text-decoration: underline;
+  font-size: 12px;
+  cursor: pointer;
+}
 .chat_window {
   background: #fafafa;
   padding: 30px 20px;
@@ -97,7 +119,7 @@
   font-size: 12px;
 }
 .messagess {
-  max-height: 500px;
+  max-height: 400px;
   overflow: auto;
   margin-bottom: 5px;
 }

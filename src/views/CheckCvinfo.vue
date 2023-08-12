@@ -44,7 +44,7 @@
     <div class="form">
        
       <!-- Image Section  -->
-      <div class="image_control">
+      <div class="image_control d-none">
         <div v-if="uploadedImage" class="image_container">
           <img :src="uploadedImage" alt="Uploaded Image" class="image">
         </div>

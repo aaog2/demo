@@ -6,7 +6,7 @@
    
     <div class="chatHistory col-2 ">
         <h6 class="submittedList">Submited Employees List</h6>
-        <div class=" chattedUsers" v-for="chatId in messageHistory" :key="chatId" @click="fetchSingleUser(chatId)">
+        <div class="col-9 chattedUsers" v-for="chatId in messageHistory" :key="chatId" @click="fetchSingleUser(chatId)">
             {{ chatId }}
         </div>
         <div>
@@ -16,7 +16,13 @@
     <div class="chat_window col-10">
         <div class="messagess" ref="msgBox">
             <div class="single" v-for="message in messages" :key="message.id">
-              <span class="message text-justify">{{ message.message }}</span>  
+              <!-- <span class="message text-justify">{{ message.message }}</span>   -->
+              <template v-if="isImage(message.message)">
+             <span> <a :href="message.message" target="_blank" class="file-link">ပုံကိုကြည့်ရှုရန် နှိပ်ပါ</a></span>
+            </template>
+            <template v-else>
+              <span class="message text-justify">{{ message.message }}</span>
+            </template>
               <span class="name mt-1
               ">{{ message.name }}</span>
               <span class="created_at">{{ message.created_at }}</span>
@@ -25,17 +31,42 @@
         </div>
     </div>
    </div>
-    <form class="container col-lg-6 col-sm-4 d-flex">
+    <!-- <form class="container col-lg-6 col-sm-4 d-flex">
         <textarea class="col-9 chatBox" placeholder="Enter Message" v-model="message" @keypress.enter="handleSubmit"></textarea>
         <div class="col-1 mt-3 ms-2" @click="handleSubmit">
             <span class="sendIcon"><font-awesome-icon icon="fa-solid fa-paper-plane" /></span>
         </div>
+    </form> -->
+    <form class="container col-lg-6 col-sm-6 d-flex">
+       <div class="col-12">
+        <div class="col-12 d-block imageSend">
+          <div class="d-flex">
+            <div class="col-8 sendImageSection">
+                <label for="imageInput" class="plus-button plus_button d-flex">
+                    <!-- <font-awesome-icon icon="fa-solid fa-plus" size="lg" />  -->
+                    <span class="photoChooseBtn" :style="{ backgroundColor: bgColor }">{{ guideText }}</span>
+                </label>
+                <input type="file" ref="imageInput" class="imageSelector" id="imageInput" @change="handleImageChange" />
+            </div>
+            <div class="col-4  imageSendBtn">
+                <button type="button" class="btn" @click="sendImage">ဓာတ်ပုံပိုရန်</button>
+            </div>
+          </div>
+        </div>
+       <div class="col-12 d-block d-flex">
+        <textarea class="col-8 chatBox" placeholder="စာရိုက်ထည့်ရန်" v-model="message" @keypress.enter="handleSubmit"></textarea>
+            <div class="col-1 mt-3 ms-2" @click="handleSubmit">
+                <span class="sendIcon"><font-awesome-icon icon="fa-solid fa-paper-plane" /></span>
+            </div>
+       </div>
+       </div>
+     
     </form>
 </template>
 
 <script>
 import Navbar from '@/components/Navbar.vue';
-import { db, timestamp } from '../firebase/config';
+import { db, timestamp,storage } from '../firebase/config';
 import { computed, onUpdated, ref } from 'vue';
 import { getUnixTime } from 'date-fns';
 // import chat from '@/store/chat';
@@ -98,6 +129,10 @@ export default{
             msgBox.value.scrollTop = msgBox.value.scrollHeight
           })
 
+          const isImage = (content) => {
+          return content.startsWith('http') || content.startsWith('https');
+        };
+
           let fetchMessages = async() =>{
            if(dynamicId.value === ''){
                 console.log("Nothing to show");
@@ -118,8 +153,49 @@ export default{
            }
           }
           fetchMessages();
+          let guideText = ref('ဓာတ်ပုံရွေးချယ်ရန်နှိပ်ပါ');
+            let bgColor = ref('#007bff');
+          let imageFile = ref(null);
+            let handleImageChange = (event) =>{
+                imageFile.value = event.target.files[0];
+                console.log("Image value =>", imageFile.value);
+                console.log("Image value type=>", typeof(imageFile.value));
+                if(imageFile.value){
+                    guideText.value = "ဓာတ်ပုံရွေးချယ်ပြီးပါပြီ";
+                    bgColor.value = "#198754";
+                }
+            }
+            const sendImage = async()=>{
+                if(!imageFile.value){
+                    return;
+                }
+                const storageRef = storage.ref();
+                const imageRef = storageRef.child(imageFile.value.name);
+                await imageRef.put(imageFile.value);
 
-           
+                const imageUrl = await imageRef.getDownloadURL();
+                console.log("Image File URL =>", imageUrl);
+                console.log("Image File URL Type=>", typeof(imageUrl));
+
+                let chat = {
+                    name:nameDisplay,
+                    message:imageUrl
+                }
+                console.log("Image Chat info =>",chat);
+                let imgChatRef = db.collection('chats').doc(nameDisplay);
+                imgChatRef.get()
+                .then((doc)=>{
+                    if(doc.exists){
+                        const existingMessages = doc.data().messages || [];
+                        existingMessages.push(chat);
+                        return imgChatRef.update({
+                            messages:existingMessages
+                        })
+                    }
+                    console.log("Document Successfully Written");
+                })
+
+            }
            
            
             let handleSubmit =async () =>{
@@ -173,8 +249,12 @@ export default{
             msgBox,
             fetchMessages,
             message,
-            handleSubmit
-               
+            handleSubmit,
+            isImage,
+            guideText,
+                bgColor,
+                sendImage,
+                handleImageChange
             }
 
         }
@@ -196,7 +276,7 @@ export default{
         font-size: 14px;
         color: #fff;
         margin: auto;
-        width: 12rem;
+        /* width: 12rem; */
         border-radius: 10px;
         background-color: #007bff;
         cursor: pointer;
@@ -227,7 +307,7 @@ export default{
     font-size: 12px;
   }
   .messagess {
-    max-height: 500px;
+    max-height: 400px;
     overflow: auto;
     margin-bottom: 5px;
   }
@@ -294,6 +374,51 @@ export default{
         flex: 1;
         resize: none;
         line-height: 1;
+    }
+
+    .imageSend{
+        height: 3rem;
+        /* margin: auto; */
+    }
+
+    .imageSelector{
+        display: none;
+    }
+
+    .imageSendBtn{
+        width: 40px;
+        height: 30px;
+    }
+
+    .imageSendBtn button{
+       /* margin-right: -3rem; */
+       /* margin-left: 0; */
+        border: none;
+        outline: none;
+        border-radius: 5px;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 12px;
+        padding: 10px 14px;
+    }
+
+
+    .photoChooseBtn{
+        font-size: 12px;
+        cursor: pointer;
+        padding: 12px 20px;
+        margin-right: 20px;
+       
+        color: #fff;
+        border-radius: 12px;
+
+        position: relative;
+    }
+
+    .sendImageSection{
+        margin-left: 0;
+        margin-right: 4rem;
+        /* margin: auto; */
     }
 
     

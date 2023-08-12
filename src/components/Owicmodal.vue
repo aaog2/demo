@@ -94,7 +94,7 @@
   
                   <div class="mx-auto col-7">
                       <div class="row">
-                          <div class="col-6 pb-2">
+                          <div class="col-6 pb-3 py-3">
                               <label for="owic" class="d-block">Owic Number</label>
                               <input type="text" class="form-control" name="owic" id="owic" v-model="owicnum">
                           </div>
@@ -103,17 +103,17 @@
                           <div class="form-group col-6 pb-3">
                               <label for="passportcreateDate" class="d-block">Owic Created Date</label>
                               <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="day">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="month">
                                     <span>/</span>
-                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+                                    <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="year" @input="insertDate">
                             </div>
                           </div>
   
                           <!-- Contract Date -->
                           <div class="form-group col-6 py-3" >
-                            <label for="owiclocation" class="d-block">Owic Created Place</label>
+                            <label for="owiclocation" class="d-block py-2">Owic Created Place</label>
                                     <select class="form-select" id="country" v-model="owiccreatedPlace">
                                         <option value="yangon" >Yangon</option>
                                         <option value="myawadyy">Myawadyy</option>
@@ -124,11 +124,11 @@
                           <div class="form-group col-6 py-3">
                               <label for="trainingStartDate" class="d-block">Training Start Date</label>
                               <div class="dateContainer form-control">
-                                    <input type="text" class="datecss" v-model="trainingday">
+                                    <input type="text" placeholder="DD" class="datecss" v-model="trainingday">
                                     <span>/</span>
-                                    <input type="text" class="datecss" v-model="trainingmonth">
+                                    <input type="text" placeholder="MM" class="datecss" v-model="trainingmonth">
                                     <span>/</span>
-                                    <input type="text" class="datecss" v-model="trainingyear" @input="insertDatetwo">
+                                    <input type="text" placeholder="YYYY" class="datecss" v-model="trainingyear" @input="insertDatetwo">
                             </div>
                           </div>
 
@@ -136,11 +136,11 @@
                            <div class="form-group col-6 py-3">
                               <label for="DepatureDate" class="d-block">Depature Date</label>
                               <div class="dateContainer form-control">
-                                    <input type="text" class="datecss" v-model="expireday">
+                                    <input type="text" placeholder="DD" class="datecss" v-model="expireday">
                                     <span>/</span>
-                                    <input type="text" class="datecss" v-model="expiremonth">
+                                    <input type="text" placeholder="MM" class="datecss" v-model="expiremonth">
                                     <span>/</span>
-                                    <input type="text" class="datecss" v-model="expireyear" @input="insertDatethree">
+                                    <input type="text" placeholder="YYYY" class="datecss" v-model="expireyear" @input="insertDatethree">
                             </div>
                           </div>
                       </div>

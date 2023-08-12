@@ -220,11 +220,11 @@
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">ပထမအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
               <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="day">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="month">
                                     <span>/</span>
-                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+                                    <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="year" @input="insertDate">
               </div>
     </div>
 
@@ -252,11 +252,11 @@
    <div class="firstVaccineDate_control">
               <label for="secondVaccineDate" class="form-label">ဒုတိယအကြိမ် အကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
               <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" class="datecss" v-model="trainingday">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="trainingday">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" class="datecss" v-model="trainingmonth">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="trainingmonth">
                                     <span>/</span>
-                                    <input type="text" maxlength="4" class="datecss" v-model="trainingyear" @input="insertDatetwo">
+                                    <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="trainingyear" @input="insertDatetwo">
                </div>
     </div>
 
@@ -284,11 +284,11 @@
    <div class="firstVaccineDate_control">
               <label for="firstVaccineDate" class="form-label">တတိယအကြိမ် ကာကွယ်ဆေးထိုးသည့်ရက်စွဲ</label>
                <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" class="datecss" v-model="expireday">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="expireday">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" class="datecss" v-model="expiremonth">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="expiremonth">
                                     <span>/</span>
-                                    <input type="text" maxlength="4" class="datecss" v-model="expireyear" @input="insertDatethree">
+                                    <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="expireyear" @input="insertDatethree">
                 </div>
     </div>
 
