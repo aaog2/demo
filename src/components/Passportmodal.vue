@@ -106,11 +106,11 @@
                         <div class="form-group col-6 py-3">
                             <label for="passportcreateDate" class="d-block">Passport Created Date</label>
                             <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" class="datecss" v-model="day">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="day">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="month">
                                     <span>/</span>
-                                    <input type="text" maxlength="4" class="datecss" v-model="year" @input="insertDate">
+                                    <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="year" @input="insertDate">
                             </div>
                         </div>
 
@@ -124,11 +124,11 @@
                         <div class="form-group col-6 py-3">
                             <label for="passportexpiredDate" class="d-block">Passport Expired Date</label>
                             <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" class="datecss" v-model="expireday">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="expireday">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" class="datecss" v-model="expiremonth">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="expiremonth">
                                     <span>/</span>
-                                    <input type="text" maxlength="4" class="datecss" v-model="expireyear" @input="insertDatetwo">
+                                    <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="expireyear" @input="insertDatetwo">
                             </div>
                         </div>
                     </div>

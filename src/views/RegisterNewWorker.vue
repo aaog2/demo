@@ -71,11 +71,11 @@
                                 <label for="MoveInDate" class="d-block">Date Of Birth</label>
                                 <!-- <input type="text" class="dates form-control" v-model="dob" placeholder="dd-mm-yyyy" @keyup.enter="updateDate"> -->
                                 <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" max="31" class="datecss" v-model="day">
+                                    <input type="text" maxlength="2" placeholder="DD" max="31" class="datecss" v-model="day">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" class="datecss" v-model="month">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="month">
                                     <span>/</span>
-                                    <input type="text" maxlength="4" class="datecss" v-model="year">
+                                    <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="year">
                                 </div>
                               
                             </div>
