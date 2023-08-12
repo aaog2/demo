@@ -7,7 +7,7 @@
       <!-- Centered navigation links -->
       <div class="d-flex justify-content-between">
         <div class="nav nav-centered">
-          <router-link class="nav-link nav-link-ltr " to="/cvform">Cv</router-link>
+          <!-- <router-link class="nav-link nav-link-ltr " to="/cvform">Cv</router-link> -->
           <router-link class="nav-link nav-link-ltr" to="/surveyform">Survey</router-link>
           <router-link class="nav-link nav-link-ltr " to="/workerhome">တိုင်ကြားရန်</router-link>
          
