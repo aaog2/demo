@@ -177,12 +177,17 @@ export default {
             contractDate.value = fillterEmployees.value.forEach((fillterEmp)=>{
                 
                 if(fillterEmp.contract_upload){
-                    console.log(fillterEmp.contract_upload);
+                    console.log(fillterEmp.contract_upload.contract_date);
                     let daysSinceLastDate = computed(()=>{
                         const currentDate = new Date()
-                        const previousDate = new Date(fillterEmp.contract_upload.contract_date)
-                        const timeDifference = currentDate.getTime() - previousDate.getTime()
+                        const dateParts = fillterEmp.contract_upload.contract_date.split("-")
+                        console.log(dateParts);
+                        var dateObject = new Date(+dateParts[2], dateParts[1] - 1, +dateParts[0]); 
+                        console.log("previousDate",dateObject);
+                        const timeDifference = currentDate.getTime() - dateObject.getTime()
+                        console.log("time Diff = ",timeDifference)
                         const daysDifference = Math.floor(timeDifference / (1000 * 60 * 60 * 24))
+                        console.log(daysDifference);
                         return daysDifference
                     })
                     console.log(daysSinceLastDate.value);

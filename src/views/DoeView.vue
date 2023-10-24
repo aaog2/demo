@@ -49,8 +49,8 @@
                             <div class="form-group col-4 col-xl-3 mt-4 mt-xl-0">
                                 <label for="category">Category</label>
                                     <select class="form-select" id="category" v-model="factoryCategory">
-                                        <option value="Food Packing" >ပလတ်စတစ်ဖြင့်ပြုလုပ်သော အီလက်ထရောနစ်ပစ္စည်းများ ထုတ်လုပ်သည့် လုပ်ငန်း</option>
-                                        <option value="Steel Manufacturing">ပင်လယ်အစားအစာထုတ်လုပ်ခြင်း လုပ်ငန်း</option>
+                                        <option value="ပလတ်စတစ်ဖြင့်ပြုလုပ်သော အီလက်ထရောနစ်ပစ္စည်းများ ထုတ်လုပ်သည့် လုပ်ငန်း" >ပလတ်စတစ်ဖြင့်ပြုလုပ်သော အီလက်ထရောနစ်ပစ္စည်းများ ထုတ်လုပ်သည့် လုပ်ငန်း</option>
+                                        <option value="ပင်လယ်အစားအစာထုတ်လုပ်ခြင်း လုပ်ငန်း">ပင်လယ်အစားအစာထုတ်လုပ်ခြင်း လုပ်ငန်း</option>
                                     </select>
                             </div>
 
