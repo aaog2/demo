@@ -181,7 +181,7 @@ export default {
             contractDate.value = fillterEmployees.value.forEach((fillterEmp)=>{
                 
                 if(fillterEmp.contract_upload){
-                    console.log(fillterEmp.contract_upload.contract_date);
+                    console.log("change fix",fillterEmp.contract_upload.contract_date);
                     let daysSinceLastDate = computed(()=>{
                         const currentDate = new Date()
                         const dateParts = fillterEmp.contract_upload.contract_date.split("-")
