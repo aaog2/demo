@@ -22,6 +22,7 @@
     "file-saver": "^2.0.5",
     "firebase": "^8.6.8",
     "jquery": "^3.7.0",
+    "jwt-decode": "^4.0.0",
     "mm-nrc": "^0.2.5",
     "mm-nrc-converter": "^1.0.1",
     "myanmar-nrc-tool": "^0.2.2",

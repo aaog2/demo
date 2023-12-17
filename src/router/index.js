@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory, useRouter } from "vue-router";
+import { jwtDecode } from "jwt-decode";
 import HomeView from "../views/HomeView.vue";
 import LoginPage from "../views/LoginPage.vue";
 import CvForm from "../views/CvForm.vue";
@@ -34,7 +35,7 @@ const routes = [
     component: HomeView,
     meta: { requiresAuth: true },
   },
-  
+
   {
     path: "/checkprimaryinfo",
     name: "checkprimaryinfo",
@@ -148,37 +149,58 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
 });
-// ORIGINAL ROUTE GUARD 
-router.beforeEach((to, from, next) => {
-  const isAuthenticated = localStorage.getItem('token') !== null;
-  const isUser = localStorage.getItem('role') === 'employee';
-  const isAdmin = localStorage.getItem('role') === 'admin';
 
+  
+
+ 
+ 
+
+
+// ORIGINAL ROUTE GUARD
+router.beforeEach((to, from, next) => {
+  // check the token expired first 
+  const token = localStorage.getItem("token");
+  const isAuthenticated = localStorage.getItem("token") !== null;
+  const isUser = localStorage.getItem("role") === "employee";
+  const isAdmin = localStorage.getItem("role") === "admin";
+  if(token){
+    const currentTimestamp = Math.floor(Date.now() / 1000);
+    const decoded = jwtDecode(token);
+  // console.log('Decoded Token from local storage ==>', decoded);
+  if(decoded.exp < currentTimestamp){
+    localStorage.removeItem('token');
+    next('/login')
+    console.log("Token has expired");
+    console.log("Token expired date =>", decoded.exp);
+  }else{
+    console.log("Token has not expired yet");
+    console.log("Token expired date =>", decoded.exp);
+
+  }
+  }
+
+  // next proceed 
   if (to.meta.requiresAuth && !isAuthenticated) {
-    if (to.path !== '/login') {
-      next('/');
+    if (to.path !== "/") {
+      next("/");
     } else {
       next();
     }
-  } 
-  else if (!to.meta.requiresAuth && isAuthenticated && isAdmin) {
-    if (to.path !== '/home') {
-      next('/home');
+  } else if (!to.meta.requiresAuth && isAuthenticated && isAdmin) {
+    if (to.path !== "/home") {
+      next("/home");
     } else {
       next();
     }
-  } 
-  else if(!to.meta.requiresAuth && isAuthenticated && isUser) {
-    if(to.path !== '/'){
-      next('/workerhome');
-    }else{
+  } else if (!to.meta.requiresAuth && isAuthenticated && isUser) {
+    if (to.path !== "/") {
+      next("/workerhome");
+    } else {
       next();
     }
   } else {
     next();
   }
 });
-
-
 
 export default router;

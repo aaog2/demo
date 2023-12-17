@@ -13,7 +13,11 @@
                     <img src="http://100dayscss.com/codepen/alert.png" width="44" height="38" />
                         <span class="title">ops !</span>
                         <p class="my-2">{{ errorMessage }}</p>
-                        <button class="btn btn-danger" @click="closemessage">Close</button>
+                        <button class="btn btn-danger" @click="closemessage">
+                          <router-link  to="/" class="my-auto">
+                              Close
+                              </router-link>
+                        </button>
                 </div>
             </div>
         </div>
