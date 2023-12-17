@@ -106,9 +106,9 @@
                         <div class="form-group col-6 py-3">
                             <label for="passportcreateDate" class="d-block">Passport Created Date</label>
                             <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="day">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="day" @input="insertDate">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="month">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="month" @input="insertDate">
                                     <span>/</span>
                                     <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="year" @input="insertDate">
                             </div>
@@ -124,9 +124,9 @@
                         <div class="form-group col-6 py-3">
                             <label for="passportexpiredDate" class="d-block">Passport Expired Date</label>
                             <div class="dateContainer form-control">
-                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="expireday">
+                                    <input type="text" maxlength="2" placeholder="DD" class="datecss" v-model="expireday" @input="insertDatetwo">
                                     <span>/</span>
-                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="expiremonth">
+                                    <input type="text" maxlength="2" placeholder="MM" class="datecss" v-model="expiremonth" @input="insertDatetwo">
                                     <span>/</span>
                                     <input type="text" maxlength="4" placeholder="YYYY" class="datecss" v-model="expireyear" @input="insertDatetwo">
                             </div>
@@ -242,15 +242,23 @@ export default {
             console.log(employees.value.data.passport_data);
             address.value = employees.value.data.passport_data.address_english ;
             passport.value =employees.value.data.passport_data.passport_number;
-            passportcreateDate.value = employees.value.data.passport_data.passport_created_date ;
+            passportcreateDate.value = employees.value.data.passport_data.passport_created_date.split('-');
+            day.value=passportcreateDate.value[0];
+            month.value=passportcreateDate.value[1];
+            year.value=passportcreateDate.value[2];
             passportlocation.value = employees.value.data.passport_data.passport_location;
-            passportexpiredDate.value = employees.value.data.passport_data.passport_expired_date;
+            passportexpiredDate.value = employees.value.data.passport_data.passport_expired_date.split('-');
+            expireday.value=passportexpiredDate.value[0];
+            expiremonth.value=passportexpiredDate.value[1];
+            expireyear.value=passportexpiredDate.value[2];
             edit.value=true;
         }
         
 
         let update=async()=>{
             console.log(props.id);
+            insertDate();
+            insertDatetwo();
             let data = {
                 user_id:props.id,
                 passport_number:passport.value,

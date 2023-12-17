@@ -197,7 +197,7 @@ export default {
 
          //Filter Function
          let getfilter=async(value)=>{
-            console.log(value);
+            console.log(filterStatus.value);
             if(filterStatus.value===value){
                 filterStatus.value=null;
                 fillterEmployees.value=null;

@@ -259,18 +259,30 @@
           } 
   
           let editData = ()=>{
-              console.log(employees.value.data.owic_data);
+            console.log(employees.value.data.owic_data);
               owicnum.value = employees.value.data.owic_data.owic_number;
-              owiccreateDate.value =employees.value.data.owic_data.owic_created_date;
+              owiccreateDate.value =employees.value.data.owic_data.owic_created_date.split('-');
+              day.value = owiccreateDate.value[0];
+              month.value = owiccreateDate.value[1];
+              year.value = owiccreateDate.value[2];
               owiccreatedPlace.value = employees.value.data.owic_data.owic_created_place ;
-              trainingstartDate.value = employees.value.data.owic_data.training_start_date;
-              depatureDate.value = employees.value.data.owic_data.departure_date;
+              trainingstartDate.value = employees.value.data.owic_data.training_start_date.split('-');
+              trainingday.value = trainingstartDate.value[0];
+              trainingmonth.value = trainingstartDate.value[1];
+              trainingyear.value = trainingstartDate.value[2];
+              depatureDate.value = employees.value.data.owic_data.departure_date.split('-');
+              depatureday.value = depatureDate.value[0];
+              depaturemonth.value = depatureDate.value[1];
+              depatureyear.value = depatureDate.value[2];
               edit.value=true;
           }
           
   
           let update=async()=>{
               console.log(props.id);
+              insertDate();
+              insertDatetwo();
+              insertDatethree();
               let data = {
                   user_id:props.id,
                   owic_number:owicnum.value,
