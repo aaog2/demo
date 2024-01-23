@@ -499,5 +499,6 @@ input:focus {
   display: flex;
 }
 
-.dateContainer:focus {
+.pagetitle {
+  font-weight: bold;
 }
