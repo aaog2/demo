@@ -81,7 +81,7 @@
 }
 
 .router-link-active.sides {
-  background: #007bff;
+  background: #9900ff;
   color: wheat;
   border-radius: 10%;
   transition: 5s;
@@ -266,7 +266,7 @@ input:focus {
 }
 
 .refleshbtn:hover {
-  background: #0dddf8;
+  background: #9900ff;
 }
 
 .refleshbtn:active {

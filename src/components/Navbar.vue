@@ -1,41 +1,60 @@
 <template>
   <div>
-     <!-- top navbar -->
-        <div>
-            <nav class="nav navbar-light bg-white mx-auto">
-              <router-link  to="/home" class="my-auto">
-                <a class="navbar-brand logo_container"><img src="../assets/image/internationalfocuslogo.jpg" width="30px" height="30px"  alt="logo"></a>
-              </router-link>
-              
-                  <div class="mx-auto">
-                    <router-link class="nav-link nav-link-ltr ms-5"  to="/home" >Manage</router-link>
-                    <router-link class="nav-link nav-link-ltr"  to="/surveypage">Survey</router-link>
-                    <router-link class="nav-link nav-link-ltr" to="/chatadminview">Grievance Form</router-link>
-                  </div>
-                  <div class="my-2 my-lg-0 px-2">
-                      <!-- <p>logo</p> -->
-                      <div class="account">
-                            <div class="btn-group dropstart">
-                                <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" data-bs-auto-close="outside">
-                                  <font-awesome-icon icon="fa-solid fa-circle-user" size="2xl" style="color:black" />
+    <!-- top navbar -->
+    <div>
+      <nav class="nav navbar-light bg-white mx-auto">
+        <router-link to="/home" class="my-auto">
+          <!-- <a class="navbar-brand logo_container"><img src="../assets/image/internationalfocuslogo.jpg" width="30px" height="30px"  alt="logo"></a> -->
+        </router-link>
 
-                                </button>
-                                <form class="dropdown-menu p-4">
-                                  <div class="mb-3">
-                                    <label for="exampleDropdownFormEmail2" class="form-label">User Name</label>
-                                    <p class="form-control text-center">{{ useraccount }}</p>
-                                  </div>
-                              
-                                
-                                  <button type="submit" class="col-12 btn btn-primary text-center" @click="logoutFunction">Logout</button>
-                                </form>
-                            </div>
-                      </div>
-                  </div>
-            </nav>
+        <div class="mx-auto">
+          <router-link class="nav-link nav-link-ltr ms-5" to="/"
+            >Manage</router-link
+          >
+          <router-link class="nav-link nav-link-ltr" to="/surveypage"
+            >Survey</router-link
+          >
         </div>
-        <!-- side navbar -->
-        <!-- <div class="sidebars bg-white">
+        <div class="my-2 my-lg-0 px-2">
+          <!-- <p>logo</p> -->
+          <div class="account">
+            <div class="btn-group dropstart">
+              <button
+                type="button"
+                class="btn btn-light dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                data-bs-auto-close="outside"
+              >
+                <font-awesome-icon
+                  icon="fa-solid fa-circle-user"
+                  size="2xl"
+                  style="color: black"
+                />
+              </button>
+              <form class="dropdown-menu p-4">
+                <div class="mb-3">
+                  <label for="exampleDropdownFormEmail2" class="form-label"
+                    >User Name</label
+                  >
+                  <p class="form-control text-center">{{ useraccount }}</p>
+                </div>
+
+                <button
+                  type="submit"
+                  class="col-12 btn btn-primary text-center"
+                  @click="logoutFunction"
+                >
+                  Logout
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </div>
+    <!-- side navbar -->
+    <!-- <div class="sidebars bg-white">
           <nav class="nav flex-column pt-3">
               <router-link class="nav-link sides py-3" to="/home">
               <font-awesome-icon icon="fa-solid fa-users" size="lg" />
@@ -76,43 +95,40 @@
 
 <script>
 // import router from '@/router';
-import { useRouter } from 'vue-router';
-import { ref } from 'vue';
+import { useRouter } from "vue-router";
+import { ref } from "vue";
 export default {
-    name:"Navbar",
+  name: "Navbar",
 
-    setup(){
-      let router = useRouter();
-      let useraccount = ref(localStorage.getItem("useraccount"));
-      const logoutFunction = () => {
-        localStorage.removeItem("token");
-        localStorage.removeItem("userid");
-        router.push('/');
-      }
+  setup() {
+    let router = useRouter();
+    let useraccount = ref(localStorage.getItem("useraccount"));
+    const logoutFunction = () => {
+      localStorage.removeItem("token");
+      localStorage.removeItem("userid");
+      router.push("/");
+    };
 
-      return{
-        useraccount,
-        logoutFunction
-      }
-    }
-}
+    return {
+      useraccount,
+      logoutFunction,
+    };
+  },
+};
 </script>
 
 <style>
-
-.navbar-brand img{
+.navbar-brand img {
   margin-left: 0.5rem;
   width: 40px !important;
   height: 40px !important;
 }
- 
 
-  .logo_container img{
-    width: 30px;
-    height: 30px;
-    border-radius: 50%;
-    background-color: #007bff;
-    border: 2px solid #007bff;
-
-  }
+.logo_container img {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background-color: #007bff;
+  border: 2px solid #007bff;
+}
 </style>
