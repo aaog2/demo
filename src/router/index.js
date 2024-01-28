@@ -145,49 +145,5 @@ const router = createRouter({
 });
 
 // ORIGINAL ROUTE GUARD
-router.beforeEach((to, from, next) => {
-  // check the token expired first
-  const token = localStorage.getItem("token");
-  const isAuthenticated = localStorage.getItem("token") !== null;
-  const isUser = localStorage.getItem("role") === "employee";
-  const isAdmin = localStorage.getItem("role") === "admin";
-  if (token) {
-    const currentTimestamp = Math.floor(Date.now() / 1000);
-    const decoded = jwtDecode(token);
-    // console.log('Decoded Token from local storage ==>', decoded);
-    if (decoded.exp < currentTimestamp) {
-      localStorage.removeItem("token");
-      next("/login");
-      console.log("Token has expired");
-      console.log("Token expired date =>", decoded.exp);
-    } else {
-      console.log("Token has not expired yet");
-      console.log("Token expired date =>", decoded.exp);
-    }
-  }
-
-  // next proceed
-  if (to.meta.requiresAuth && !isAuthenticated) {
-    if (to.path !== "/") {
-      next("/");
-    } else {
-      next();
-    }
-  } else if (!to.meta.requiresAuth && isAuthenticated && isAdmin) {
-    if (to.path !== "/home") {
-      next("/home");
-    } else {
-      next();
-    }
-  } else if (!to.meta.requiresAuth && isAuthenticated && isUser) {
-    if (to.path !== "/") {
-      next("/workerhome");
-    } else {
-      next();
-    }
-  } else {
-    next();
-  }
-});
 
 export default router;
