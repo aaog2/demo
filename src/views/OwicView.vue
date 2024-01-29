@@ -1249,7 +1249,7 @@ export default {
         gender: "female",
         dob: "1993-03-29",
         address: null,
-        nrc: "၇\/မလန(နိုင်)၁၂၄၄၅၄",
+        nrc: "၇\/မလန(နိုင်)၁၂၄၄၅၄၅၄၅၄",
         nrc_english: "7\/MALANA(N)126441",
         religion: "ဗုဒ္ဓ",
         ethnic: "ဗမာ",
