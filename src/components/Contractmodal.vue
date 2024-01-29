@@ -132,7 +132,7 @@ export default {
           father_name_en: "U MYINT SOE",
           gender: "female",
           dob: "1994-11-02",
-          nrc: "၆\/ပလန(နိုင်)၁၂၄၇၇၉",
+          nrc: "၆\/ပလန(နိုင်)၁၂၄၇၇၉၃၄၄",
           cv_result: "passed",
           cv_result_date: "2023-08-10 07:21:03",
           worker_result: "passed",
